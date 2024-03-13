@@ -17,6 +17,9 @@ function MainPage() {
 
       <div className='gredient'>
         핫한 식품 / 더보기
+        <div className='saleGrd'>
+          카레 재료 공동구매합니다
+        </div>
       </div>
     </div>
   );

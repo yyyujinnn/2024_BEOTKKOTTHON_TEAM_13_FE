@@ -1,3 +1,8 @@
+.Header{
+    height: 56px;
+    background-color: #D9D9D9;
+}
+
 .recommendRecipe{
     margin-top: 30px;
     height: 180px;
@@ -21,5 +26,15 @@
     margin-top: 60px;
     font-size: 16px;
     font-weight: 600;
-    padding-left: 16px;
+    padding: 0 16px ;
+}
+
+.saleGrd{
+    width: 343px;
+    height: 170px;
+    margin-top: 76px;
+    padding-top: 16px;
+    border-color: black;
+    border-style: solid;
+    border-width: 0.5px;
 }
