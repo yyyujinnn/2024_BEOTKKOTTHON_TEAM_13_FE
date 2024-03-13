@@ -1,0 +1,25 @@
+.recommendRecipe{
+    margin-top: 30px;
+    height: 180px;
+    background-color: antiquewhite;
+    color: #191919;
+    font-size: 16px;
+    font-weight: 600;
+    padding-left: 16px;
+}
+
+.recipePhoto{
+    margin-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, 112px);
+    grid-template-rows: repeat(2, 144px);
+    border-radius: 8px;
+    gap: 8px;
+}
+
+.gredient{
+    margin-top: 60px;
+    font-size: 16px;
+    font-weight: 600;
+    padding-left: 16px;
+}

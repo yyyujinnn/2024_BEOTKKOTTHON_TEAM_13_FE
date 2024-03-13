@@ -1,0 +1,11 @@
+.header{
+    height: 46px;
+    background-color: #D9D9D9;
+    margin-top: 54px; /* 시계 바? */
+}
+
+.recommendRecipe{
+    margin-top: 30px;
+    height: 180px;
+    background-color: antiquewhite;
+}
