@@ -1,27 +1,82 @@
-.Header{
+.header{
     height: 56px;
-    background-color: #D9D9D9;
 }
 
+.right-header {
+    margin-top: 16px;
+    float: right;
+}
+
+.right-header img {
+    margin-right: 16px;
+    cursor: pointer;
+}
+
+/* 추천레시피 */
 .recommendRecipe{
+    clear: both;
     margin-top: 30px;
     height: 180px;
-    background-color: antiquewhite;
+    padding-left: 12px;
+}
+
+.recipe-name {
     color: #191919;
     font-size: 16px;
     font-weight: 600;
-    padding-left: 16px;
+}
+
+.recipe-text {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.more {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+}
+
+.more img {
+    margin-left: 8px;
+    margin-right: 16px;
 }
 
 .recipePhoto{
     margin-top: 12px;
     display: grid;
     grid-template-columns: repeat(3, 112px);
-    grid-template-rows: repeat(2, 144px);
-    border-radius: 8px;
+    grid-template-rows: repeat(1, 144px);
     gap: 8px;
 }
+.photoStyle {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 8px;
+    align-items: center;
 
+    width: 112px;
+    height: 144px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    color: #333;
+    background-color: #D9D9D9;
+}
+
+.photoStyle span {
+    background-color: white;
+    border-radius: 4px;
+    padding: 4px 10px;
+}
+
+/* 핫한 식품 */
 .gredient{
     margin-top: 60px;
     font-size: 16px;
@@ -30,11 +85,78 @@
 }
 
 .saleGrd{
-    width: 343px;
-    height: 170px;
-    margin-top: 76px;
-    padding-top: 16px;
-    border-color: black;
-    border-style: solid;
-    border-width: 0.5px;
+    display: flex;
+    margin-top: 10px;
+    padding: 16px 0;
+}
+
+.img {
+    width: 92px;
+    height: 92px;
+    border-radius: 4px;
+    margin-right: 16px;
+    background-color: #D9D9D9;
+}
+
+.title {
+    display: flex;
+    align-items: center; /*아이콘 수평정렬*/
+    font-size: 16px;
+    font-weight: 600;
+    color :#333;
+}
+
+.title img {
+    margin-left: 25px;    
+}
+
+.saler {
+    display: flex;    
+    justify-content: space-between;     
+    text-align: center;
+    margin-top: 13px;
+    font-size: 14px;
+}
+
+.location{
+    display: flex;
+    align-items: center;
+    color: #666;
+    font-size: 14px;
+}
+
+.tags {
+    display: flex;
+}
+
+.tags div {
+    margin-right: 12px; /* 해시태그 사이의 간격 조절 */
+    padding: 4px 10px; /* 해시태그의 내부 여백 설정 */
+    font-size: 14px;
+    color: #404040;
+    background-color: #EFEFEF;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.tags div:last-child {
+    margin-right: 0; /* 마지막 해시태그의 오른쪽 마진 제거 */
+}
+
+.grd-more{
+    margin: 160px 24px 0 24px;
+    display: flex;
+    padding: 12px 16px;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 8px;
+    border: 1px solid #666;
+
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #191919;
+    
+    
 }
