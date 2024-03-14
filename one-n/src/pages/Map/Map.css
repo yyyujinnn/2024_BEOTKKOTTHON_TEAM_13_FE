@@ -1,0 +1,26 @@
+/* @media (max-width: 768px) {
+    .map-container {
+        background-color: #a95555;
+        
+    }
+} */
+
+#kakao-map {
+    width: 100%; /* 지도가 화면에 꽉 차도록 설정 */
+    height: 100vh;
+    margin-bottom: 20px; /* 지도와 다른 콘텐츠 간의 간격 설정 */
+  }
+  
+  /* 기타 모바일에 대한 스타일 조정 */
+  body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 10px;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
