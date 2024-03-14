@@ -1,10 +1,12 @@
 import React from 'react';
-import MainPage from './pages/MainPage/MainPage';
+// import MainPage from './pages/MainPage/MainPage';
+import ChatList from './pages/ChatList/ChatList';
 
 function App() {
   return (
     <div className="App">
-      <MainPage />
+      {/* <MainPage /> */}
+      <ChatList />
     </div>
   );
 }

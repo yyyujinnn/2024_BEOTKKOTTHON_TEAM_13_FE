@@ -1,0 +1,71 @@
+.header {
+    height: 75px;
+}
+
+.search {
+    display: flex;
+    height: 40px;
+    margin: 16px;
+    padding: 12px 16px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    background: #F0F0F0;
+}
+
+.search img {    
+    justify-content: space-between;
+}
+
+.chat {
+    margin-top: 35px;
+    padding: 0 16px;
+    display: flex;
+    cursor: pointer;
+    
+    color: #191919;
+    font-size: 14px;
+}
+
+.img {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0; 
+    border-radius: 4px;
+    margin-right: 16px;
+    background-color: #D9D9D9;
+}
+.buyer {
+    display: flex;
+    justify-content: space-between; 
+    font-weight: 600;
+}
+
+.info {
+    display: none; /* 기본적으로 숨김 */
+    width: 16px;
+    height: 16px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10000px;
+    background: #FFDC25;   
+    font-size: 12px; 
+}
+
+/* .info 값이 0이 아닌 경우에만 보이도록 설정 */
+.info:not(:empty) {
+    display: flex;
+}
+
+
+.text {
+    width: 270px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 8px;
+    font-weight: 500;
+}
+
+
