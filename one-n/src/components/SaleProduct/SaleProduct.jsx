@@ -1,12 +1,27 @@
 import React from "react";
 import './SaleProduct.css';
+import profile from '../../assets/Profile.png'
 
-export default function SaleProduct ({product}) {
+
+//프로필이미지는 추후 api로 받은 이미지 사용
+export default function SaleProduct({ product }) {
     return (
         <div className="sale-product">
-            <h2>{product.title}</h2>
-            <p>위치: {product.latitude}, {product.longitude}</p>
-            {/* 다른 상세 정보들도 필요한 경우 여기에 추가 */}
+            <div className="product-info">
+                <div className="product-details">
+                    <img src={profile} alt="Product" className="product-image" />
+
+                        <div className="user-name">{product.name} </div>
+                        <span className="user-level"> Lv. {product.level}</span>
+                   
+                </div>
+                <div className="products">
+                    {product.item.map((item, index) => (
+                            <span key={index} className="product-item">{item}</span>
+                        ))}
+                </div>
+                
+            </div>
         </div>
     );
 }

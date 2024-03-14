@@ -34,8 +34,10 @@
 
 
 #kakao-map {
+    opacity: 0.8;
     width: 100%; /* 지도가 화면에 꽉 차도록 설정 */
     height: 100vh;
+    
     margin-bottom: 20px; /* 지도와 다른 콘텐츠 간의 간격 설정 */
   }
   

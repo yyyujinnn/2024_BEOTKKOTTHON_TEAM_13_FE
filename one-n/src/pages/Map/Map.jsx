@@ -5,7 +5,12 @@ import LocationImage from '../../assets/Location.png'
 const LocationData = [
     { "title": "서천동 위치 1", "latitude": 37.275504, "longitude": 127.107736 },
     { "title": "서천동 위치 2", "latitude": 37.269682, "longitude": 127.101832 },
-    { "title": "경희대학교 국제캠퍼스", "latitude": 37.242040, "longitude": 127.080202 }
+    {   "image": "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fthumbnail7.coupangcdn.com%2Fthumbnails%2Fremote%2F492x492ex%2Fimage%2Frs_quotation_api%2Fysrimegn%2F61c98841c46b4834becfb17ae6097027.jpg&blockId=2618ba81-a66c-4218-aff7-0e1ca5ba2b51",
+        "name": "짱구",
+        "level": "5",
+        "item": ["감자", "라면", "호박고구마", "캔콜라", "감자"],
+        "latitude": 37.242040, 
+        "longitude": 127.080202 }
 ];
 
 const Map = () => {
@@ -27,7 +32,8 @@ const Map = () => {
                 const container = document.getElementById('kakao-map');
                 const options = {
                     center: new window.kakao.maps.LatLng(37.506502, 127.053617), // 서울시 강남구 위치를 기준으로 지도 초기화
-                    level: 3 // 지도 확대 레벨
+                    level: 3, // 지도 확대 레벨
+                   
                 };
                 const map = new window.kakao.maps.Map(container, options);
 
