@@ -41,7 +41,7 @@ function MainPage() {
               카레 재료 공동구매합니다 <img src={like} alt='like' />
             </div>
             
-            <div className='saler' >  
+            <div className='seller' >  
             윤준영 
             <div className='level'> 
               <span> 만족도 </span>
