@@ -34,7 +34,7 @@ function MainPage() {
       <div className='gredient'>
         핫한 식품
         <div className='saleGrd'>
-          <div className='img' />
+          <div className='grd-img' />
           
           <div>
             <div className='title'>

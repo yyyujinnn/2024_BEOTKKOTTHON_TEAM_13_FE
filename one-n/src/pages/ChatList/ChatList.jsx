@@ -12,7 +12,7 @@ function ChatList() {
 
         <div style={{height: '620px'}}>
             <div className='chat'>
-              <div className='img' />  
+              <div className='sell-img' />  
               <div className='seller-img' />
               <div>
                 <div className='buyer'> 짱구 <div className='time'> 오후 3:55 </div> </div>
@@ -24,7 +24,7 @@ function ChatList() {
             </div>
             
             <div className='chat'>
-                <div className='img' />  
+                <div className='sell-img' />  
                 <div className='seller-img' />
                 <div>
                     <div className='buyer'> 짱구 <div className='time'> 오후 3:55 </div> </div>

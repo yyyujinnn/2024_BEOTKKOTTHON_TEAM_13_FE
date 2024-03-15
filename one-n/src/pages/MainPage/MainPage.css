@@ -93,9 +93,10 @@
     cursor: pointer;
 }
 
-.img {
+.grd-img {
     width: 92px;
-    height: 92px;
+    height: 92px;    
+    flex-shrink: 0;
     border-radius: 4px;
     margin-right: 16px;
     background-color: #D9D9D9;
