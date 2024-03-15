@@ -4,6 +4,7 @@ import MainPage from './pages/MainPage/MainPage';
 import ChatList from './pages/ChatList/ChatList';
 import ChatRoom from './pages/ChatRoom/ChatRoom';
 import RecipeDetail from './pages/RecipeDetail/RecipeDetail';
+import Explore from './pages/Explore/Explore';
 
 function App() {
   return (
@@ -11,7 +12,8 @@ function App() {
         {/* <MainPage /> */}
         {/* <ChatList /> */}
         {/* <ChatRoom /> */}
-        <RecipeDetail />
+        {/* <RecipeDetail /> */}
+        <Explore />
         <NavBar />
     </div>
   );
