@@ -18,26 +18,42 @@ function MainPage() {
         </div>
       </div>
 
-      <div className='recommendRecipe'>
+<div className='main-body'>
+      <div className='title'>
         <div className='recipe-text'>
-          <div className='recipe-name'> 추천 레시피 </div>
-          <div className='more'> 더보기 <img src={next} alt='next'/>  </div>
+          <div className='recipe-name'> 레시피 둘러보기 </div>
+          <div className='more'> 더보기 <img src={next} alt='next'/> </div>
         </div>
 
         <div className='recipePhoto'>
-          <div className='photoStyle'> <span> 카레 </span> </div>
-          <div className='photoStyle'> <span> 까르보나라 </span> </div>
-          <div className='photoStyle'> <span> 닭볶음탕 </span></div>
+          <div className='photoStyle'> 
+            <img src={like} alt='like' />
+            <span> 카레 </span> 
+          </div>
+
+          <div className='photoStyle'> 
+            <img src={like} alt='like' />
+            <span> 까르보나라 </span> 
+          </div>
+          
+          <div className='photoStyle'> 
+            <img src={like} alt='like' />
+            <span> 불닭볶음면 </span> 
+          </div>
         </div>
       </div>
 
-      <div className='gredient'>
-        핫한 식품
+      <div className='title'>
+        <div className='recipe-text'>
+          <div className='grd-name'> 지금 핫한 식품 </div>
+          <div className='more'> 더보기 <img src={next} alt='next'/> </div>
+        </div>
+
         <div className='saleGrd'>
           <div className='grd-img' />
           
           <div>
-            <div className='title'>
+            <div className='sell-title'>
               카레 재료 공동구매합니다 <img src={like} alt='like' />
             </div>
             
@@ -53,6 +69,7 @@ function MainPage() {
             <div className='location'> <img src={location} alt='location'/>  218m </div>
           </div>
         </div>
+
         <div className='tags'>
           <div> 카레가루 </div>
           <div> 감자 </div>
@@ -60,9 +77,9 @@ function MainPage() {
           <div> 당근 </div>
           <div> + 3개 </div>
         </div>
-      </div>
 
-      <div className='grd-more'> 더보기 </div>
+      </div>
+      </div>
     </div>
   );
 }
