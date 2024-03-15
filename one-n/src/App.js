@@ -1,12 +1,14 @@
 import React from 'react';
 import MainPage from './pages/MainPage/MainPage';
-// import ChatList from './pages/ChatList/ChatList';
+import { NavBar } from './components/NavBar/NavBar'
+import ChatList from './pages/ChatList/ChatList';
 
 function App() {
   return (
     <div className="App">
-      <MainPage />
+        <MainPage />
       {/* <ChatList /> */}
+        <NavBar />
     </div>
   );
 }

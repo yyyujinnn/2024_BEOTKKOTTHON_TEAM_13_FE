@@ -6,21 +6,6 @@
     align-items: center;
 }
 
-.search {
-    display: flex;
-    height: 24px;
-    margin: 16px;
-    padding: 12px 16px;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 8px;
-    background: #F0F0F0;
-}
-
-.search img {    
-    margin-left: auto;
-}
-
 .chat {
     margin-top: 35px;
     align-items: center;

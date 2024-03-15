@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+  <g filter="url(#filter0_b_20_7778)">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M20.6317 20.6303C17.1183 24.1453 11.913 24.9047 7.65425 22.9351C7.02555 22.682 2.9563 23.8089 2.07334 22.927C1.19038 22.0439 2.31835 17.9741 2.06525 17.3454C0.0947724 13.0872 0.855228 7.87999 4.36973 4.36616C8.85619 -0.122055 16.1452 -0.122055 20.6317 4.36616C25.1274 8.86132 25.1181 16.1433 20.6317 20.6303Z" fill="#FFD951" stroke="#FFD951" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M17.7272 13.4956H17.738H17.7272Z" fill="#FFD951"/>
+    <path d="M17.7272 13.4956H17.738" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9165 13.4955H12.9273H12.9165Z" fill="#FFD951"/>
+    <path d="M12.9165 13.4955H12.9273" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M8.10568 13.4955H8.11648H8.10568Z" fill="#FFD951"/>
+    <path d="M8.10568 13.4955H8.11648" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <defs>
+    <filter id="filter0_b_20_7778" x="-3.79985" y="-3.80005" width="32.5999" height="32.5999" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feGaussianBlur in="BackgroundImageFix" stdDeviation="2"/>
+      <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_20_7778"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_20_7778" result="shape"/>
+    </filter>
+  </defs>
+</svg>

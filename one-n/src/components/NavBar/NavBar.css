@@ -1,0 +1,13 @@
+.navbar{
+    width: 310px;
+    height: 48.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24.5px 32px;
+}
+
+.navbar img{
+    cursor: pointer;
+    padding: 0 10px;
+}
