@@ -13,7 +13,7 @@ const Explore = () => {
 
   return (
     <>
-      <div className='header' />
+      <div className='explore-header' />
 
       <div className='search'>
         <img src={search} alt='search' />
