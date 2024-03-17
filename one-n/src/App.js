@@ -12,8 +12,8 @@ function App() {
         {/* <MainPage /> */}
         {/* <ChatList /> */}
         {/* <ChatRoom /> */}
-        {/* <RecipeDetail /> */}
-        <Explore />
+        <RecipeDetail />
+        {/* <Explore /> */}
         <NavBar />
     </div>
   );
