@@ -1,26 +1,38 @@
-.header {
+.chatroom-header{
     width: 375px;
-    height: 75px;
+    height: 87px;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    padding-bottom: 15px;
+    margin-bottom: 8px;
     align-items: center;
+    border-bottom: 2px solid #D9D9D9;
+}
+
+.chatlist-body{
+    width: 375px;
+    height: 620px;
+    max-width: 620px;
+    overflow-y: auto;
 }
 
 .chat {
-    margin-top: 35px;
+    width: 343px;
     align-items: center;
-    padding: 0 16px;
+    padding: 16px;
     display: flex;
     cursor: pointer;
     
     color: #191919;
     font-size: 14px;
+    
+    border-bottom: 1px solid #D9D9D9;
 }
 
 .sell-img {
-    width: 48px;
-    height: 48px;
+    width: 45px;
+    height: 45px;
     flex-shrink: 0;
     border-radius: 4px;
     background-color: #D9D9D9;
@@ -76,4 +88,11 @@
 .time {
     font-size: 10px;
     font-weight: 400;
+}
+
+.plus{
+    position: absolute;
+    left: 300px;
+    bottom: 85px;
+    cursor: pointer;
 }

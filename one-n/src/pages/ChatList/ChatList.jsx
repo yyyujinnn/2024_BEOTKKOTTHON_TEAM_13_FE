@@ -1,19 +1,20 @@
 import React from 'react';
 import './ChatList.css'
-import search from '../../assets/icons/search.svg'
 import chatting from '../../assets/logo/chatting.png'
+import user from '../../assets/icons/user.png'
+import plus from '../../assets/icons/plus.svg'
 
 function ChatList() {
   return (
     <div>
-        <div className='header'>
+        <div className='chatroom-header'>
             <img src={chatting} alt='chatting'/>
         </div>
 
-        <div style={{height: '620px'}}>
+        <div className='chatlist-body'>
             <div className='chat'>
               <div className='sell-img' />  
-              <div className='seller-img' />
+              <img src={user} className='seller-img' />
               <div>
                 <div className='buyer'> 짱구 <div className='time'> 오후 3:55 </div> </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -32,8 +33,23 @@ function ChatList() {
                 </div>
             </div>
 
+            <div className='chat'>
+              <div className='sell-img' />  
+              <img src={user} className='seller-img' />
+              <div>
+                <div className='buyer'> 짱구 <div className='time'> 오후 3:55 </div> </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <div className='text'> 안녕하세요 감자 1.6kg 공동구매 하고싶어요. </div>
+                    <div className='info'>2</div>
+                    </div>
+                </div>
+            </div>
+
+            
+
         </div>
         
+        <img src={plus} className='plus'/>
         
     </div>
   )
