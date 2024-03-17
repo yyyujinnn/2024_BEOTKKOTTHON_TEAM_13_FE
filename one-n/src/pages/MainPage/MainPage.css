@@ -1,11 +1,16 @@
-.header{
+.header-icon {    
     width: 375px;
-    height: 56px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 54px;
 }
 
-.right-header {
-    margin-top: 16px;
-    margin-left: auto;
+.logo-img {
+    width: 36px;
+    height: 37px;
+    margin-left: 16px;
 }
 
 .right-header img {
@@ -163,4 +168,8 @@
 
 .tags div:last-child {
     margin-right: 0; /* 마지막 해시태그의 오른쪽 마진 제거 */
+}
+
+.footer {
+    height: 28px;
 }
