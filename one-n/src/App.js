@@ -9,8 +9,8 @@ import Explore from './pages/Explore/Explore';
 function App() {
   return (
     <div className="App">
-        {/* <MainPage /> */}
-        <ChatList />
+        <MainPage />
+        {/* <ChatList /> */}
         {/* <ChatRoom /> */}
         {/* <RecipeDetail /> */}
         {/* <Explore /> */}
