@@ -20,8 +20,8 @@
 
 .main-body {
     width: 375px;
-    height: 685px;
-    max-width: 600px;
+    height: 635px;
+    max-width: 635px;
     overflow-y: auto;
 }
 
@@ -30,20 +30,20 @@
     clear: both;
     width: 360px;
     margin-top: 30px;
-    height: 180px;
+    height: 200px;
     padding-left: 12px;
 }
 
 .recipe-name {
     color: #191919;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
 }
 
 .grd-name {
     color: #191919;
     font-size: 20px;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 .recipe-text {
@@ -93,6 +93,7 @@
     background-color: white;
     border-radius: 4px;
     padding: 4px 10px;
+    opacity: 0.6;
 }
 
 .photoStyle img {
@@ -104,8 +105,6 @@
 /* 핫한 식품 */
 .gredient{
     margin-top: 60px;
-    font-size: 16px;
-    font-weight: 600;
     padding: 0 16px ;
 }
 
@@ -168,8 +167,4 @@
 
 .tags div:last-child {
     margin-right: 0; /* 마지막 해시태그의 오른쪽 마진 제거 */
-}
-
-.footer {
-    height: 28px;
 }

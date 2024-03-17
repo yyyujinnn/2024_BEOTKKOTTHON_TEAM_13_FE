@@ -46,7 +46,7 @@ function MainPage() {
           </div>
         </div>
 
-        <div className='title'>
+        <div className='gredient'>
           <div className='recipe-text'>
             <div className='grd-name'> 지금 핫한 식품 </div>
             <div className='more'> 더보기 <img src={next} alt='next'/> </div>
@@ -79,7 +79,7 @@ function MainPage() {
           <div> 감자 </div>
           <div> 양파 </div>
           <div> 당근 </div>
-          <div> + 3개 </div>
+          <div> + 4개 </div>
         </div>
 
       </div>
