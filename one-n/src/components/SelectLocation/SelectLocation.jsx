@@ -1,21 +1,34 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import useDidMountEffect from './useDidMountEffect';
 import CustomMarker from '../../assets/Marker.svg'
-import Location from '../../assets/Location.png'
+import { useNavigate } from 'react-router-dom';
+import ProductPost from '../../pages/ProductPost/ProductPost';
+import { ReactComponent as Back } from '../../assets/back.svg'
+import { MyContext } from '../MyContextProvider/MyContextProvider';
 import './SelectLocation.css'
 
 export default function SelectLocation() {
   const [map, setMap] = useState();
   const [marker, setMarker] = useState();
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedAddress, setSelectedAddress] = useState('');
+  const { postAddress, setPostAddress } = useContext(MyContext);
+  const navigate = useNavigate();
 
+  const goBack = () => {
+    setMap(null);
+    navigate(-1); // 뒤로가기
+  }
+
+  const goToProductPost = () => {
+    navigate('/product-post');
+  }
   // 1) 카카오맵 불러오기
   useEffect(() => {
     if (!window.kakao) {
       const script = document.createElement('script');
       script.async = true;
-      script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAO_MAP_API_KEY}&autoload=false&libraries=services`;
+      script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAO_MAP_API_KEY}&autoload=false&libraries=services&t=${new Date().getTime()}`;
+
       document.head.appendChild(script);
 
       script.onload = () => {
@@ -90,53 +103,64 @@ export default function SelectLocation() {
         CustomMarker, // 마커 이미지 경로
         new window.kakao.maps.Size(33, 40), // 마커 이미지 크기
       );
-  
+
       const newMarker = new window.kakao.maps.Marker({
         map: map,
         image: markerImage
       });
-  
-      const clickListener = window.kakao.maps.event.addListener(map, 'click', function (mouseEvent) {
+
+      const handleMapClick = (mouseEvent) => {
         var geocoder = new window.kakao.maps.services.Geocoder();
-  
+
         geocoder.coord2Address(
           mouseEvent.latLng.getLng(),
           mouseEvent.latLng.getLat(),
           function (result, status) {
             if (status === window.kakao.maps.services.Status.OK) {
               var addr = !!result[0].road_address ? result[0].road_address.address_name : result[0].address.address_name;
-  
+
               console.log('주소:', addr);
               console.log('위도:', mouseEvent.latLng.getLat());
               console.log('경도:', mouseEvent.latLng.getLng());
-  
-              setSelectedAddress(addr);
+
+              setPostAddress(addr);
               setModalVisible(true);
-  
+
               // 마커 위치 업데이트
               newMarker.setPosition(mouseEvent.latLng);
             }
           }
         );
-      });
-  
+      };
+
+      // 클릭 이벤트를 등록
+      window.kakao.maps.event.addListener(map, 'click', handleMapClick);
+
+      // 컴포넌트가 unmount 되면 클릭 이벤트를 제거
       return () => {
-        window.kakao.maps.event.removeListener(clickListener);
+        window.kakao.maps.event.removeListener(map, 'click', handleMapClick);
       };
     }
   }, [map]);
-  
-  
-  
+
+
+
+
+
 
   return (
     <div>
       <div id="map" style={{ width: '100%', height: '100vh' }}></div>
+      <button className='seletctmap-back-button' onClick={goBack}>
+        <Back />
+      </button>
       {modalVisible && (
         <div className="modal">
           <div className="modal-content">
-            <p className='modal-address'>{selectedAddress}</p>
-            <button className='modal-address-button'>이 주소로 설정하기</button>
+            <p className='modal-address'>{postAddress}</p>
+            <div className='modal-address-button-container'>
+              <button className='modal-address-button' onClick={goToProductPost}>이 주소로 설정하기</button>
+            </div>
           </div>
         </div>
       )}
