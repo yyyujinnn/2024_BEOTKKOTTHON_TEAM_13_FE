@@ -34,8 +34,6 @@ const Explore = () => {
           <div className="grid-item"> <img src={b}/> </div>
           <div className="grid-item"> <img src={c}/></div>
       </Masonry>
-
-      <div className='recipe-reg'> 레시피 등록하기 </div>
     </>
   )
 };
