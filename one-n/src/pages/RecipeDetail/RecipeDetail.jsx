@@ -29,19 +29,9 @@ function RecipeDetail() {
             <div className='recipe-title'>
                 <div > 콘치즈 </div>
                 <div className='indicate'>
-                <div style={{display:'flex', alignItems:'center', gap: '8px', marginRight:'10px'}}> <img src={like24} alt='like' style={{width: '22px', height: '22px'}} /> 12 </div>
-                <div style={{display:'flex', alignItems:'center', gap: '8px', marginRight:'10px'}}> <img src={chat} alt='chat' /> 12 </div>
-                <div> <img src={share} alt='share' /> </div>
+                   <img src={like24} alt='like' style={{width: '21px', height: '22px'}} /> 
+                   12 
                 </div>
-            </div>
-
-            <div className='nutrition'> 영양정보 (100g) </div>            
-            <div className='sub-tag'>
-                <div> 238kacl </div>
-                <div> 지방 5.36g </div>
-                <div> 탄수화물 37.33g </div>
-                <div> 단백질 9.69g </div>
-                
             </div>
             
             <div style={{ fontSize: '16px', fontWeight: '600', color: '#333', marginTop: '40px'}}> 재료 </div>
