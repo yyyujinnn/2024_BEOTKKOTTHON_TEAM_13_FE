@@ -1,19 +1,12 @@
 .chatroom-header{
     width: 375px;
-    height: 87px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding-bottom: 15px;
-    margin-bottom: 8px;
-    align-items: center;
-    border-bottom: 2px solid #D9D9D9;
+    height: 54px;
 }
 
 .chatlist-body{
     width: 375px;
-    height: 620px;
-    max-width: 620px;
+    height: 644px;
+    max-width: 644px;
     overflow-y: auto;
 }
 
@@ -31,45 +24,37 @@
 }
 
 .sell-img {
-    width: 45px;
-    height: 45px;
+    width: 56px;
+    height: 56px;
     flex-shrink: 0;
     border-radius: 4px;
-    background-color: #D9D9D9;
-}
-
-.seller-img{
-    width: 40px;
-    height: 40px;
-    flex-shrink: 0;
-    border-radius: 40px;
-    margin: 0 8px;
+    margin-right: 16px;
     background-color: #D9D9D9;
 }
 
 .buyer {
     display: flex;
-    width: 230px;
+    width: 270px;
     justify-content: space-between; 
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
 }
 
 .text {
-    width: 190px;
+    width: 240px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     margin-top: 8px;
-    font-size: 11px;
-    font-weight: 400;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 
 .info {
     display: none; /* 기본적으로 숨김 */
     width: 20px;
-    padding: 3px 0.5px;
+    padding: 4px 0.5px;
     flex-shrink: 0;
     justify-content: center;
     border-radius: 8px;
@@ -86,13 +71,7 @@
 }
 
 .time {
-    font-size: 10px;
+    font-size: 13px;
     font-weight: 400;
-}
-
-.plus{
-    position: absolute;
-    left: 300px;
-    bottom: 85px;
-    cursor: pointer;
+    color: #BCBCBC;
 }
