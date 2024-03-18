@@ -4,17 +4,19 @@ import MainPage from './pages/MainPage/MainPage';
 import ChatList from './pages/ChatList/ChatList';
 import ChatRoom from './pages/ChatRoom/ChatRoom';
 import RecipeDetail from './pages/RecipeDetail/RecipeDetail';
+import RecipeReg from './pages/RecipeReg/RecipeReg';
 import Explore from './pages/Explore/Explore';
 
 function App() {
   return (
     <div className="App">
-        <MainPage />
+        {/* <MainPage /> */}
         {/* <ChatList /> */}
         {/* <ChatRoom /> */}
         {/* <RecipeDetail /> */}
+        {/* <RecipeReg/> */}
         {/* <Explore /> */}
-        <NavBar />
+        {/* <NavBar /> */}
     </div>
   );
 }
