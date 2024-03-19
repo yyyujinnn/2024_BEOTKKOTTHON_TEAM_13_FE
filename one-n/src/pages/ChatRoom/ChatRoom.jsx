@@ -1,19 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ChatRoom.css'
 
 import previous from '../../assets/icons/previous.svg'
 import next from '../../assets/icons/next.svg'
+import down from '../../assets/icons/down.png'
 import exit from '../../assets/icons/exit.png'
 import menu from '../../assets/icons/menu.png'
 import img from '../../assets/icons/img.png'
 import send from '../../assets/icons/send.png'
 
+import { SellList } from '../../components/Chat/SellList';
+
 function ChatRoom() {
+
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+
+  const toggleDropdown = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+
   return (
     <div>
         <div className='room-header'>
           <div className='top-header'>
-            <img src={previous} alt='previous'/>
+            <img src={previous} style={{ cursor: 'pointer' }}/>
 
             <div className='product'>
               <div className='product-img' />
@@ -26,7 +36,13 @@ function ChatRoom() {
             </div>
           </div>
 
-          <div className='product-list'> 목록 더보기 <img src={next}/> </div>
+          <div className='product-list' onClick={toggleDropdown}> 목록 더보기 
+          {dropdownVisible ? <img src={down}/> : <img src={next}/> }</div>
+          {dropdownVisible && (
+          <div id='dropdown' className='dropdown'>
+            <SellList />
+          </div>
+          )}
         </div>
 
         <div className='room-body'>
@@ -37,7 +53,7 @@ function ChatRoom() {
         <div className='input-msg'>
           <img src={img} alt='img'/>
           <input placeholder='메세지 보내기' />
-          <img src={send} alt='send'/>
+          <img src={send} alt='send' className='send'/>
         </div>
         
 
