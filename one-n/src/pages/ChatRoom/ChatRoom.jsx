@@ -29,6 +29,10 @@ function ChatRoom() {
     setExitModalOpen(false);
   }
 
+  const onClickclose = () => {
+    setExitModalOpen(false);
+  }
+
   
   const onClickReview = () => {
     setReviewModalOpen(false);
@@ -59,8 +63,10 @@ function ChatRoom() {
                     <br/>
                     거래는 자동으로 취소됩니다.
                   </div>
-                  
-                  <button onClick={onClickExit} style={ExitModalStyles.button}> 확인 </button>
+                  <div style={{display: 'flex', gap: '16px'}}>
+                    <button onClick={onClickclose} style={{...ExitModalStyles.button, backgroundColor:'#FFF', border:'1px solid #D9D9D9'}}> 취소 </button>
+                    <button onClick={onClickExit} style={ExitModalStyles.button}> 확인 </button>
+                  </div>
                   </div>
                 </ReactModal>
               
@@ -132,7 +138,7 @@ const ExitModalStyles = {
     overflow: "auto",
   },
   button: {
-    width: "279px",
+    width: "132px",
     padding: "12px 20px",
     fontSize: "16px",
     fontWeight: "500",
