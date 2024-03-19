@@ -12,7 +12,7 @@ function App() {
     <div className="App">
         {/* <MainPage /> */}
         {/* <ChatList /> */}
-        {/* <ChatRoom /> */}
+        <ChatRoom />
         {/* <RecipeDetail /> */}
         {/* <RecipeReg/> */}
         {/* <Explore /> */}

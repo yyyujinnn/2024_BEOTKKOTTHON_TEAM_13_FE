@@ -91,3 +91,7 @@
     border: none;
     background-color: #FFDC25;
 }
+
+input:focus {
+    outline: none;
+}
