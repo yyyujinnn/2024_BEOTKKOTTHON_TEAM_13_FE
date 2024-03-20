@@ -1,0 +1,155 @@
+.room-header{
+    width: 343px;
+    /* height: 86px; */
+    margin-top: 54px;
+    padding: 12px 16px;
+    border-bottom: 1px solid #D9D9D9;
+}
+
+.top-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rt-header img{
+    margin-left: 16px;
+    cursor: pointer;
+}
+
+.product{
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: -30px;
+}
+.product-img{
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    background-color: #D9D9D9;
+}
+
+.product-list{
+    width: 295px;
+    height: 18px;
+    padding: 8px;
+    margin: 12px 0 0 auto;
+    border-radius: 8px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F2F2F2;
+}
+
+.dropdown{
+    display: flex;
+    align-items: flex-end;
+    width: 295px;
+    height: 110px;
+    padding: 8px;
+    margin: -34px 0 0 auto;
+    border-radius: 8px;
+    background-color: #F2F2F2;
+}
+
+.dropdown::after {
+    content: '';
+    margin: 26px auto auto auto;
+    width: 98%;
+    height: 1px;
+    background-color: #D9D9D9;
+}
+
+.room-body{
+    width: 343px;
+    height: 612px;
+    max-height: 612px ;
+    overflow-y: auto;
+}
+
+.input-msg{
+    position: absolute;
+    bottom: 42px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 311px;
+    height: 56px;
+    padding: 0px 16px;
+    margin: 0 14px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.12);
+}
+.input-msg img{    
+    cursor: pointer;
+}
+
+.send{
+    padding: 4px;
+    border-radius: 8px;
+    background-color: #FFDC25;
+}
+
+.input-msg input{
+    width: 239px;
+    border: none;
+    font-size: 14px ;
+}
+
+input:focus {
+    outline: none;
+}
+
+.reviewModal{
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.reviewModal input{
+    width: 255px;
+    height: 96px;
+    padding: 12px;
+    margin-top: 12px;
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.review-body{    
+    font-size: 14px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #FFDC25;
+    position: relative;
+    margin: -4px 0 0 3.5px;
+  }
+
+input[type="range"] {
+    /* Webkit/Blink */
+    -webkit-appearance: none;
+  
+    /* Firefox */
+    overflow: hidden;
+  
+    /* Edge */
+    width: 90%;
+    height: 0px;
+    background-color: transparent;
+  }
+  
+  input[type="range"]::-webkit-slider-runnable-track {
+    width: 90%;
+    height: 4px;
+    cursor: pointer;
+    background: #ddd; /* 트랙의 색상을 설정합니다. */
+    border-radius: 2px;
+  }
+  
+  
