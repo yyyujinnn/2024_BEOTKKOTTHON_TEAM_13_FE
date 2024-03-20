@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './MainPage.css'
 import logo from '../../assets/logo/logo.png'
 import search from '../../assets/icons/search.svg'
@@ -7,8 +8,29 @@ import next from '../../assets/icons/next.svg'
 import like from '../../assets/icons/like.svg'
 import location from '../../assets/icons/location.svg'
 import level from '../../assets/icons/level.svg'
+import { ThrumnailRecipe } from '../../components/Recipe/ThrumnailRecipe';
 
 function MainPage() {
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+      // API 엔드포인트 URL 설정
+      const apiUrl = 'http://20.39.188.154:8080/recipe/brief';
+  
+      axios.get(apiUrl)
+        .then((response) => {
+          const updatedData = response.data.map(item => ({
+            ...item,
+            thumbnail_image: `http://20.39.188.154${item.thumbnail_image}`
+          }));
+          setData(updatedData);
+        })
+        .catch((error) => {
+          console.error('API 요청 에러:', error);
+        });
+  }, []);
+
   return (
     <div>
       <div className='header-icon'>
@@ -22,28 +44,25 @@ function MainPage() {
       </div>
       
       <div className='main-body'>
+
         <div className='title'>
           <div className='recipe-text'>
             <div className='recipe-name'> 레시피 둘러보기 </div>
             <div className='more'> 더보기 <img src={next} alt='next'/> </div>
           </div>
-
-          <div className='recipePhoto'>
-            <div className='photoStyle'> 
-              <img src={like} alt='like' />
-              <span> 카레 </span> 
-            </div>
-
-            <div className='photoStyle'> 
-              <img src={like} alt='like' />
-              <span> 까르보나라 </span> 
-            </div>
           
-            <div className='photoStyle'> 
-              <img src={like} alt='like' />
-              <span> 불닭볶음면 </span> 
-            </div>
-          </div>
+          <ThrumnailRecipe data={data} />
+          {/* <div className='recipePhoto'>
+            {data.map((item) => (
+              <div>
+                <img src={item.thumbnail_image} className='rec-photo' />
+                <div className='photoStyle' >
+                <img src={like} alt='like' />
+                <span> {item.title} </span> 
+              </div>
+              </div>
+            ))}
+          </div> */}
         </div>
 
         <div className='gredient'>
