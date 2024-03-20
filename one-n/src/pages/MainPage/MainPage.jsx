@@ -52,17 +52,6 @@ function MainPage() {
           </div>
           
           <ThrumnailRecipe data={data} />
-          {/* <div className='recipePhoto'>
-            {data.map((item) => (
-              <div>
-                <img src={item.thumbnail_image} className='rec-photo' />
-                <div className='photoStyle' >
-                <img src={like} alt='like' />
-                <span> {item.title} </span> 
-              </div>
-              </div>
-            ))}
-          </div> */}
         </div>
 
         <div className='gredient'>
