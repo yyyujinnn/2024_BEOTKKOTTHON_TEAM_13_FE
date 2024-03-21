@@ -55,7 +55,7 @@ div {
     height: 64px;
     flex-shrink: 0;
     border-radius: 8px;
-   
+
 }
 
 
@@ -137,15 +137,16 @@ div {
     align-items: center;
     border-radius: 16px;
     background: var(--grey-95, #F2F2F2);
-    
+
 
 }
 
 .option-buttons {
     display: flex;
-    flex-grow: 1; /* 옵션 버튼들이 컨테이너에 공간을 채우도록 함 */
-    
-    
+    flex-grow: 1;
+    /* 옵션 버튼들이 컨테이너에 공간을 채우도록 함 */
+
+
 
 }
 
@@ -161,13 +162,33 @@ div {
     border: none;
     border-radius: 12px;
     background: var(--grey-95, #F2F2F2);
-    
+    color: var(--grey-75, #BCBCBC);
+    text-align: center;
+
+    /* h16 */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.16px;
+
 }
 
 /* 선택된 버튼에 대한 스타일 */
 .option-buttons button.active {
-    
+
     background: var(--brand_color, #FFDC25);
+    color: var(--black-10, #191919);
+    text-align: center;
+
+    /* h16 */
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.16px;
     /* 선택된 버튼을 구별하기 위해 배경색 변경 */
 }
 
@@ -189,7 +210,7 @@ div {
     border: none;
     background-color: transparent;
     margin-top: 15px;
-    
+
 }
 
 .product-post-select-place-container {
@@ -198,7 +219,7 @@ div {
 }
 
 .product-post-select-place {
-   
+
     display: flex;
     width: 95%;
     padding: 8px;

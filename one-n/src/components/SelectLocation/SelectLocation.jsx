@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import ProductPost from '../../pages/ProductPost/ProductPost';
 import { ReactComponent as Back } from '../../assets/back.svg'
 import { MyContext } from '../MyContextProvider/MyContextProvider';
+import axios from 'axios'; // axios 추가
 import './SelectLocation.css'
 
 export default function SelectLocation() {
@@ -22,6 +23,28 @@ export default function SelectLocation() {
   const goToProductPost = () => {
     navigate('/product-post');
   }
+
+  const fetchHCode = (query) => {
+    axios.get(`https://dapi.kakao.com/v2/local/search/address.json?query=${query}`, {
+      headers: {
+        Authorization: "KakaoAK"
+      },
+    })
+    .then(response => {
+      if (response.data.meta.total_count > 0) {
+        const hCode = response.data.documents[0].address.h_code; // 행정동 코드
+        const BCode = response.data.documents[0].address.b_code; 
+        console.log('행정동 코드:', hCode);
+        console.log('법정동 코드:', BCode);
+        // 여기서 필요한 작업 수행
+      } else {
+        console.error('No results found for the address query:', query);
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching hCode:', error);
+    });
+  };
   // 1) 카카오맵 불러오기
   useEffect(() => {
     if (!window.kakao) {
@@ -122,6 +145,10 @@ export default function SelectLocation() {
               console.log('주소:', addr);
               console.log('위도:', mouseEvent.latLng.getLat());
               console.log('경도:', mouseEvent.latLng.getLng());
+
+              const query = encodeURIComponent(addr);
+
+              fetchHCode(query);
 
               setPostAddress(addr);
               setModalVisible(true);

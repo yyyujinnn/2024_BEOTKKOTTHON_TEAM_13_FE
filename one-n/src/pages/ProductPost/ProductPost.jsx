@@ -3,7 +3,7 @@ import { ReactComponent as Back } from '../../assets/back.svg'
 import { ReactComponent as Next } from '../../assets/Next.svg'
 import InputForm from '../../components/InputForm/InputForm';
 import { Link } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { MyContext } from '../../components/MyContextProvider/MyContextProvider';
 import IngredientPost from '../../components/ProductPostForm/IngredientPost';
 import RecipeIngredientsPost from '../../components/ProductPostForm/RecipeIngredientsPost';
@@ -15,6 +15,7 @@ export default function ProductPost() {
     const [selectedOption, setSelectedOption] = useState('ingredients');
     const [imageUploaded, setImageUploaded] = useState(false); // 이미지가 업로드되었는지 여부
     const [imageURL, setImageURL] = useState(''); // 이미지 URL 상태 추가
+    // const [userLocation, setUserLocation] = useState(null); // 사용자 위치 정보 상태 추가
 
     const handleButtonClick = (option) => {
         if (selectedOption !== option) {
@@ -64,6 +65,24 @@ export default function ProductPost() {
         console.log(postContent);
         console.log(postAddress);
     };
+
+    // useEffect(() => {
+    //     // 위치 정보 가져오기
+    //     if (navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition(
+    //             (position) => {
+    //                 const { latitude, longitude } = position.coords;
+    //                 setUserLocation({ latitude, longitude });
+    //                 console.log("User's current location:", { latitude, longitude });
+    //             },
+    //             (error) => {
+    //                 console.error('Error getting user location:', error);
+    //             }
+    //         );
+    //     } else {
+    //         console.error('Geolocation is not supported by this browser.');
+    //     }
+    // }, []);
 
 
     return (

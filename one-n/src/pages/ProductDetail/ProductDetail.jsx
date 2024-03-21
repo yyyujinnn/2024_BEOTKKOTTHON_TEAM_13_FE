@@ -3,7 +3,7 @@ import './ProductDetail.css';
 import product from '../../assets/example.jpg'
 import { ReactComponent as Back } from '../../assets/back.svg'
 import { ReactComponent as Pick } from '../../assets/heart.svg'
-import { ReactComponent as Location } from '../../assets/location.svg'
+import { ReactComponent as Next } from '../../assets/Next.svg'
 
 export default function ProductDetail() {
     const [productData, setProductData] = useState({
@@ -18,32 +18,32 @@ export default function ProductDetail() {
         remain: '1',
     });
 
-    useEffect(() => {
-        // 백엔드에서 데이터 가져오는 비동기 함수
-        fetchProductData().then(data => {
-            setProductData({
-                ...productData,
-                price: data.price,
-                seller: data.seller,
-                satisfaction: data.satisfaction
-            });
-        }).catch(error => {
-            console.error("Error fetching product data:", error);
-        });
-    }, [productData]);
+    // useEffect(() => {
+    //     // 백엔드에서 데이터 가져오는 비동기 함수
+    //     fetchProductData().then(data => {
+    //         setProductData({
+    //             ...productData,
+    //             price: data.price,
+    //             seller: data.seller,
+    //             satisfaction: data.satisfaction
+    //         });
+    //     }).catch(error => {
+    //         console.error("Error fetching product data:", error);
+    //     });
+    // }, [productData]);
 
-    const fetchProductData = async () => {
-        // 백엔드에서 상품 데이터를 가져오는 비동기 함수
-        // 예를 들어, API 호출이나 데이터베이스 쿼리 등을 수행합니다.
-        // 이 예시에서는 가짜 데이터를 반환합니다.
-        return {
-            name: "강원도 햇감자 1kg 10개",
-            price: 4000,
-            seller: "윤준영",
-            satisfaction: 89,
-            link: "https://coupang.com/qwejisdjf"
-        };
-    };
+    // const fetchProductData = async () => {
+    //     // 백엔드에서 상품 데이터를 가져오는 비동기 함수
+    //     // 예를 들어, API 호출이나 데이터베이스 쿼리 등을 수행합니다.
+    //     // 이 예시에서는 가짜 데이터를 반환합니다.
+    //     return {
+    //         name: "강원도 햇감자 1kg 10개",
+    //         price: 4000,
+    //         seller: "윤준영",
+    //         satisfaction: 89,
+    //         link: "https://coupang.com/qwejisdjf"
+    //     };
+    // };
 
     const handleBackClick = () => {
         // 이전 페이지로 돌아가는 기능 추가
@@ -92,23 +92,25 @@ export default function ProductDetail() {
                     </div>
                 </span>
             </div>
-            <div className='product-address'>
-                <span className='address-name'>
-                    {productData.address}
-                </span>
-                <span className='address-distance'>
-                    <Location />
-                    <span className='product-distance'>
-                        216m
-                    </span>
-                </span>
-            </div>
             <div className='product-link'>
                 {productData.link}
             </div>
             <div className='product-content'>
                 {productData.content}
             </div>
+            <div className='product-address'>
+                <p className='product-detail-address-text'>거래희망 장소</p>
+                <div className='address-name'>
+                    <div>
+                        {productData.address}
+                    </div>
+
+                    <button className='look-map'>
+                        <Next className='next-button-style' />
+                    </button>
+                </div>
+            </div>
+
             <div className='people-container'>
                 <div className='product-people-container'>
                     <div className='product-people'>
@@ -119,41 +121,17 @@ export default function ProductDetail() {
                     </div>
                 </div>
             </div>
-            <div className='divider'> </div>
+            <div className='remaining-message'>
+                {productData.remain}자리 밖에 안 남았어요!
+            </div>
 
-            <div className='product-recipe'>
-                <div className='product-recipe-header'>
-                    만들 수 있는 레시피
-                </div>
-                <div className='recipe-card-container'>
-                    <div className='recipe-card'>
-                        <span className='recipe-card-name'>
-                            까르보나라
-                        </span>
-                    </div>
-                    <div className='recipe-card'>
-                        <span className='recipe-card-name'>
-                            까르보나라
-                        </span>
-                    </div>
-                    <div className='recipe-card'>
-                        <span className='recipe-card-name'>
-                            까르보나라
-                        </span>
-                    </div>
-                    <div className='recipe-card'>
-                        <span className='recipe-card-name'>
-                            까르보나라
-                        </span>
-                    </div>
-                </div>
-                <div className='product-sell-button-container'>
-                    <button className='product-sell-button'>
-                        구매하기
-                    </button>
-                </div>
+            <div className='product-sell-button-container'>
+                <button className='product-sell-button'>
+                    구매하기
+                </button>
             </div>
         </div>
+
 
     );
 }

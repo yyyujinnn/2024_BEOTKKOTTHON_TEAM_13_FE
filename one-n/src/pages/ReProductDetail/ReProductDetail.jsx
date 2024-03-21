@@ -22,32 +22,32 @@ export default function ReProductDetail() {
         remain: '1',
     });
 
-    useEffect(() => {
-        // 백엔드에서 데이터 가져오는 비동기 함수
-        fetchProductData().then(data => {
-            setProductData({
-                ...productData,
-                price: data.price,
-                seller: data.seller,
-                satisfaction: data.satisfaction
-            });
-        }).catch(error => {
-            console.error("Error fetching product data:", error);
-        });
-    }, [productData]);
+    // useEffect(() => {
+    //     // 백엔드에서 데이터 가져오는 비동기 함수
+    //     fetchProductData().then(data => {
+    //         setProductData({
+    //             ...productData,
+    //             price: data.price,
+    //             seller: data.seller,
+    //             satisfaction: data.satisfaction
+    //         });
+    //     }).catch(error => {
+    //         console.error("Error fetching product data:", error);
+    //     });
+    // }, [productData]);
 
-    const fetchProductData = async () => {
-        // 백엔드에서 상품 데이터를 가져오는 비동기 함수
-        // 예를 들어, API 호출이나 데이터베이스 쿼리 등을 수행합니다.
-        // 이 예시에서는 가짜 데이터를 반환합니다.
-        return {
-            name: "강원도 햇감자 1kg 10개",
-            price: 4000,
-            seller: "윤준영",
-            satisfaction: 89,
-            link: "https://coupang.com/qwejisdjf"
-        };
-    };
+    // const fetchProductData = async () => {
+    //     // 백엔드에서 상품 데이터를 가져오는 비동기 함수
+    //     // 예를 들어, API 호출이나 데이터베이스 쿼리 등을 수행합니다.
+    //     // 이 예시에서는 가짜 데이터를 반환합니다.
+    //     return {
+    //         name: "강원도 햇감자 1kg 10개",
+    //         price: 4000,
+    //         seller: "윤준영",
+    //         satisfaction: 89,
+    //         link: "https://coupang.com/qwejisdjf"
+    //     };
+    // };
 
     const handleBackClick = () => {
         // 이전 페이지로 돌아가는 기능 추가

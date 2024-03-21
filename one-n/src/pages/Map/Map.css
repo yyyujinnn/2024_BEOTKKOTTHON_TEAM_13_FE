@@ -1,60 +1,72 @@
-/* @media (max-width: 768px) {
-    .map-container {
-        background-color: #a95555;
-        
-    }
-} */
-
-.map-modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: white;
-    padding: 20px;
-    z-index: 1000; /* 모달이 지도 위에 올라오도록 z-index를 설정합니다. */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* 모달에 그림자 효과를 추가합니다. */
-  }
-  
-
 .map-modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Close button CSS */
 .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
 }
 
 
 #kakao-map {
-    opacity: 0.8;
-    width: 100%; /* 지도가 화면에 꽉 차도록 설정 */
-    height: 100vh;
-    
-    margin-bottom: 20px; /* 지도와 다른 콘텐츠 간의 간격 설정 */
-  }
-  
-  /* 기타 모바일에 대한 스타일 조정 */
-  body {
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    padding: 10px;
-  }
-  
-  h1 {
-    font-size: 24px;
-    margin-top: 0;
-    margin-bottom: 20px;
-  }
+  opacity: 0.8;
+  width: 100%;
+  /* 지도가 화면에 꽉 차도록 설정 */
+  height: 100vh;
+}
 
 
-/* modal 스타일 */
-/* Modal CSS */
+
+h1 {
+  font-size: 24px;
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.bottom-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background-color: #ffffff;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  z-index: 999;
+  /* 필요에 따라 z-index 설정 */
+  border-radius: 24px 24px 24px 24px;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.set-location-image {
+  width: 34px;
+  height: 36px;
+  
+}
+
+.set-location-button {
+  position: absolute;
+  bottom: 46%;
+  /* 원하는 위치로 조정 */
+  left: 89%;
+  /* 가운데 정렬 */
+  border-radius: 50%;
+  padding-top: 5px;
+  border: none;
+  transform: translateX(-50%);
+  /* 가운데 정렬을 위한 transform */
+  z-index: 1000;
+  /* 다른 요소 위에 표시하기 위한 z-index 설정 */
+  background: var(--grey-95, #F2F2F2);
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.16);
+}
