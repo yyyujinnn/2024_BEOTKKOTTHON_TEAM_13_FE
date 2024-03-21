@@ -15,10 +15,14 @@ import save from '../../assets/icons/save.png';
 
 import { SellList } from '../../components/Chat/SellList';
 import { ReviewSelect } from '../../components/Review/ReviewSelect';
+import { useParams } from 'react-router-dom';
 
 function ChatRoom() {
+  
+  const { chat_id } = useParams;
 
   const [data, setData] = useState([]);
+  const [Exit, setExit] = useState(null);
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [exitModalOpen, setExitModalOpen] = useState(false);
@@ -31,7 +35,18 @@ function ChatRoom() {
     setDropdownVisible(!dropdownVisible);
   };
 
+  // 채팅방 퇴장
   const onClickExit = () => {
+    const apiUrl = 'http://20.39.188.154:8080/chat/exit-user';
+     
+    axios.post(apiUrl)
+      .then((response) => {
+        setExit(response.data);
+      })
+      .catch((error) => {
+        console.error('API 요청 에러:', error);
+      });
+    
     setExitModalOpen(false);
   }
 
@@ -43,8 +58,10 @@ function ChatRoom() {
     setReviewModalOpen(false);
   }
 
+  // 채팅방 전체 메시지
   useEffect(() => {
-    const apiUrl = 'http://20.39.188.154:8080/chat/init-messages?id=2e068450-1b2f-4ff9-9447-182f3e4395e6&session_id=test_session_id';
+    // const apiUrl = `http://20.39.188.154:8080/chat/init-messages?id=${chat_id}&session_id=test_session_id`;
+    const apiUrl = `http://20.39.188.154:8080/chat/init-messages?id=2e068450-1b2f-4ff9-9447-182f3e4395e6&session_id=test_session_id`;
    
     axios.get(apiUrl)
       .then((response) => {
@@ -59,7 +76,6 @@ function ChatRoom() {
         console.error('API 요청 에러:', error);
       });
     }, []);
-
 
   return (
     <div>
@@ -107,7 +123,7 @@ function ChatRoom() {
 
                   <div className='review-body'>
                     <input placeholder='거래에 대한 후기를 작성해주세요.'/>
-                    <div style={{margin: '16px 16px  0 16px'}}> 만족도</div>
+                    <div style={{margin: '16px 16px 0 16px'}}> 만족도</div>
                     <ReviewSelect/> {/* 만족도 슬라이더 */}
                   </div>
                   
@@ -230,7 +246,7 @@ const ReviewModalStyles = {
   },
   content: {
     width: "311px",
-    height: "360px",
+    height: "370px",
     padding: "16px 0",
     position: "absolute",
     top: "50%",
