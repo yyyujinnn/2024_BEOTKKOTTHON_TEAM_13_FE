@@ -1,48 +1,46 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import './ChatList.css'
-import chatting from '../../assets/logo/chatting.png'
-import user from '../../assets/icons/user.png'
-import plus from '../../assets/icons/plus.svg'
 
 function ChatList() {
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+      // API 엔드포인트 URL 설정
+      const apiUrl = 'http://20.39.188.154:8080/chats/list?session_id=test_session_id';
+  
+      axios.get(apiUrl)
+        .then((response) => {
+          setData(response.data);
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error('API 요청 에러:', error);
+        });
+      }, []);
+
   return (
     <div>
         <div className='chatroom-header'>
         </div>
 
         <div className='chatlist-body'>
-            <div className='chat'>
-              <div className='sell-img' />  
-              <div>
-                <div className='buyer'> 
-                  짱구
-                  <div className='time'> 오후 3:55 </div> 
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <div className='text'> 안녕하세요 감자 1.6kg 공동구매 하고싶어요. </div>
-                    <div className='info'>2</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div className='chat'>
-                <div className='sell-img' />  
-                <div>
-                    <div className='buyer'> 짱구 <div className='time'> 오후 3:55 </div> </div>
-                    <div className='text'> 안녕하세요 감자 1.6kg 공동구매 하고싶어요. <div className='info'></div> </div>
-                </div>
-            </div>
-
-            <div className='chat'>
-              <div className='sell-img' />  
-              <div>
-                <div className='buyer'> 짱구 <div className='time'> 오후 3:55 </div> </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <div className='text'> 안녕하세요 감자 1.6kg 공동구매 하고싶어요. </div>
-                    <div className='info'>2</div>
-                    </div>
-                </div>
-            </div>
+          {data.map((item) => (
+             <div key={item.chat_id} className='chat'>
+             <div className='sell-img' />  
+             <div>
+               <div className='buyer'> 
+                 짱구
+                 <div className='time'> 오후 3:55 </div> 
+               </div>
+               <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                   <div className='text'> {item.last_message} </div>
+                   <div className='info'>2</div>
+                   </div>
+               </div>
+           </div>            
+          ))}
         </div>        
     </div>
   )

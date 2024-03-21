@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import ReactModal from 'react-modal';
 import './ChatRoom.css'
 
@@ -16,6 +17,8 @@ import { SellList } from '../../components/Chat/SellList';
 import { ReviewSelect } from '../../components/Review/ReviewSelect';
 
 function ChatRoom() {
+
+  const [data, setData] = useState([]);
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [exitModalOpen, setExitModalOpen] = useState(false);
@@ -39,6 +42,23 @@ function ChatRoom() {
   const onClickReview = () => {
     setReviewModalOpen(false);
   }
+
+  useEffect(() => {
+    const apiUrl = 'http://20.39.188.154:8080/chat/init-messages?id=2e068450-1b2f-4ff9-9447-182f3e4395e6&session_id=test_session_id';
+   
+    axios.get(apiUrl)
+      .then((response) => {
+        const updatedData = response.data.map(item => ({
+        ...item,
+        profile_image: `http://20.39.188.154${item.profile_image}`
+      }));
+      setData(updatedData);
+      console.log(updatedData);
+      })
+      .catch((error) => {
+        console.error('API 요청 에러:', error);
+      });
+    }, []);
 
 
   return (
@@ -127,6 +147,38 @@ function ChatRoom() {
         <div className='room-body'>
 
 
+          {/* 채팅메세지 */}
+          {data.map((item, index) => (
+          <div className='other' key={index}>
+          {item.type === 'NOTICE' ? (
+            <div style={{ display:'flex', gap:'20px', alignItems:'center', margin: '8px 0', fontSize: '12px', color: '#8593A8', textAlign: 'center' }}>
+              <div style={{ flex: '1', borderBottom: '1px solid #8593A8', opacity:'0.5' }}></div>
+              {item.message}
+              <div style={{ flex: '1', borderBottom: '1px solid #8593A8', opacity:'0.5' }}></div>
+            </div>
+          ) : (
+            <>
+              {index === 0 || data[index - 1].nickname !== item.nickname ? (
+                <div style={{ display: 'flex', justifyContent: 'flex-start', margin: '8px 0' }}>
+                  <img src={item.profile_image} style={{ width: '35px', height: '35px' }} />
+                  <div style={{ marginLeft: '5px' }}>
+                    <div style={{ fontSize: '14px', marginBottom: '5px' }}> {item.nickname} </div>
+                    <div className='message'> {item.message} </div>
+                  </div>
+                </div>
+              ) : (
+                <div style={{ display: 'flex', justifyContent: 'flex-start', margin: '8px 0' }}>
+                  <div style={{ marginLeft: '40px' }}>
+                    <div className='message'> {item.message} </div>
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+        ))}
+
+         
         </div>
         
         <div className='input-msg'>
