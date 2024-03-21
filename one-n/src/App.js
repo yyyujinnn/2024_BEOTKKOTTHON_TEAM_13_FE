@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavBar } from './components/NavBar/NavBar'
 import MainPage from './pages/MainPage/MainPage';
 import Map from './pages/Map/Map';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
