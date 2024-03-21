@@ -10,13 +10,13 @@ import Explore from './pages/Explore/Explore';
 function App() {
   return (
     <div className="App">
-        {/* <MainPage /> */}
+        <MainPage />
         {/* <ChatList /> */}
-        <ChatRoom />
+        {/* <ChatRoom /> */}
         {/* <RecipeDetail /> */}
         {/* <RecipeReg/> */}
         {/* <Explore /> */}
-        {/* <NavBar /> */}
+        <NavBar />
     </div>
   );
 }
