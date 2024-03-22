@@ -18,7 +18,7 @@ export const ThrumnailRecipe = ({data}) => {
         <div className='recipePhoto'>
             {data.map((item) => (
               <div key={item.id}>
-                <Link to={`/recipe?${item.id}`}>
+                <Link to={`/recipe/${item.id}`}>
                   <img src={item.thumbnail_image} className='rec-photo' />
                 </Link>
                 <div className='photoStyle'  >
