@@ -1,6 +1,7 @@
 // 레시피 상세페이지
-import React, { useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 import './RecipeDetail.css'
 import user from '../../assets/icons/user.png'
 import previous from '../../assets/icons/previous.svg';
@@ -11,15 +12,36 @@ import arrow from '../../assets/icons/direct-arrow.png'
 
 function RecipeDetail() {
     const navigate = useNavigate();
-
-    const [picked, setPicked] = useState(false);
+    const { recipeId } = useParams();
     
+    const [recipe, setRecipe] = useState(null);
+    const [picked, setPicked] = useState(false);
+
     const togglePicked = () => {
         setPicked(!picked);
     }
 
-  return (
-    <div>
+    useEffect(() => {
+        const apiUrl = `http://20.39.188.154:8080/recipe/${recipeId}`;
+        axios.get(apiUrl)
+        .then(response => {
+            const updatedData = {
+                ...response.data,
+                thumbnail_image: `http://20.39.188.154${response.data.thumbnail_image}`
+            };
+            setRecipe(updatedData);
+            })
+            .catch(error => {
+                console.error('API 요청 에러:', error);
+            });
+    }, [recipeId]);
+
+    if (!recipe) {
+        return <div>Loading...</div>;
+    }
+    
+    return (
+      <div>
         <div className='recipe-header'>
             <img src={previous} alt='previous' onClick={() => navigate(-1)} />
             <img src={dot} alt='dot' />
@@ -27,54 +49,51 @@ function RecipeDetail() {
 
         <div className='body'>
 
-            <div className='recipe-img' />
+            <img src={recipe.thumbnail_image} className='recipe-img'/>
             <div className='user'>
                 <img src={user} />
-                <div>스텔라 1245</div>
+                <div>{recipe.user.nickname}</div>
             </div>
             
 
             <div className='recipe-title'>
-                <div > 콘치즈 </div>
+                <div > {recipe.title} </div>
                 <div className='indicate'>
                   <img src={picked ? FiledPick : pick} onClick={togglePicked} style={{width: 20}} className="pick" />
-                   12 
+                   {recipe.likes_count}
                 </div>
             </div>
             
             <div style={{ fontSize: '16px', fontWeight: '600', color: '#333', marginTop: '40px'}}> 재료 </div>
             <div className='grd-tag'>
-                <div> 모짜렐라 치즈 <img src={arrow} /> </div> 1개 
-                <div> 스위트콘 <img src={arrow} /> </div> 1개
-                <div> 마요네즈 <img src={arrow} /> </div> 3 티스푼
-                <div> 설탕 <img src={arrow} /> </div> 1 티스푼
+                {recipe.ingredients.map( ingredient => (
+                <>
+                  <div key={ingredient.id}>
+                    {ingredient.name} <img src={arrow} />
+                </div> {ingredient.id}
+                </>
+                ))}
             </div>
             
-
             <div className='cook'> 요리 방법 </div>
-                <div className='step-img'/>
-                <div className='cook-step'>
-                    <div className='step1'> 1 </div>
-                    <div className='step1-detail'> 스위트콘의 물기를 빼줍니다.</div>
+            <>
+              {recipe.processes.map( (process, index) => (
+                <>
+                  <img src={process.image} className='step-img'/>
+                  <div className='cook-step'>
+                    <div className='step1' > {index+1} </div>
+                    <div className='step1-detail'> {process.contents}</div>
                 </div>
+                </>
+                ))}
+            </>
 
-                <div className='step-img'/>
-                <div className='cook-step'>
-                    <div className='step1'> 2 </div>
-                    <div className='step1-detail'> 스위트콘의 물기를 빼줍니다.</div>
-                </div>
-
-                <div className='step-img'/>
-                <div className='cook-step'>
-                    <div className='step1'> 3 </div>
-                    <div className='step1-detail'> 스위트콘의 물기를 빼줍니다.</div>
-                </div>
+                
         </div>
+            
+            
 
-
-
-
-
+            
 
 
     </div>

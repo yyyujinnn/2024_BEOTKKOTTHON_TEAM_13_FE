@@ -15,7 +15,7 @@
 
 .body{  
     width: 359px;
-    height: 602px;
+    height: 635px;
     padding: 16px 0 0 16px;
     overflow-y: auto;   
     scrollbar-width: none; /* Firefox용 */
@@ -41,6 +41,12 @@
     align-items: center;
     margin : -50px 0 30px -20px;
     font-weight: 600;
+}
+
+.user img {
+    width: 64px;
+    height: 64px;
+    border-radius: 64px;
 }
 
 .recipe-title{
@@ -95,7 +101,8 @@
     width: 343px;
     height: 229px;
     flex-shrink: 0;
-    background-color: #D9D9D9;
+    border-radius: 8px;
+    background-color: hsl(0, 0%, 85%);
     margin: 16px 12px 0 0;
 }
 
