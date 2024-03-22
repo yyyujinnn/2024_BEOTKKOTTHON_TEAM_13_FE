@@ -2,104 +2,12 @@ import React, { useState, useEffect } from 'react';
 import './Scrap.css';
 import { ReactComponent as Back } from '../../assets/back.svg'
 import Modify from '../../assets/modify.png'
+import axios from 'axios';
 import SaleProduct from '../../components/SaleProduct/SaleProduct';
 
 export default function Scrap() {
-    const LocationData = [
-
-        {
-            "image": "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fthumbnail7.coupangcdn.com%2Fthumbnails%2Fremote%2F492x492ex%2Fimage%2Frs_quotation_api%2Fysrimegn%2F61c98841c46b4834becfb17ae6097027.jpg&blockId=2618ba81-a66c-4218-aff7-0e1ca5ba2b51",
-            "title": "샐러드 공동구매 합니다.",
-            "price": "4,000원",
-            "item": ["감자", "라면", "호박고구마", "캔콜라", "감자"],
-            "satisfaction": '89',
-            "address": "서천동 위치 1",
-            "latitude": 37.275504,
-            "name": "박나리",
-            "longitude": 127.107736
-        },
-        {
-            "image": "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fthumbnail7.coupangcdn.com%2Fthumbnails%2Fremote%2F492x492ex%2Fimage%2Frs_quotation_api%2Fysrimegn%2F61c98841c46b4834becfb17ae6097027.jpg&blockId=2618ba81-a66c-4218-aff7-0e1ca5ba2b51",
-            "title": "감자 공동구매 하실 분",
-            "price": "4,000원",
-            "item": [],
-            "satisfaction": '89',
-            "address": "서천동 위치 2",
-            "name": "박나리",
-            "latitude": 37.269682,
-            "longitude": 127.101832
-        },
-        {
-            "image": "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fthumbnail7.coupangcdn.com%2Fthumbnails%2Fremote%2F492x492ex%2Fimage%2Frs_quotation_api%2Fysrimegn%2F61c98841c46b4834becfb17ae6097027.jpg&blockId=2618ba81-a66c-4218-aff7-0e1ca5ba2b51",
-            "title": "짱구33",
-            "price": "5",
-            "item": ["감자", "라면", "호박고구마", "캔콜라", "감자"],
-            "satisfaction": '89',
-            "address": "근처 식당",
-            "name": "박나리",
-            "latitude": 37.273240,
-            "longitude": 127.101458
-        },
-        {
-            "image": "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fthumbnail7.coupangcdn.com%2Fthumbnails%2Fremote%2F492x492ex%2Fimage%2Frs_quotation_api%2Fysrimegn%2F61c98841c46b4834becfb17ae6097027.jpg&blockId=2618ba81-a66c-4218-aff7-0e1ca5ba2b51",
-            "title": "짱구44",
-            "price": "5",
-            "item": ["감자", "라면", "호박고구마", "캔콜라", "감자"],
-            "satisfaction": '89',
-            "name": "박나리",
-            "address": "TEST1",
-            "latitude": 37.236399457807806,
-            "longitude": 127.07254154778428
-        },
-        {
-            "image": "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fthumbnail7.coupangcdn.com%2Fthumbnails%2Fremote%2F492x492ex%2Fimage%2Frs_quotation_api%2Fysrimegn%2F61c98841c46b4834becfb17ae6097027.jpg&blockId=2618ba81-a66c-4218-aff7-0e1ca5ba2b51",
-            "title": "짱구55",
-            "price": "5",
-            "item": ["감자", "라면", "호박고구마", "캔콜라", "감자"],
-            "satisfaction": '89',
-            "address": "TEST2",
-            "name": "박나리",
-            "latitude": 37.23670640302805,
-            "longitude": 127.0715726640949
-        },
-        {
-            "image": "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fthumbnail7.coupangcdn.com%2Fthumbnails%2Fremote%2F492x492ex%2Fimage%2Frs_quotation_api%2Fysrimegn%2F61c98841c46b4834becfb17ae6097027.jpg&blockId=2618ba81-a66c-4218-aff7-0e1ca5ba2b51",
-            "title": "짱구66",
-            "price": "5",
-            "item": ["감자", "라면", "호박고구마", "캔콜라"],
-            "satisfaction": '89',
-            "address": "TEST3",
-            "name": "박나리",
-            "latitude": 37.237544006041105,
-            "longitude": 127.07218201622115
-        },
-        {
-            "image": "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fthumbnail7.coupangcdn.com%2Fthumbnails%2Fremote%2F492x492ex%2Fimage%2Frs_quotation_api%2Fysrimegn%2F61c98841c46b4834becfb17ae6097027.jpg&blockId=2618ba81-a66c-4218-aff7-0e1ca5ba2b51",
-            "title": "짱구77",
-            "price": "5",
-            "item": ["감자", "라면", "호박고구마", "캔콜라", "감자"],
-            "satisfaction": '89',
-            "address": "근처 카페",
-            "name": "박나리",
-            "latitude": 37.270842,
-            "longitude": 127.102785
-        },
-
-        {
-            "image": "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fthumbnail7.coupangcdn.com%2Fthumbnails%2Fremote%2F492x492ex%2Fimage%2Frs_quotation_api%2Fysrimegn%2F61c98841c46b4834becfb17ae6097027.jpg&blockId=2618ba81-a66c-4218-aff7-0e1ca5ba2b51",
-            "title": "짱구88",
-            "level": "5",
-            "item": ["감자", "라면", "호박고구마", "캔콜라", "감자"],
-            "satisfaction": '89',
-            "name": "박나리",
-            "address": "근처 카페",
-            "latitude": 37.242040,
-            "longitude": 127.080202
-        }
-    ];
-
     const [satisfaction, setSatisfaction] = useState(44);
-    const [products, setProducts] = useState(LocationData);
+    const [products, setProducts] = useState([]);
     const [selectedWishlistButton, setSelectedWishlistButton] = useState('글');
     const handleBackClick = () => {
 
@@ -118,6 +26,28 @@ export default function Scrap() {
             setSelectedOption(option); // 선택된 옵션이 현재 선택된 옵션과 다를 때만 상태 변경
         }
     };
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // Axios를 사용하여 데이터 요청
+                const response = await axios.get('http://20.39.188.154:8080/post/list', {
+                    params: {
+                        type: 'all',
+                        bcode: '',
+                        keyword: '',
+                        page: 1
+                    }
+                });
+                // 받아온 데이터를 LocationData로 설정
+                setProducts(response.data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        // fetchData 함수 호출
+        fetchData();
+    }, []);
 
     return (
         <div className='scrap-container'>

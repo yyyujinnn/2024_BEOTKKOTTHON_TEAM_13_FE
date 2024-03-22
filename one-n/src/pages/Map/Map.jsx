@@ -3,115 +3,48 @@ import SaleProduct from '../../components/SaleProduct/SaleProduct';
 import './Map.css'
 import LocationImage from '../../assets/Marker.svg'
 import SetLocation from '../../assets/setlocation.png'
+import axios from 'axios';
+import { NavBar } from '../../components/NavBar/NavBar';
 
-const LocationData = [
-
-    {
-        "image": "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fthumbnail7.coupangcdn.com%2Fthumbnails%2Fremote%2F492x492ex%2Fimage%2Frs_quotation_api%2Fysrimegn%2F61c98841c46b4834becfb17ae6097027.jpg&blockId=2618ba81-a66c-4218-aff7-0e1ca5ba2b51",
-        "title": "샐러드 공동구매 합니다.",
-        "price": "4,000원",
-        "item": ["감자", "라면", "호박고구마", "캔콜라", "감자"],
-        "satisfaction": '89',
-        "address": "서천동 위치 1",
-        "latitude": 37.275504,
-        "name": "박나리",
-        "longitude": 127.107736
-    },
-    {
-        "image": "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fthumbnail7.coupangcdn.com%2Fthumbnails%2Fremote%2F492x492ex%2Fimage%2Frs_quotation_api%2Fysrimegn%2F61c98841c46b4834becfb17ae6097027.jpg&blockId=2618ba81-a66c-4218-aff7-0e1ca5ba2b51",
-        "title": "감자 공동구매 하실 분",
-        "price": "4,000원",
-        "item": [],
-        "satisfaction": '89',
-        "address": "서천동 위치 2",
-        "name": "박나리",
-        "latitude": 37.269682,
-        "longitude": 127.101832
-    },
-    {
-        "image": "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fthumbnail7.coupangcdn.com%2Fthumbnails%2Fremote%2F492x492ex%2Fimage%2Frs_quotation_api%2Fysrimegn%2F61c98841c46b4834becfb17ae6097027.jpg&blockId=2618ba81-a66c-4218-aff7-0e1ca5ba2b51",
-        "title": "짱구33",
-        "price": "5",
-        "item": ["감자", "라면", "호박고구마", "캔콜라", "감자"],
-        "satisfaction": '89',
-        "address": "근처 식당",
-        "name": "박나리",
-        "latitude": 37.273240,
-        "longitude": 127.101458
-    },
-    {
-        "image": "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fthumbnail7.coupangcdn.com%2Fthumbnails%2Fremote%2F492x492ex%2Fimage%2Frs_quotation_api%2Fysrimegn%2F61c98841c46b4834becfb17ae6097027.jpg&blockId=2618ba81-a66c-4218-aff7-0e1ca5ba2b51",
-        "title": "짱구44",
-        "price": "5",
-        "item": ["감자", "라면", "호박고구마", "캔콜라", "감자"],
-        "satisfaction": '89',
-        "name": "박나리",
-        "address": "TEST1",
-        "latitude": 37.236399457807806,
-        "longitude": 127.07254154778428
-    },
-    {
-        "image": "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fthumbnail7.coupangcdn.com%2Fthumbnails%2Fremote%2F492x492ex%2Fimage%2Frs_quotation_api%2Fysrimegn%2F61c98841c46b4834becfb17ae6097027.jpg&blockId=2618ba81-a66c-4218-aff7-0e1ca5ba2b51",
-        "title": "짱구55",
-        "price": "5",
-        "item": ["감자", "라면", "호박고구마", "캔콜라", "감자"],
-        "satisfaction": '89',
-        "address": "TEST2",
-        "name": "박나리",
-        "latitude": 37.23670640302805,
-        "longitude": 127.0715726640949
-    },
-    {
-        "image": "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fthumbnail7.coupangcdn.com%2Fthumbnails%2Fremote%2F492x492ex%2Fimage%2Frs_quotation_api%2Fysrimegn%2F61c98841c46b4834becfb17ae6097027.jpg&blockId=2618ba81-a66c-4218-aff7-0e1ca5ba2b51",
-        "title": "짱구66",
-        "price": "5",
-        "item": ["감자", "라면", "호박고구마", "캔콜라", "감자"],
-        "satisfaction": '89',
-        "address": "TEST3",
-        "name": "박나리",
-        "latitude": 37.237544006041105,
-        "longitude": 127.07218201622115
-    },
-    {
-        "image": "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fthumbnail7.coupangcdn.com%2Fthumbnails%2Fremote%2F492x492ex%2Fimage%2Frs_quotation_api%2Fysrimegn%2F61c98841c46b4834becfb17ae6097027.jpg&blockId=2618ba81-a66c-4218-aff7-0e1ca5ba2b51",
-        "title": "짱구77",
-        "price": "5",
-        "item": ["감자", "라면", "호박고구마", "캔콜라", "감자"],
-        "satisfaction": '89',
-        "address": "근처 카페",
-        "name": "박나리",
-        "latitude": 37.270842,
-        "longitude": 127.102785
-    },
-
-    {
-        "image": "https://oopy.lazyrockets.com/api/v2/notion/image?src=https%3A%2F%2Fthumbnail7.coupangcdn.com%2Fthumbnails%2Fremote%2F492x492ex%2Fimage%2Frs_quotation_api%2Fysrimegn%2F61c98841c46b4834becfb17ae6097027.jpg&blockId=2618ba81-a66c-4218-aff7-0e1ca5ba2b51",
-        "title": "짱구88",
-        "level": "5",
-        "item": ["감자", "라면", "호박고구마", "캔콜라", "감자"],
-        "satisfaction": '89',
-        "name": "박나리",
-        "address": "근처 카페",
-        "latitude": 37.242040,
-        "longitude": 127.080202
-    }
-];
 
 const Map = () => {
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const [products, setProducts] = useState(LocationData);
+    const [products, setProducts] = useState([]);
     const [marker, setMarker] = useState(null);
     const [myLocation, setMyLocation] = useState(false);
 
     const moveToUserLocation = () => {
-        if(myLocation) {
+        if (myLocation) {
             setMyLocation(false);
         }
         else {
             setMyLocation(true);
         }
-        
+
     };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // Axios를 사용하여 데이터 요청
+                const response = await axios.get('http://20.39.188.154:8080/post/list', {
+                    params: {
+                        type: 'all',
+                        bcode: '',
+                        keyword: '',
+                        page: 1
+                    }
+                });
+                // 받아온 데이터를 LocationData로 설정
+                setProducts(response.data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        // fetchData 함수 호출
+        fetchData();
+    }, []);
 
 
     useEffect(() => {
@@ -132,8 +65,10 @@ const Map = () => {
                 const map = new window.kakao.maps.Map(container, options);
 
                 // 마커 추가
-                LocationData.forEach(markerData => {
-                    const position = new window.kakao.maps.LatLng(markerData.latitude, markerData.longitude);
+                products.forEach(markerData => {
+                    console.log(markerData);
+                    console.log(markerData.location.latiude, markerData.location.longitude)
+                    const position = new window.kakao.maps.LatLng(markerData.location.latiude, markerData.location.longitude);
 
                     // 원의 옵션 설정
                     const circleOptions = {
@@ -232,7 +167,7 @@ const Map = () => {
 
         };
     }, [myLocation]);
-    
+
 
 
 
@@ -254,10 +189,15 @@ const Map = () => {
             <div id="kakao-map" style={{ width: '100%', height: '70vh' }} />
 
             <div className="bottom-panel">
-                {products.map((product, index) => (
-                    <SaleProduct key={index} product={product} />
-                ))}
+                <div className='map-products'>
+                    {products.map((product, index) => (
+                        <SaleProduct key={index} product={product} />
+                    ))}
+                </div>
+                <NavBar />
+
             </div>
+
         </>
     );
 };

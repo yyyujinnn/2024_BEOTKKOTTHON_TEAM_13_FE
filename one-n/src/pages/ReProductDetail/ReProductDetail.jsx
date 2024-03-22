@@ -3,7 +3,7 @@ import './ReProductDetail.css';
 import product from '../../assets/example.jpg'
 import { ReactComponent as Back } from '../../assets/back.svg'
 import { ReactComponent as Pick } from '../../assets/heart.svg'
-import { ReactComponent as Location } from '../../assets/location.svg'
+import { ReactComponent as Location } from '../../assets/Location.svg'
 
 export default function ReProductDetail() {
     const [productData, setProductData] = useState({

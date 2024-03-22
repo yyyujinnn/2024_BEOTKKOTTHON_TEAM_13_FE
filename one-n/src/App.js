@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavBar } from './components/NavBar/NavBar'
-import MainPage from './pages/MainPage/MainPage';
 import Map from './pages/Map/Map';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import ReProductDetail from './pages/ReProductDetail/ReProductDetail';
@@ -11,6 +10,10 @@ import SearchAddress from './components/SearchAddress/SearchAddress';
 import Scrap from './pages/Scrap/Scrap';
 import { MyContextProvider } from './components/MyContextProvider/MyContextProvider';
 import TemporaryHome from './pages/TemporaryHome/TemporaryHome';
+import ChatList from './pages/ChatList/ChatList';
+import MainPage from './pages/MainPage/MainPage';
+import Explore from './pages/Explore/Explore';
+import SearchPage from './pages/SearchPage/SearchPage';
 
 
 function App() {
@@ -27,7 +30,10 @@ function App() {
             <Route path="/select-location" element={<SelectLocation />} />
             <Route path='/product-post' element={<ProductPost />} />
             <Route path="/scrap" element={<Scrap />} />
-            <Route path="/" element={<TemporaryHome />} />
+            <Route path="/" element={<MainPage />} />
+            <Route path="/chat" element={<ChatList/>} />
+            <Route path='/explore' element={<Explore/>} />
+            <Route path='/search' element={<SearchPage/>}/>
           </Routes>
 
         </div>

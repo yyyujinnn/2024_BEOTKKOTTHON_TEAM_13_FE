@@ -1,14 +1,19 @@
-.navbar{
-    width: 327px;
+.navbar {
+    width: 90%;
     height: 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 24px;
-    margin-bottom: 34px;
+    padding: 20px 20px;
+    position: fixed;
+    bottom: 0;
+    margin-bottom: 0px;
+    background-color: white;
+    
+
 }
 
-.navbar img{
+.navbar img {
     cursor: pointer;
     padding: 0 10px;
 }

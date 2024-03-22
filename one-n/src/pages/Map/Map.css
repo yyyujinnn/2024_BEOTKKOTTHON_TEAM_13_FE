@@ -70,3 +70,7 @@ h1 {
   background: var(--grey-95, #F2F2F2);
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.16);
 }
+
+.map-products{
+  margin-bottom: 50px;
+}

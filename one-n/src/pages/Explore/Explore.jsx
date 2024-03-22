@@ -9,20 +9,20 @@ const Explore = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-      // API 엔드포인트 URL 설정
-      const apiUrl = 'http://20.39.188.154:8080/recipe/list?keyword=&page=';
-  
-      axios.get(apiUrl)
-        .then((response) => {
-          const updatedData = response.data.map(item => ({
-            ...item,
-            thumbnail_image: `http://20.39.188.154${item.thumbnail_image}`
-          }));
-          setData(updatedData);
-        })
-        .catch((error) => {
-          console.error('API 요청 에러:', error);
-        });
+    // API 엔드포인트 URL 설정
+    const apiUrl = 'http://20.39.188.154:8080/recipe/list?keyword=&page=';
+
+    axios.get(apiUrl)
+      .then((response) => {
+        const updatedData = response.data.map(item => ({
+          ...item,
+          thumbnail_image: `http://20.39.188.154${item.thumbnail_image}`
+        }));
+        setData(updatedData);
+      })
+      .catch((error) => {
+        console.error('API 요청 에러:', error);
+      });
   }, []);
 
   return (
@@ -32,13 +32,13 @@ const Explore = () => {
       <div className='search'>
         <img src={search} alt='search' />
       </div>
-      
+
       <Masonry
         breakpointCols={2}
         className="grid-container"
         columnClassName="column"
-        >
-          {data.map((item) => (
+      >
+        {data.map((item) => (
           <div key={item.id} className="grid-item">
             <img src={item.thumbnail_image} alt={`Image ${item.title}`} />
           </div>
@@ -49,5 +49,4 @@ const Explore = () => {
   )
 };
 
-  export default Explore;
-  
+export default Explore;

@@ -35,14 +35,14 @@ export default function SaleProduct({ product}) {
     
 
     return (
-        <div className="sale-product" onClick={handleProductClick}>
+        <div className="sale-product">
             <div className="product-details">
                 <img src={product.image} alt="Product" className="product-image" />
                 <div className="sale-product-details">
                     <button className="sale-product-pick-button" onClick={togglePicked}>
                         <img src={picked ? FiledPick : Mypick} alt="Pick" />
                     </button>
-                    <div className="sale-product-title-container">
+                    <div className="sale-product-title-container"  onClick={handleProductClick}>
                         <div>
                             <div className="sale-product-title">{product.title}</div>
                         </div>
