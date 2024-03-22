@@ -12,9 +12,9 @@ import inmap from '../../assets/icons/nav-in-map.png'
 
 export const NavBar = () => {
     return (
-        <div className="navbar">
+        /*<div className="navbar">
             
-            {/* <NavLink to="/" className='nav-home' isActive={(match, location) => location.pathname === '/'}>
+            <NavLink to="/" className='nav-home' isActive={(match, location) => location.pathname === '/'}>
                 {isActive => isActive ? <img src={inhome} alt='home' /> : <img src={home} alt='home' />}
             </NavLink>
 
@@ -28,7 +28,7 @@ export const NavBar = () => {
 
             <NavLink to="/chat" className='nav-chat' isActive={(match, location) => location.pathname === '/'}>
                 {isActive => isActive ? <img src={inchat} alt='chat' /> : <img src={chat} alt='chat' />}
-            </NavLink> */}
+            </NavLink> 
 
 
             <img src={home} alt='home'/>
@@ -36,6 +36,25 @@ export const NavBar = () => {
             <img src={map} alt='map'/>
             <img src={chat} alt='chat'/>
         </div>
+        */
 
-    )
+        <div className="navbar">
+            <NavLink to="/" activeClassName="active">
+                <img src={home} alt='home'/>
+            </NavLink>
+
+            <NavLink to="/explore" activeClassName="active">
+                <img src={explore} alt='explore'/>
+            </NavLink>
+
+            <NavLink to="/map" activeClassName="active">
+                <img src={map} alt='map'/>
+            </NavLink>
+
+            <NavLink to="/chat" activeClassName="active">
+                <img src={chat} alt='chat'/>
+            </NavLink>
+        </div>
+
+    );
 }
