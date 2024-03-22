@@ -67,7 +67,7 @@ const Map = () => {
                 // 마커 추가
                 products.forEach(markerData => {
                     console.log(markerData);
-                    console.log(markerData.location.latiude, markerData.location.longitude)
+                    console.log(markerData.location.latitude, markerData.location.longitude);
                     const position = new window.kakao.maps.LatLng(markerData.location.latiude, markerData.location.longitude);
 
                     // 원의 옵션 설정

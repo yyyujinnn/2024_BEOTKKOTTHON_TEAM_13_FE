@@ -14,6 +14,8 @@ import ChatList from './pages/ChatList/ChatList';
 import MainPage from './pages/MainPage/MainPage';
 import Explore from './pages/Explore/Explore';
 import SearchPage from './pages/SearchPage/SearchPage';
+import MoreProductPage from './pages/MoreProductPage/MoreProductPage';
+import CheckLocationPage from './pages/CheckLocationPage/CheckLocationPage';
 
 
 function App() {
@@ -34,6 +36,8 @@ function App() {
             <Route path="/chat" element={<ChatList/>} />
             <Route path='/explore' element={<Explore/>} />
             <Route path='/search' element={<SearchPage/>}/>
+            <Route path='/more-product' element={<MoreProductPage/>}/>
+            <Route path='/check-location' element={<CheckLocationPage/>}/>
           </Routes>
 
         </div>

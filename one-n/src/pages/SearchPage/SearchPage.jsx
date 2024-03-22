@@ -22,6 +22,7 @@ export default function SearchPage() {
         };
 
         console.log(params.keyword);
+        console.log(url);
 
         axios.get(url, { params })
             .then(response => {

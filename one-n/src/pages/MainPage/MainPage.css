@@ -5,6 +5,7 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 54px;
+   
 }
 
 .logo-img {
@@ -19,12 +20,9 @@
 }
 
 .main-body {
-
-    height: calc(100vh - 40px);
     width: 100%;
     max-width: 604px;
-    overflow-y: auto;
-   
+    
 }
 
 /* 추천레시피 */
@@ -121,6 +119,7 @@
 .gredient{
     margin-top: 50px;
     padding: 0 16px ;
+   
 
     
 }
@@ -188,10 +187,10 @@
 }
 
 .mainpage-container{
-    overflow-y: hidden;
-    height: 100vh;
+    margin-bottom: 80px;
+   
 }
 
-.sale-gredient-container{
-    margin-bottom: 40px;
-}
+.link-style {
+    text-decoration: none;
+  }
