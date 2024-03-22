@@ -5,9 +5,6 @@ import logo from '../../assets/logo/logo.png';
 import search from '../../assets/icons/search.svg';
 import mypage from '../../assets/icons/mypage.svg';
 import next from '../../assets/icons/next.svg';
-import like from '../../assets/icons/like.svg';
-import location from '../../assets/icons/location.svg';
-import level from '../../assets/icons/level.svg';
 import { ThrumnailRecipe } from '../../components/Recipe/ThrumnailRecipe';
 import SaleProduct from '../../components/SaleProduct/SaleProduct';
 import { NavBar } from '../../components/NavBar/NavBar';
@@ -445,7 +442,9 @@ function MainPage() {
         <div className='title'>
           <div className='recipe-text'>
             <div className='recipe-name'> 레시피 둘러보기 </div>
-            <div className='more'> 더보기 <img src={next} alt='next' /> </div>
+            <Link to='/explore'>
+              <div className='more'> 더보기 <img src={next} alt='next' /> </div>
+            </Link>
           </div>
 
           <ThrumnailRecipe data={data} />

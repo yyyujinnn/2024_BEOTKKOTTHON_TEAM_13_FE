@@ -61,6 +61,7 @@
     font-weight: 500;
     color: #666;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .more img {
