@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ReactModal from 'react-modal';
 import './ChatRoom.css'
@@ -15,11 +16,10 @@ import save from '../../assets/icons/save.png';
 
 import { SellList } from '../../components/Chat/SellList';
 import { ReviewSelect } from '../../components/Review/ReviewSelect';
-import { useParams } from 'react-router-dom';
+
 
 function ChatRoom() {
-  
-  const { chat_id } = useParams;
+  const navigate = useNavigate();
 
   const [data, setData] = useState([]);
   const [Exit, setExit] = useState(null);
@@ -60,7 +60,6 @@ function ChatRoom() {
 
   // 채팅방 전체 메시지
   useEffect(() => {
-    // const apiUrl = `http://20.39.188.154:8080/chat/init-messages?id=${chat_id}&session_id=test_session_id`;
     const apiUrl = `http://20.39.188.154:8080/chat/init-messages?id=2e068450-1b2f-4ff9-9447-182f3e4395e6&session_id=test_session_id`;
    
     axios.get(apiUrl)
@@ -81,7 +80,7 @@ function ChatRoom() {
     <div>
         <div className='room-header'>
           <div className='top-header'>
-            <img src={previous} style={{ cursor: 'pointer' }}/>
+            <img src={previous} onClick={() => navigate(-1)}/>
 
             <div className='product'>
               <div className='product-img' />
