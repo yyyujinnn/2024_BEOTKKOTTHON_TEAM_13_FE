@@ -10,8 +10,11 @@ import SearchAddress from './components/SearchAddress/SearchAddress';
 import Scrap from './pages/Scrap/Scrap';
 import { MyContextProvider } from './components/MyContextProvider/MyContextProvider';
 import ChatList from './pages/ChatList/ChatList';
+import ChatRoom from './pages/ChatRoom/ChatRoom';
 import MainPage from './pages/MainPage/MainPage';
 import Explore from './pages/Explore/Explore';
+import RecipeDetail from './pages/RecipeDetail/RecipeDetail';
+import RecipeReg from './pages/RecipeReg/RecipeReg';
 import SearchPage from './pages/SearchPage/SearchPage';
 
 
@@ -31,12 +34,16 @@ function App() {
             <Route path="/scrap" element={<Scrap />} />
             <Route path="/" element={<MainPage />} />
             <Route path="/chat" element={<ChatList/>} />
+            <Route path="/chatroom" element={<ChatRoom/>} />
             <Route path='/explore' element={<Explore/>} />
+            <Route path='/recipe' element={<RecipeDetail/>} />
+            <Route path='/recipeRegister' element={<RecipeReg/>} />
             <Route path='/search' element={<SearchPage/>}/>
           </Routes>
 
         </div>
       </MyContextProvider>
+      {window.location.pathname !== '/chatroom' && <NavBar />}
     </BrowserRouter >
 
   );
