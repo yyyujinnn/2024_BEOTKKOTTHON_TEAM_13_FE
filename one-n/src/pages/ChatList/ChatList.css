@@ -12,6 +12,7 @@
 
 .chat {
     width: 343px;
+    height: 40px;
     align-items: center;
     padding: 16px;
     display: flex;
@@ -54,7 +55,9 @@
 .info {
     display: none; /* 기본적으로 숨김 */
     width: 20px;
-    padding: 4px 0.5px;
+    height: 17px;
+    padding: 3px 0.5px;
+    margin-top: 6px;
     flex-shrink: 0;
     justify-content: center;
     border-radius: 8px;

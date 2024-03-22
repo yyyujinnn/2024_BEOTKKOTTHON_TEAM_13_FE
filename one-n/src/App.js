@@ -9,7 +9,6 @@ import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-rou
 import SearchAddress from './components/SearchAddress/SearchAddress';
 import Scrap from './pages/Scrap/Scrap';
 import { MyContextProvider } from './components/MyContextProvider/MyContextProvider';
-import TemporaryHome from './pages/TemporaryHome/TemporaryHome';
 import ChatList from './pages/ChatList/ChatList';
 import MainPage from './pages/MainPage/MainPage';
 import Explore from './pages/Explore/Explore';
