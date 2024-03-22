@@ -442,7 +442,7 @@ function MainPage() {
         <div className='title'>
           <div className='recipe-text'>
             <div className='recipe-name'> 레시피 둘러보기 </div>
-            <Link to='/explore'>
+            <Link to='/explore' className='a'>
               <div className='more'> 더보기 <img src={next} alt='next' /> </div>
             </Link>
           </div>
@@ -453,7 +453,9 @@ function MainPage() {
         <div className='gredient'>
           <div className='recipe-text'>
             <div className='grd-name'> 공구 중인 식품 </div>
-            <div className='more'> 더보기 <img src={next} alt='next' /> </div>
+            <Link to='/explore' className='a'>
+              <div className='more' > 더보기 <img src={next} alt='next' /> </div>
+            </Link>
           </div>
 
           <div className='sale-gredient-container'>

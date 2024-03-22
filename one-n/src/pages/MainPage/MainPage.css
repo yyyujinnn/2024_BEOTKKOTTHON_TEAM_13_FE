@@ -59,6 +59,9 @@
     font-weight: 500;
     color: #666;
     cursor: pointer;
+}
+
+.a {    
     text-decoration: none;
 }
 
@@ -78,7 +81,7 @@
 
 .rec-photo{
     width: 112px;
-    height: 144px;
+    height: 140px;
     border-radius: 8px;
     flex-shrink: 0;
     cursor: pointer;
