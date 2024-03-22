@@ -1,19 +1,27 @@
 // 레시피 상세페이지
-import React from 'react';
+import React, { useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import './RecipeDetail.css'
 import user from '../../assets/icons/user.png'
 import previous from '../../assets/icons/previous.svg';
 import dot from '../../assets/icons/dot.png';
-import like24 from '../../assets/icons/like24.png';
-import chat from '../../assets/icons/chat.svg';
-import share from '../../assets/icons/share.svg';
+import pick from '../../assets/pick.svg'
+import FiledPick from '../../assets/filedpick.png'
 import arrow from '../../assets/icons/direct-arrow.png'
 
 function RecipeDetail() {
+    const navigate = useNavigate();
+
+    const [picked, setPicked] = useState(false);
+    
+    const togglePicked = () => {
+        setPicked(!picked);
+    }
+
   return (
     <div>
         <div className='recipe-header'>
-            <img src={previous} alt='previous' />
+            <img src={previous} alt='previous' onClick={() => navigate(-1)} />
             <img src={dot} alt='dot' />
         </div>
 
@@ -29,7 +37,7 @@ function RecipeDetail() {
             <div className='recipe-title'>
                 <div > 콘치즈 </div>
                 <div className='indicate'>
-                   <img src={like24} alt='like' style={{width: '21px', height: '22px'}} /> 
+                  <img src={picked ? FiledPick : pick} onClick={togglePicked} style={{width: 20}} className="pick" />
                    12 
                 </div>
             </div>
