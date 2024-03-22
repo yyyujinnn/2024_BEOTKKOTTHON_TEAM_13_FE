@@ -1,38 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import ReactModal from 'react-modal';
 import './ChatRoom.css'
 
 import previous from '../../assets/icons/previous.svg'
-import next from '../../assets/icons/next.svg'
 import down from '../../assets/icons/down.png'
 import exit from '../../assets/icons/exit.png'
-import menu from '../../assets/icons/menu.png'
 import img from '../../assets/icons/img.png'
 import send from '../../assets/icons/send.png'
 import door from '../../assets/icons/door.png';
 import save from '../../assets/icons/save.png';
 
-import { SellList } from '../../components/Chat/SellList';
 import { ReviewSelect } from '../../components/Review/ReviewSelect';
-
 
 function ChatRoom() {
   const navigate = useNavigate();
+  const { chatId } = useParams();
 
   const [data, setData] = useState([]);
   const [Exit, setExit] = useState(null);
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [rounded, setRounded] = useState(false);
+  
   const [exitModalOpen, setExitModalOpen] = useState(false);
   const [reviewModalOpen, setReviewModalOpen] = useState(false);  
   const [closeModalOpen, setCloseModalOpen] = useState(false);
-  const [level, setLevel] = useState(0);
-
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
+    setRounded(!rounded); 
   };
 
   // 채팅방 퇴장
@@ -47,12 +45,12 @@ function ChatRoom() {
         console.error('API 요청 에러:', error);
       });
     
-    setExitModalOpen(false);
+    navigate(-1);
   }
 
   const onClickclose = () => {
-    setCloseModalOpen(false);
-  }
+    setExitModalOpen(false);
+  };
 
   const onClickReview = () => {
     setReviewModalOpen(false);
@@ -60,7 +58,7 @@ function ChatRoom() {
 
   // 채팅방 전체 메시지
   useEffect(() => {
-    const apiUrl = `http://20.39.188.154:8080/chat/init-messages?id=2e068450-1b2f-4ff9-9447-182f3e4395e6&session_id=test_session_id`;
+    const apiUrl = `http://20.39.188.154:8080/chat/init-messages?id=${chatId}&session_id=test_session_id`;
    
     axios.get(apiUrl)
       .then((response) => {
@@ -69,12 +67,11 @@ function ChatRoom() {
         profile_image: `http://20.39.188.154${item.profile_image}`
       }));
       setData(updatedData);
-      console.log(updatedData);
       })
       .catch((error) => {
         console.error('API 요청 에러:', error);
       });
-    }, []);
+    }, [chatId]);
 
   return (
     <div>
@@ -109,9 +106,16 @@ function ChatRoom() {
                   </div>
                   </div>
                 </ReactModal>
+            </div>
+          </div>
 
+          <div>    
+          <img src={down} onClick={toggleDropdown} className={`drop ${rounded ? 'rounded' : ''}`} /> 
+          {dropdownVisible && (
+            <div id='dropdown' className='dropdown'>
+              
               {/* 채팅방 종료 → 리뷰 작성 */}
-              <img src={menu} onClick={() => setReviewModalOpen(true)} alt='menu'/>
+              <button onClick={() => setReviewModalOpen(true)}> 거래완료 </button>
               <ReactModal
                 isOpen={reviewModalOpen}
                 style={ReviewModalStyles}
@@ -148,15 +152,8 @@ function ChatRoom() {
                   </div>
               </ReactModal>
             </div>
-          </div>
-
-          <div className='product-list' onClick={toggleDropdown}> 목록 더보기 
-          {dropdownVisible ? <img src={down}/> : <img src={next}/> }</div>
-          {dropdownVisible && (
-          <div id='dropdown' className='dropdown'>
-            <SellList />
-          </div>
           )}
+          </div>
         </div>
 
         <div className='room-body'>

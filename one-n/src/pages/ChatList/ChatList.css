@@ -54,18 +54,17 @@
 
 .info {
     display: none; /* 기본적으로 숨김 */
-    width: 20px;
     height: 17px;
-    padding: 3px 0.5px;
+    padding: 4px 8px;
     margin-top: 6px;
     flex-shrink: 0;
     justify-content: center;
-    border-radius: 8px;
+    border-radius: 100px;
     background: #FFD951;
 
-    color: white;
-    font-size: 11px;
-    font-weight: 600;
+    color: #191919;
+    font-size: 12px;
+    font-weight: 400;
 }
 
 /* .info 값이 0이 아닌 경우에만 보이도록 설정 */

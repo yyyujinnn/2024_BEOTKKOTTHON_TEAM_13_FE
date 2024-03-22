@@ -11,10 +11,15 @@ import verygood from '../../assets/icons/verygood.png'
 
 export const ReviewSelect = () => {
     const [level, setLevel] = useState(0);
+    
+    // 현재 슬라이더의 위치에 따라 각 점의 색상을 결정
+    const getPointColor = (pointIndex) => {
+        return level >= pointIndex / 4 ? '#FFDC25' : '#D9D9D9';
+    };
 
     return (
         <>
-        <div style={{ marginLeft:'18px', marginTop: '20px', marginBottom:'40px', width:'85%' }}>
+        <div style={{ marginLeft:'18px', marginTop: '20px', marginBottom:'12px', width:'85%' }}>
             {/* 수평 슬라이더 */}
             <ReactSlider
                 trackClassName='slider'
@@ -25,6 +30,8 @@ export const ReviewSelect = () => {
                 onChange={(value,index) => {
                     setLevel(value);
                 }}
+                // 슬라이더 값이 변경된 후에 각 점의 색상을 업데이트
+                onAfterChange={() => {}}
                 renderThumb={(props, state) => (
                     <div {...props} style={{ 
                         ...props.style,
@@ -43,9 +50,18 @@ export const ReviewSelect = () => {
                     }} />
                 )}
             />
+            {/* 수평 슬라이더의 step 위치에 점 표시 */}
+            <div className='points' style={{display: 'flex', justifyContent:'space-between'}}>
+                {[0, 1, 2, 3, 4].map((pointIndex) => (
+                   <div key={pointIndex} className='point' style={{
+                    ...pointStyle,
+                    backgroundColor: getPointColor(pointIndex)
+               }} />
+                ))}
+            </div>
         </div>
 
-        <div style={{display:'flex', fontSize:'12px', gap:'10px', marginBottom: '24px'}}>
+        <div style={{display:'flex', fontSize:'12px', gap:'10px', marginBottom: '8px'}}>
                 <div style={{ display:'flex', flexDirection: 'column', alignItems:'center' }}>
                     <img src={sobad} width={20}/> 별로에요 
                 </div>
@@ -66,3 +82,11 @@ export const ReviewSelect = () => {
         </>        
     );
 }
+
+const pointStyle ={
+    width: '8px',
+    height: '8px',
+    marginTop:'-1px',
+    borderRadius: '50px',
+ }
+  
