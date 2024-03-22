@@ -19,9 +19,9 @@
 }
 
 .main-body {
-    height: calc(100vh - 40px);
+    height: 645px;
     width: 100%;
-    max-width: 604px;
+    max-height: 645px;
     overflow-y: auto;   
 }
 
@@ -196,4 +196,31 @@
 
 .sale-gredient-container{
     margin-bottom: 40px;
+}
+
+.plus{
+    position: absolute;
+    bottom: 90px;
+    right: 24px;
+    padding: 12px;
+    border-radius: 100px;
+    background: #FFD31A;
+}
+
+.dropup{
+    position: absolute;
+    bottom: 140px;
+    right: 24px;
+}
+.link-style{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 8px;
+    font-size: 14px;
+    color: #333;
+    border: 1px solid #333;
+    border-radius: 100px;
+    background-color: #FFF;
+    text-decoration: none;
 }

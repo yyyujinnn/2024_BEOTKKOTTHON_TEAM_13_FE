@@ -18,11 +18,11 @@
 }
 
 .grid-container {
-    height: 586px;
+    height: 623px;
     margin: 16px 16px 0 16px;
     display: flex;
     gap: 8px;
-    max-height: 586px;
+    max-height: 623px;
     overflow-y: auto; 
 }
 

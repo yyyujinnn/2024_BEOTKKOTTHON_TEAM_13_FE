@@ -5,13 +5,24 @@ import logo from '../../assets/logo/logo.png';
 import search from '../../assets/icons/search.svg';
 import mypage from '../../assets/icons/mypage.svg';
 import next from '../../assets/icons/next.svg';
+import plus from '../../assets/icons/plus.png';
+import chef from '../../assets/icons/chef.png';
+import cart from '../../assets/icons/cart.png';
 import { ThrumnailRecipe } from '../../components/Recipe/ThrumnailRecipe';
 import SaleProduct from '../../components/SaleProduct/SaleProduct';
-import { NavBar } from '../../components/NavBar/NavBar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function MainPage() {
+  
+  const navigate = useNavigate();
+
   const [data, setData] = useState([]);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+
+  const toggleDropup = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+
   const [products, setProducts] = useState([
     {
       "image": "/user-image/post/1.png",
@@ -466,8 +477,15 @@ function MainPage() {
             )}
           </div>
         </div>
+      
+        <img src={plus} className='plus' onClick={toggleDropup} />
+        {dropdownVisible && (
+            <div className='dropup'>
+              <Link to='/recipeReg' className='link-style'><img src={chef} alt='chef'/> 레시피 </Link>
+              <Link to='/product-post' className='link-style' style={{marginTop:'8px'}}><img src={cart} alt='cart'/> 공동구매 </Link>
+            </div>
+        )}
       </div>
-      <NavBar />
     </div>
   );
 }

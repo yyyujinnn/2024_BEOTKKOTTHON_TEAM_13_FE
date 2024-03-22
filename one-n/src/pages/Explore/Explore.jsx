@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Explore.css'
 import search from '../../assets/icons/search.svg'
@@ -6,7 +7,12 @@ import Masonry from "https://cdn.skypack.dev/react-masonry-css@1.0.16";
 
 const Explore = () => {
 
+  const navigate = useNavigate();
   const [data, setData] = useState([]);
+
+  const handlePhotoClick = (id) => {
+    navigate(`/recipe/${id}`);
+  };
 
   useEffect(() => {
     // API 엔드포인트 URL 설정
@@ -40,7 +46,7 @@ const Explore = () => {
       >
         {data.map((item) => (
           <div key={item.id} className="grid-item">
-            <img src={item.thumbnail_image} alt={`Image ${item.title}`} />
+            <img src={item.thumbnail_image} onClick={() => handlePhotoClick(item.id)} alt={`Image ${item.title}`} />
           </div>
         ))}
 
