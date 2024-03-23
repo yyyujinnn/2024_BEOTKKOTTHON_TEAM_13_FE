@@ -21,19 +21,26 @@
 }
 
 .main-body {
-  height: 645px;
+  height: 1000px;
+  max-height: 1000px;
   width: 100%;
-  max-height: 645px;
   overflow-y: auto;
 }
 
 /* 추천레시피 */
-.title {
+/* .title {
   clear: both;
-  width: 360px;
+  width: 100%;
   margin-top: 30px;
   height: 200px;
   padding-left: 12px;
+  padding-right: 12px;
+} */
+
+.title {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 30px;
 }
 
 .recipe-name {
@@ -53,6 +60,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  margin-left: 5px;
 }
 
 .more {
@@ -69,14 +77,15 @@
 
 .more img {
   margin-left: 8px;
-  margin-right: 16px;
+  margin-right: 8px;
 }
 
 .recipePhoto {
+  margin: 0 auto;
   margin-top: 12px;
   display: flex;
   height: 144px;
-  max-width: 375px;
+  max-width: 95%;
   overflow-x: auto;
   gap: 8px;
 }
@@ -124,7 +133,7 @@
 /* 핫한 식품 */
 .gredient {
   margin-top: 50px;
-  padding: 0 16px;
+  width: 100%;
 }
 
 .saleGrd {
