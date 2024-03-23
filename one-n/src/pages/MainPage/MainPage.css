@@ -21,8 +21,8 @@
 }
 
 .main-body {
-  height: 1000px;
-  max-height: 1000px;
+  height: 800px;
+  max-height: 800px;
   width: 100%;
   overflow-y: auto;
 }
