@@ -8,6 +8,9 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { ThrumnailRecipe } from '../../components/Recipe/ThrumnailRecipe';
 import { useNavigate } from 'react-router-dom';
+import FiledPick from '../../assets/filedproductpick.png'
+import Mypick from '../../assets/productpick.png'
+
 
 export default function ProductDetail() {
     const { productId } = useParams();
@@ -15,6 +18,7 @@ export default function ProductDetail() {
     const [daysRemaining, setDaysRemaining] = useState(null);
     const [data, setData] = useState([]);
     const navigate = useNavigate();
+    const [picked, setPicked] = useState(false);
 
 
     useEffect(() => {
@@ -45,6 +49,11 @@ export default function ProductDetail() {
         });
     }, [productId]);
 
+    const togglePicked = (event) => {
+        event.stopPropagation(); // 이벤트 버블링 방지
+        setPicked(!picked);
+    };
+
     const fetchProductData = async (productId) => {
         // productId를 이용하여 백엔드에서 상품 데이터를 가져오는 비동기 함수
         try {
@@ -73,10 +82,7 @@ export default function ProductDetail() {
         // 이전 페이지로 돌아가는 기능 추가
     };
 
-    const handlePickClick = () => {
-        // 이전 페이지로 돌아가는 기능 추가
-    };
-
+    
     const handleMapButton = () => {
         // check-location 페이지로 이동하고 productData의 위치 정보를 함께 전달
         navigate('/check-location', {
@@ -99,8 +105,8 @@ export default function ProductDetail() {
                         <div className='product-name'>
                             {productData.title}
                         </div>
-                        <button className='detial-pick-button' onClick={handlePickClick}>
-                            <Pick />
+                        <button className='detial-pick-button' onClick={togglePicked}>
+                        <img src={picked ? FiledPick : Mypick} alt="Pick" />
                         </button>
                     </div>
 

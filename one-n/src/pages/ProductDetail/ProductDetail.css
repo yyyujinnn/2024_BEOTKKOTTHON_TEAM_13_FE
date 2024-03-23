@@ -9,7 +9,7 @@ div {
     padding: 16px;
     max-height: calc(100vh - 60px);
     /* 페이지 전체 높이에서 '구매하기' 버튼의 높이를 뺀 값으로 최대 높이 설정 */
-    
+
     margin-bottom: 80px;
     /* 스크롤이 필요한 경우 스크롤 활성화 */
 
@@ -46,12 +46,15 @@ div {
 
 .product-name {
     margin-left: 10px;
-    color: #191919;
-    font-family: Abel;
+    color: var(--black-10, #191919);
+
+    /* h16_sb */
+    font-family: Pretendard;
     font-size: 16px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     line-height: normal;
+    letter-spacing: -0.16px;
 
 }
 
@@ -314,7 +317,7 @@ div {
 
 .price-date-container {
     width: 100%;
-    
+
     display: flex;
     align-items: center;
     gap: 12px;
@@ -323,18 +326,19 @@ div {
 }
 
 .create-date-container {
-   
+
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 8px; /* 간격 설정 */
-    
+    gap: 8px;
+    /* 간격 설정 */
+
 
 }
 
 .create-date {
-   
-    
+
+
     color: var(--grey-60, #989898);
 
     /* b12_r */
@@ -391,6 +395,6 @@ div {
 
 }
 
-.testtest{
+.testtest {
     display: flex;
 }
