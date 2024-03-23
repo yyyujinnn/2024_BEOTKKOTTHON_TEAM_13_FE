@@ -67,7 +67,7 @@ export default function SaleProduct({ product }) {
                                 <img src={picked ? FiledPick : Mypick} alt="Pick" />
                             </button>
                         </div>
-                        <div className="sale-product-price">{product.price}원</div>
+                        <div className="sale-product-price">{product.price} 원</div>
                     </div>
                     <div className='sale-product-satisfaction-container'>
                         <div className="sale-product-user-name">

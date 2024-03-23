@@ -23,14 +23,16 @@ export default function ProductDetail() {
 
     useEffect(() => {
         // API 엔드포인트 URL 설정
-        const apiUrl = 'http://20.39.188.154:8080/recipe/brief';
+        const apiUrl = `http://20.39.188.154:8080/post/${productId}`;
 
         axios.get(apiUrl)
             .then((response) => {
-                const updatedData = response.data.map(item => ({
+                const updatedData = response.data.linked_recipes.map(item => ({
                     ...item,
                     thumbnail_image: `http://20.39.188.154${item.thumbnail_image}`
                 }));
+                console.log("출력출력");
+                console.log(updatedData);
                 setData(updatedData);
             })
             .catch((error) => {
@@ -79,10 +81,10 @@ export default function ProductDetail() {
     };
 
     const handleBackClick = () => {
-        // 이전 페이지로 돌아가는 기능 추가
+        navigate(-1);
     };
 
-    
+
     const handleMapButton = () => {
         // check-location 페이지로 이동하고 productData의 위치 정보를 함께 전달
         navigate('/check-location', {
@@ -97,7 +99,7 @@ export default function ProductDetail() {
     return (
         <div className="product-detail-container">
             {Object.keys(productData).length > 0 && (
-                <div>
+                <div className='product-detail-contents'>
                     <div className="product-header">
                         <button className='back-button' onClick={handleBackClick}>
                             <Back />
@@ -106,7 +108,7 @@ export default function ProductDetail() {
                             {productData.title}
                         </div>
                         <button className='detial-pick-button' onClick={togglePicked}>
-                        <img src={picked ? FiledPick : Mypick} alt="Pick" />
+                            <img src={picked ? FiledPick : Mypick} alt="Pick" />
                         </button>
                     </div>
 
@@ -122,7 +124,7 @@ export default function ProductDetail() {
                                     <div className='alert-dute-date'>마감 {daysRemaining}일 전</div>
                                 )}
 
-                                <div className='product-price'>{productData.price} 원 </div>
+                                <div className='post-product-price'>{productData.price} 원 </div>
                             </div>
 
                             <div className='create-date-container'>
@@ -178,7 +180,7 @@ export default function ProductDetail() {
                         </div>
                     </div>
                     <div className='remaining-message'>
-                        {productData.remain}자리 밖에 안 남았어요!
+                        {productData.group_size - productData.cur_group_size}자리 밖에 안 남았어요!
                     </div>
 
                     <div className='divider'></div>

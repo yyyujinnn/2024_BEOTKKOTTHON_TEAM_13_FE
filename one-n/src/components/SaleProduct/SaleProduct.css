@@ -21,9 +21,7 @@
   margin: 0;
 }
 
-.products {
-  margin-top: 10px;
-}
+
 
 .product-item {
   margin-top: 6px;
@@ -57,10 +55,9 @@
 
 .sale-product-price {
   color: var(--black-10, #191919);
-  font-family: Pretendard;
-  font-size: 15px;
+  font-family: Pretendard Bold;
+  font-size: 20px;
   font-style: normal;
-  font-weight: 700;
   line-height: normal;
   letter-spacing: -0.2px;
   margin-top: 8px;
@@ -111,10 +108,10 @@
 
 .sale-product-user-name {
   color: var(--black-20, #333);
-  font-family: Pretendard;
+  font-family: Pretendard Light;
   font-size: 14px;
   font-style: normal;
-  font-weight: 500;
+  font-weight: 00;
   line-height: normal;
   letter-spacing: -0.14px;
 }

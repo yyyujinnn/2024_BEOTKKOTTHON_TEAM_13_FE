@@ -2,14 +2,14 @@
 import { ReactComponent as Back } from '../../assets/back.svg'
 import { ReactComponent as Next } from '../../assets/Next.svg'
 import InputForm from '../../components/InputForm/InputForm';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
 import { MyContext } from '../../components/MyContextProvider/MyContextProvider';
 import IngredientPost from '../../components/ProductPostForm/IngredientPost';
 import RecipeIngredientsPost from '../../components/ProductPostForm/RecipeIngredientsPost';
 import './ProductPost.css'
 import Camera from '../../assets/camera.png'
-import { useNavigate } from 'react-router-dom';
+import PostSucessModal from '../../components/PostSucessModal/PostSucessModal';
 
 
 export default function ProductPost() {
@@ -17,6 +17,8 @@ export default function ProductPost() {
     const [imageUploaded, setImageUploaded] = useState(false); // 이미지가 업로드되었는지 여부
     const [imageURL, setImageURL] = useState(''); // 이미지 URL 상태 추가
     const navigate = useNavigate();
+    const { selectLocation, setSelectLocation } = useContext(MyContext);
+    const [showModal, setShowModal] = useState(false);
     // const [userLocation, setUserLocation] = useState(null); // 사용자 위치 정보 상태 추가
 
     const handleButtonClick = (option) => {
@@ -31,7 +33,8 @@ export default function ProductPost() {
     };
 
     const handleBackClick = () => {
-        navigate(-1); // Go back one step
+        console.log("클릭툄");
+        navigate('/');
     };
 
     const handleImageUpload = (e) => {
@@ -72,6 +75,21 @@ export default function ProductPost() {
         setPostDay(e.target.value);
     }
 
+    const handleLocationButtonClick = () => {
+
+        if (selectLocation) {
+            setSelectLocation(false);
+        }
+        else {
+            setSelectLocation(true);
+        }
+        // 원하는 로직 추가
+        console.log('거래 희망 장소 버튼을 클릭했습니다.');
+
+        // 이동할 경로로 리다이렉션 수행
+        navigate('/select-location');
+    };
+
 
     const handlePostButtonClick = () => {
         console.log(postTitle);
@@ -80,31 +98,15 @@ export default function ProductPost() {
         console.log(postPeople);
         console.log(postContent);
         console.log(postAddress);
-    };
 
-    // useEffect(() => {
-    //     // 위치 정보 가져오기
-    //     if (navigator.geolocation) {
-    //         navigator.geolocation.getCurrentPosition(
-    //             (position) => {
-    //                 const { latitude, longitude } = position.coords;
-    //                 setUserLocation({ latitude, longitude });
-    //                 console.log("User's current location:", { latitude, longitude });
-    //             },
-    //             (error) => {
-    //                 console.error('Error getting user location:', error);
-    //             }
-    //         );
-    //     } else {
-    //         console.error('Geolocation is not supported by this browser.');
-    //     }
-    // }, []);
+        setShowModal(true);
+    };
 
 
     return (
         <div className='product-post-container'>
             <div className="product-post-header">
-                <button className='back-button' onClick={handleBackClick}>
+                <button className='post-back-button' onClick={handleBackClick}>
                     <Back />
                 </button>
                 <div className='product-post-text'>
@@ -140,11 +142,9 @@ export default function ProductPost() {
 
             <div className='product-post-place'>
                 <p className='product-post-place-text'>거래 희망 장소 </p>
-                <Link to="/select-location">
-                    <button className='next-button'>
-                        <Next />
-                    </button>
-                </Link>
+                <button className='next-button' onClick={handleLocationButtonClick}>
+                    <Next />
+                </button>
             </div>
             <div className='product-post-select-place-container'>
                 <input className='product-post-select-place' placeholder='거래 희망 장소를 선택하세요.' defaultValue={postAddress}></input>
@@ -166,6 +166,12 @@ export default function ProductPost() {
                     <button className='product-post-button' onClick={handlePostButtonClick}>올리기</button>
                 </div>
             </div>
+
+            {
+                showModal && (
+                    <PostSucessModal/>
+                )
+            }
         </div>
 
     );

@@ -12,6 +12,8 @@ export const MyContextProvider = ({ children }) => {
     const [postYear, setPostYear] = useState('');
     const [postMonth, setPostMonth] = useState('');
     const [postDay, setPostDay] = useState('');
+    const [myBcode, setMyBcode] = useState('');
+    const [selectLocation, setSelectLocation] = useState(false);
 
     return (
         <MyContext.Provider value={{
@@ -23,7 +25,9 @@ export const MyContextProvider = ({ children }) => {
             postContent, setPostContent,
             postYear, setPostYear,
             postMonth, setPostMonth,
-            postDay, setPostDay
+            postDay, setPostDay,
+            myBcode, setMyBcode,
+            selectLocation, setSelectLocation
         }}>
             {children}
         </MyContext.Provider>

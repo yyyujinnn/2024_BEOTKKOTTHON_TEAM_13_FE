@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import './MainPage.css';
 import logo from '../../assets/logo/logo.png';
@@ -11,18 +11,22 @@ import cart from '../../assets/icons/cart.png';
 import { ThrumnailRecipe } from '../../components/Recipe/ThrumnailRecipe';
 import SaleProduct from '../../components/SaleProduct/SaleProduct';
 import { Link, useNavigate } from 'react-router-dom';
-import { Signup } from '../../components/Sign/Signup';
-import { Header } from '../../components/Header/Header';
+import Header from '../../components/Header/Header';
+import { MyContext } from '../../components/MyContextProvider/MyContextProvider';
+import  Signup  from '../../components/Sign/Signup';
+
+
 
 function MainPage() {
 
   const navigate = useNavigate();
   const [data, setData] = useState([]);
-
   const [page, setPage] = useState(1);
   const [products, setProducts] = useState([]);
-
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [bcode, setBcode] = useState();
+  const [userLocation, setUserLocation] = useState();
+  const {myBcode, setMyBcode} = useContext(MyContext);
 
   // 회원가입 모달창
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
@@ -63,16 +67,7 @@ function MainPage() {
       });
   }, []);
 
-  const getFetchData = () => {
-    console.log("요청을 보냈습니다");
-    const url = `http://20.39.188.154:8080/post/list?type=all&bcode=&keyword=&page=${page}`;
-    console.log(url);
-    fetch(url)
-      .then((res) => res.json())
-      .then((product) => setProducts((prev) => [...prev, ...product]));
-  };
 
-  useEffect(() => getFetchData(), [page]);
 
   useEffect(() => {
     window.addEventListener("scroll", onScroll);
@@ -93,6 +88,61 @@ function MainPage() {
       setPage((prev) => prev + 1);
     }
   };
+
+  useEffect(() => {
+    // 위치 정보 가져오기
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+
+          setUserLocation({ latitude, longitude });
+          console.log("User's current location:", { latitude, longitude });
+
+          // Kakao API로 지역 코드 요청 보내기
+          const url = `https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x=${longitude}&y=${latitude}`;
+          axios.get(url, {
+            headers: {
+              'Authorization': `KakaoAK 6de009b450e245b534db1c733cb4f4ac`
+            }
+          })
+            .then(response => {
+              console.log('Region codes:', response.data);
+              const bCode = response.data.documents.find(doc => doc.region_type === 'B').code;
+              const shortBCode = bCode.substring(0, 5); // 앞에서 5자리만 추출
+              console.log('앞 5자리 B 타입의 코드:', shortBCode);
+              setBcode(shortBCode);
+              setMyBcode(shortBCode);
+              sessionStorage.setItem('myBcode', shortBCode);
+
+              // 여기서 fetch 함수를 호출하여 요청 보내도록 수정
+              fetchProducts(shortBCode);
+            })
+            .catch(error => {
+              console.error('Error fetching region codes:', error);
+            });
+        },
+        (error) => {
+          console.error('Error getting user location:', error);
+        }
+      );
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+    }
+  }, [page]);
+
+  // fetchProducts 함수 정의
+  const fetchProducts = (bCode) => {
+    const url = `http://20.39.188.154:8080/post/list?type=all&bcode=${bCode}&keyword=&page=${page}`;
+    console.log(url);
+    fetch(url)
+      .then((res) => res.json())
+      .then((product) => setProducts((prev) => [...prev, ...product]))
+      .catch(error => {
+        console.error('Error fetching products:', error);
+      });
+  };
+
 
 
 
