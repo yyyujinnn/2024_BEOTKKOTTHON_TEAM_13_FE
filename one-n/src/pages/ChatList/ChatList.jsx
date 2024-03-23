@@ -54,7 +54,7 @@ function ChatList() {
           {chat.map((item) => (
              <div key={item.chat_id} onClick={() => handleChatClick(item.chat_id)} className='chat'>
              <div className='sell-img' />  
-             <div>
+             <div className='wrap'>
                <div className='buyer'> 
                  짱구
                </div>
