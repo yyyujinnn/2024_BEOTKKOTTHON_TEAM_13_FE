@@ -7,7 +7,6 @@ import './ChatRoom.css'
 import previous from '../../assets/icons/previous.svg'
 import down from '../../assets/icons/down.png'
 import exit from '../../assets/icons/exit.png'
-import img from '../../assets/icons/img.png'
 import send from '../../assets/icons/send.png'
 import door from '../../assets/icons/door.png';
 import save from '../../assets/icons/save.png';
@@ -21,14 +20,6 @@ function ChatRoom() {
   const [titleData, setTitleData] = useState([]);
   const [data, setData] = useState([]);
   const [Exit, setExit] = useState(null);
-
-  // 사진 업로드
-  const [image, setImage] = useState(null);  
-
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
-};
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [rounded, setRounded] = useState(false);
@@ -264,13 +255,13 @@ function ChatRoom() {
       </div>  
 
      <div className='input-msg'>
-       <input 
-       type="text"
-       value={newMessage}
-       onChange={(e) => setNewMessage(e.target.value)}
-       placeholder='메세지 보내기' />
+        <input 
+          type="text"
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          placeholder='메세지 보내기' />
      
-       <img src={send} onClick={sendMessage} className='send'/>
+        <img src={send} onClick={sendMessage} className='send'/>
      
      </div>
 

@@ -11,13 +11,28 @@ import cart from '../../assets/icons/cart.png';
 import { ThrumnailRecipe } from '../../components/Recipe/ThrumnailRecipe';
 import SaleProduct from '../../components/SaleProduct/SaleProduct';
 import { Link, useNavigate } from 'react-router-dom';
+import Signup from '../../components/Sign/Signup';
 
 function MainPage() {
   
   const navigate = useNavigate();
-
   const [data, setData] = useState([]);
   const [dropdownVisible, setDropdownVisible] = useState(false);
+
+  // 회원가입 모달창
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+  
+  const [signinData, setSigninData] = useState(null);
+
+  useEffect(() => {
+    const storedSigninData = sessionStorage.getItem('signinData');
+    if (!storedSigninData) {
+      // 세션 스토리지에 저장된 값이 없는 경우에만 모달창
+      setIsSignupModalOpen(true);
+    } else {
+      setSigninData(JSON.parse(storedSigninData));
+    }
+  }, []);
 
   const toggleDropup = () => {
     setDropdownVisible(!dropdownVisible);
@@ -396,6 +411,7 @@ function MainPage() {
     }
   ]);
 
+
   useEffect(() => {
     // API 엔드포인트 URL 설정
     const apiUrl = 'http://20.39.188.154:8080/recipe/brief';
@@ -436,6 +452,9 @@ function MainPage() {
 
   return (
     <div className='mainpage-container'>
+      
+        {/* Signup 모달 */}
+        {isSignupModalOpen && <Signup />}
       <div className='header-icon'>
         <img src={logo} alt='logo' className='logo-img' />
 
