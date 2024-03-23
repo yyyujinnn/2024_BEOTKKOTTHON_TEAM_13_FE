@@ -23,14 +23,16 @@ export default function ProductDetail() {
 
     useEffect(() => {
         // API 엔드포인트 URL 설정
-        const apiUrl = 'http://20.39.188.154:8080/recipe/brief';
+        const apiUrl = `http://20.39.188.154:8080/post/${productId}`;
 
         axios.get(apiUrl)
             .then((response) => {
-                const updatedData = response.data.map(item => ({
+                const updatedData = response.data.linked_recipes.map(item => ({
                     ...item,
                     thumbnail_image: `http://20.39.188.154${item.thumbnail_image}`
                 }));
+                console.log("출력출력");
+                console.log(updatedData);
                 setData(updatedData);
             })
             .catch((error) => {
@@ -82,7 +84,7 @@ export default function ProductDetail() {
         // 이전 페이지로 돌아가는 기능 추가
     };
 
-    
+
     const handleMapButton = () => {
         // check-location 페이지로 이동하고 productData의 위치 정보를 함께 전달
         navigate('/check-location', {
@@ -106,7 +108,7 @@ export default function ProductDetail() {
                             {productData.title}
                         </div>
                         <button className='detial-pick-button' onClick={togglePicked}>
-                        <img src={picked ? FiledPick : Mypick} alt="Pick" />
+                            <img src={picked ? FiledPick : Mypick} alt="Pick" />
                         </button>
                     </div>
 
@@ -178,7 +180,7 @@ export default function ProductDetail() {
                         </div>
                     </div>
                     <div className='remaining-message'>
-                        {productData.remain}자리 밖에 안 남았어요!
+                        {productData.group_size - productData.cur_group_size}자리 밖에 안 남았어요!
                     </div>
 
                     <div className='divider'></div>

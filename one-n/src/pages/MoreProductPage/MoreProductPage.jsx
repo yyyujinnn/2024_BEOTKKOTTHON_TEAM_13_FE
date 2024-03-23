@@ -84,9 +84,8 @@ function MoreProductPage() {
 
 
     return (
-        <div className='mainpage-container'>
-            <div className='main-body'>
-
+        <div className='more-mainpage-container'>
+            <div className='more-main-body'>
                 <div className='gredient'>
                     <div className='recipe-text'>
                         <div className='more-product-header'>

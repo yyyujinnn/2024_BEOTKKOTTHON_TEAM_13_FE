@@ -69,6 +69,8 @@ const Map = () => {
         script.src = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.REACT_APP_KAKAO_MAP_API_KEY}&autoload=false`;
         document.head.appendChild(script);
 
+        console.log('navi', window.navigator.geolocation)
+
         script.onload = () => {
             // 카카오 지도 API 초기화
             window.kakao.maps.load(() => {
@@ -135,7 +137,7 @@ const Map = () => {
 
 
                 // 사용자의 현재 위치 가져오기
-                if (navigator.geolocation) {
+                if (window !== undefined) {
                     navigator.geolocation.getCurrentPosition(position => {
                         const userPosition = new window.kakao.maps.LatLng(
                             position.coords.latitude,
@@ -173,6 +175,8 @@ const Map = () => {
                         // 지도 중심을 사용자의 현재 위치로 설정
                         map.setCenter(userPosition);
                     });
+                } else {
+                    console.log('not work')
                 }
             });
         };

@@ -1,4 +1,21 @@
-.recipe-ingredient-buttons {}
+@font-face {
+    font-family: 'Pretendard ExtraBold';
+    font-weight: 900;
+    font-display: swap;
+    src: local('Pretendard ExtraBold'), url('../../fonts/Pretendard/Pretendard-ExtraBold.otf') format('woff');
+  }
+  
+  .more-grd-name {
+      color: var(--black-10, #191919);
+      font-family: 'Pretendard Black'; /* 새로 추가된 폰트 적용 */
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: -0.32px;
+      margin-left: 8px;
+  }
+  
 
 
 .recipe-ingredient-buttons button {
@@ -28,10 +45,10 @@
     color: var(--black-10, #191919);
 
     /* b14 */
-    font-family: Pretendard;
+    font-family: Pretendard ExtraBold;
     font-size: 14px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 900;
     line-height: normal;
     letter-spacing: -0.14px;
 }
@@ -44,8 +61,8 @@
     color: var(--black-10, #191919);
 
     /* h20 */
-    font-family: Pretendard;
-    font-size: 20px;
+    font-family: Pretendard ExtraBold;
+    
     font-style: normal;
     font-weight: 700;
     line-height: normal;

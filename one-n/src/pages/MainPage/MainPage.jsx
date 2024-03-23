@@ -23,6 +23,9 @@ function MainPage() {
   const [products, setProducts] = useState([]);
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [bcode, setBcode] = useState();
+
+  const [userLocation, setUserLocation] = useState();
 
   const toggleDropup = () => {
     setDropdownVisible(!dropdownVisible);
@@ -47,16 +50,7 @@ function MainPage() {
       });
   }, []);
 
-  const getFetchData = () => {
-    console.log("요청을 보냈습니다");
-    const url = `http://20.39.188.154:8080/post/list?type=all&bcode=&keyword=&page=${page}`;
-    console.log(url);
-    fetch(url)
-      .then((res) => res.json())
-      .then((product) => setProducts((prev) => [...prev, ...product]));
-  };
 
-  useEffect(() => getFetchData(), [page]);
 
   useEffect(() => {
     window.addEventListener("scroll", onScroll);
@@ -77,6 +71,58 @@ function MainPage() {
       setPage((prev) => prev + 1);
     }
   };
+
+  useEffect(() => {
+    // 위치 정보 가져오기
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+
+          setUserLocation({ latitude, longitude });
+          console.log("User's current location:", { latitude, longitude });
+
+          // Kakao API로 지역 코드 요청 보내기
+          const url = `https://dapi.kakao.com/v2/local/geo/coord2regioncode.json?x=${longitude}&y=${latitude}`;
+          axios.get(url, {
+            headers: {
+              'Authorization': `KakaoAK 6de009b450e245b534db1c733cb4f4ac`
+            }
+          })
+            .then(response => {
+              console.log('Region codes:', response.data);
+              const bCode = response.data.documents.find(doc => doc.region_type === 'B').code;
+              console.log('B 타입의 코드:', bCode);
+              setBcode(bCode);
+
+              // 여기서 fetch 함수를 호출하여 요청 보내도록 수정
+              fetchProducts(bCode);
+            })
+            .catch(error => {
+              console.error('Error fetching region codes:', error);
+            });
+        },
+        (error) => {
+          console.error('Error getting user location:', error);
+        }
+      );
+    } else {
+      console.error('Geolocation is not supported by this browser.');
+    }
+  }, [page]);
+
+  // fetchProducts 함수 정의
+  const fetchProducts = (bCode) => {
+    const url = `http://20.39.188.154:8080/post/list?type=all&bcode=${bCode}&keyword=&page=${page}`;
+    console.log(url);
+    fetch(url)
+      .then((res) => res.json())
+      .then((product) => setProducts((prev) => [...prev, ...product]))
+      .catch(error => {
+        console.error('Error fetching products:', error);
+      });
+  };
+
 
 
 
