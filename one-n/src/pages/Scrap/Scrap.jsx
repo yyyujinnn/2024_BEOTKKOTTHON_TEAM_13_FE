@@ -5,6 +5,7 @@ import Modify from '../../assets/modify.png'
 import axios from 'axios';
 import SaleProduct from '../../components/SaleProduct/SaleProduct';
 import Masonry from "https://cdn.skypack.dev/react-masonry-css@1.0.16";
+import { useNavigate } from 'react-router-dom';
 
 export default function Scrap() {
     const [satisfaction, setSatisfaction] = useState(null);
@@ -15,8 +16,10 @@ export default function Scrap() {
     const [likedRecipe, setLikedRecipe] = useState([]);
     const [selectedWishlistButton, setSelectedWishlistButton] = useState(null);
     const [selectedOption, setSelectedOption] = useState('ingredients');
-    const handleBackClick = () => {
+    const navigate = useNavigate();
 
+    const handleBackClick = () => {
+        navigate(-1);
     }
 
     const handleWishlistButtonClick = (action) => {
@@ -81,40 +84,40 @@ export default function Scrap() {
     //     }
     // };
 
-    const fetchLikedRecipe = async() => {
+    const fetchLikedRecipe = async () => {
         const apiUrl = 'http://20.39.188.154:8080/user/likes?session_id=test_session_id&type=recipe'
-    
+
         axios.get(apiUrl)
-          .then((response) => {
-            const updatedData = response.data.map(item => ({
-              ...item,
-              thumbnail_image: `http://20.39.188.154${item.thumbnail_image}`
-            }));
-            console.log("요청감");
-            console.log(updatedData);
-            setLikedRecipe(updatedData);
-          })
-          .catch((error) => {
-            console.error('API 요청 에러:', error);
-          });
+            .then((response) => {
+                const updatedData = response.data.map(item => ({
+                    ...item,
+                    thumbnail_image: `http://20.39.188.154${item.thumbnail_image}`
+                }));
+                console.log("요청감");
+                console.log(updatedData);
+                setLikedRecipe(updatedData);
+            })
+            .catch((error) => {
+                console.error('API 요청 에러:', error);
+            });
     };
 
-    
+
 
     const fetchPostRecipe = async () => {
         const apiUrl = 'http://20.39.188.154:8080/user/recipes?session_id=test_session_id';
-    
+
         axios.get(apiUrl)
-          .then((response) => {
-            const updatedData = response.data.map(item => ({
-              ...item,
-              thumbnail_image: `http://20.39.188.154${item.thumbnail_image}`
-            }));
-            setData(updatedData);
-          })
-          .catch((error) => {
-            console.error('API 요청 에러:', error);
-          });
+            .then((response) => {
+                const updatedData = response.data.map(item => ({
+                    ...item,
+                    thumbnail_image: `http://20.39.188.154${item.thumbnail_image}`
+                }));
+                setData(updatedData);
+            })
+            .catch((error) => {
+                console.error('API 요청 에러:', error);
+            });
     };
 
 
@@ -175,58 +178,59 @@ export default function Scrap() {
                     <button className={selectedOption === 'wishlist' ? 'active' : ''} onClick={() => handleButtonClick('wishlist')}>찜</button>
                 </div>
             </div>
-            {selectedOption === 'ingredients' &&
-                products.map((product, index) => (
-                    <SaleProduct key={index} product={product} />
-                ))
-            }
+            <div className='scrap-scroll'>
+                {selectedOption === 'ingredients' &&
+                    products.map((product, index) => (
+                        <SaleProduct key={index} product={product} />
+                    ))
+                }
 
-            {selectedOption === 'recipe' &&
-                <Masonry
-                    breakpointCols={2}
-                    className="grid-container"
-                    columnClassName="column"
-                >
-                    {data.map((item) => (
-                        <div key={item.id} className="grid-item">
-                            <img src={item.thumbnail_image} alt={`Image ${item.title}`} />
-                        </div>
-                    ))}
+                {selectedOption === 'recipe' &&
+                    <Masonry
+                        breakpointCols={2}
+                        className="grid-container"
+                        columnClassName="column"
+                    >
+                        {data.map((item) => (
+                            <div key={item.id} className="grid-item">
+                                <img src={item.thumbnail_image} alt={`Image ${item.title}`} />
+                            </div>
+                        ))}
 
-                </Masonry>
-            }
-
-            
-
-
-            {selectedOption === 'wishlist' && (
-                <div className="wishlist-buttons">
-                    <button className={selectedWishlistButton === '글' ? 'wishlist-button active' : 'wishlist-button'} onClick={() => handleWishlistButtonClick('글')}>글</button>
-                    <button className={selectedWishlistButton === '레시피' ? 'wishlist-button active' : 'wishlist-button'} onClick={() => handleWishlistButtonClick('레시피')}>레시피</button>
-                </div>
+                    </Masonry>
+                }
 
 
-            )}
-            {selectedWishlistButton === '글' &&
-                pickProducts.map((product, index) => (
-                    <SaleProduct key={index} product={product} />
-                ))
-            }
-            {selectedWishlistButton === '레시피' &&
-                <Masonry
-                    breakpointCols={2}
-                    className="grid-container"
-                    columnClassName="column"
-                >
-                    {likedRecipe.map((item) => (
-                        <div key={item.id} className="grid-item">
-                            <img src={item.thumbnail_image} alt={`Image ${item.title}`} />
-                        </div>
-                    ))}
-                </Masonry>
-            }
 
 
+                {selectedOption === 'wishlist' && (
+                    <div className="wishlist-buttons">
+                        <button className={selectedWishlistButton === '글' ? 'wishlist-button active' : 'wishlist-button'} onClick={() => handleWishlistButtonClick('글')}>글</button>
+                        <button className={selectedWishlistButton === '레시피' ? 'wishlist-button active' : 'wishlist-button'} onClick={() => handleWishlistButtonClick('레시피')}>레시피</button>
+                    </div>
+
+
+                )}
+                {selectedWishlistButton === '글' &&
+                    pickProducts.map((product, index) => (
+                        <SaleProduct key={index} product={product} />
+                    ))
+                }
+                {selectedWishlistButton === '레시피' &&
+                    <Masonry
+                        breakpointCols={2}
+                        className="grid-container"
+                        columnClassName="column"
+                    >
+                        {likedRecipe.map((item) => (
+                            <div key={item.id} className="grid-item">
+                                <img src={item.thumbnail_image} alt={`Image ${item.title}`} />
+                            </div>
+                        ))}
+                    </Masonry>
+                }
+
+            </div>
         </div>
     )
 }

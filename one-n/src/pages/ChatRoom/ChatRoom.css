@@ -22,6 +22,8 @@
     align-items: center;
     margin-right: auto;
     gap: 16px;
+    font-size: 16px;
+    font-weight: 500;
 }
 .product-img{
     width: 40px;
@@ -82,6 +84,17 @@
     font-weight: 400;
     color: #191919;
 }
+
+.my {
+    display: inline-flex;
+    padding: 10px 14px;
+    border-radius: 8px 0 8px 8px;
+    margin-left: auto;
+    background-color: #FFDC25; 
+    font-size: 14px;
+    font-weight: 400;
+    color: #191919;   
+  }
 
 .input-msg{
     position: absolute;
