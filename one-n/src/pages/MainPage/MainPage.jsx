@@ -11,12 +11,12 @@ import cart from '../../assets/icons/cart.png';
 import { ThrumnailRecipe } from '../../components/Recipe/ThrumnailRecipe';
 import SaleProduct from '../../components/SaleProduct/SaleProduct';
 import { Link, useNavigate } from 'react-router-dom';
-import Header from '../../components/Header/Header';
+import { Signup } from '../../components/Sign/Signup';
+import { Header } from '../../components/Header/Header';
 
 function MainPage() {
 
   const navigate = useNavigate();
-
   const [data, setData] = useState([]);
 
   const [page, setPage] = useState(1);
@@ -24,9 +24,25 @@ function MainPage() {
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
+  // 회원가입 모달창
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+  
+  const [signinData, setSigninData] = useState(null);
+
+  useEffect(() => {
+    const storedSigninData = sessionStorage.getItem('signinData');
+    if (!storedSigninData) {
+      // 세션 스토리지에 저장된 값이 없는 경우에만 모달창
+      setIsSignupModalOpen(true);
+    } else {
+      setSigninData(JSON.parse(storedSigninData));
+    }
+  }, []);
+
   const toggleDropup = () => {
     setDropdownVisible(!dropdownVisible);
   };
+
 
 
 
@@ -82,6 +98,20 @@ function MainPage() {
 
   return (
     <div className='mainpage-container'>
+    {/* Signup 모달 */}
+        {isSignupModalOpen && <Signup />}
+        
+      <div className='header-icon'>
+        <img src={logo} alt='logo' className='logo-img' />
+
+        <div className='right-header' >
+          <Link to='/search'>
+            <img src={search} alt='search' />
+          </Link>
+          <Link to='/scrap'>
+            <img src={mypage} alt='mypage' />
+          </Link>
+        </div>
       <div className='header-container'><Header />
       </div>
 
