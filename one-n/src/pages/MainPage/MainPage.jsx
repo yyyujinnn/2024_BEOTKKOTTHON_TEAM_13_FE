@@ -11,8 +11,8 @@ import cart from '../../assets/icons/cart.png';
 import { ThrumnailRecipe } from '../../components/Recipe/ThrumnailRecipe';
 import SaleProduct from '../../components/SaleProduct/SaleProduct';
 import { Link, useNavigate } from 'react-router-dom';
-import  Signup  from '../../components/Sign/Signup';
-import  Header  from '../../components/Header/Header';
+import Signup from '../../components/Sign/Signup';
+import Header from '../../components/Header/Header';
 
 function MainPage() {
 
@@ -36,6 +36,7 @@ function MainPage() {
       setIsSignupModalOpen(true);
     } else {
       setSigninData(JSON.parse(storedSigninData));
+      console.log('로그인 정보:', JSON.parse(storedSigninData));
     }
   }, []);
 
