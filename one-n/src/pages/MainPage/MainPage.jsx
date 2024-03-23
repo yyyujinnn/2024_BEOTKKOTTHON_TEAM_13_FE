@@ -11,10 +11,11 @@ import cart from '../../assets/icons/cart.png';
 import { ThrumnailRecipe } from '../../components/Recipe/ThrumnailRecipe';
 import SaleProduct from '../../components/SaleProduct/SaleProduct';
 import { Link, useNavigate } from 'react-router-dom';
-import Signup from '../../components/Sign/Signup';
+import { Signup } from '../../components/Sign/Signup';
+import { Header } from '../../components/Header/Header';
 
 function MainPage() {
-  
+
   const navigate = useNavigate();
   const [data, setData] = useState([]);
 
@@ -97,9 +98,9 @@ function MainPage() {
 
   return (
     <div className='mainpage-container'>
-      
-        {/* Signup 모달 */}
+    {/* Signup 모달 */}
         {isSignupModalOpen && <Signup />}
+        
       <div className='header-icon'>
         <img src={logo} alt='logo' className='logo-img' />
 
@@ -111,6 +112,7 @@ function MainPage() {
             <img src={mypage} alt='mypage' />
           </Link>
         </div>
+      <div className='header-container'><Header />
       </div>
 
       <div className='main-body'>
@@ -129,7 +131,7 @@ function MainPage() {
           <div className='recipe-text'>
             <div className='grd-name'> 공구 중인 식품 </div>
 
-            <Link to='/more-product' className='link-style' >
+            <Link to='/more-product' className='more-product-link-style' >
               <div className='more'> 더보기 <img src={next} alt='next' /> </div>
             </Link>
           </div>
@@ -142,13 +144,13 @@ function MainPage() {
             )}
           </div>
         </div>
-      
+
         <img src={plus} className='plus' onClick={toggleDropup} />
         {dropdownVisible && (
-            <div className='dropup'>
-              <Link to='/recipeReg' className='link-style'><img src={chef} alt='chef'/> 레시피 </Link>
-              <Link to='/product-post' className='link-style' style={{marginTop:'8px'}}><img src={cart} alt='cart'/> 공동구매 </Link>
-            </div>
+          <div className='dropup'>
+            <Link to='/recipeReg' className='link-style'><img src={chef} alt='chef' /> 레시피 </Link>
+            <Link to='/product-post' className='link-style' style={{ marginTop: '8px' }}><img src={cart} alt='cart' /> 공동구매 </Link>
+          </div>
         )}
       </div>
     </div>
