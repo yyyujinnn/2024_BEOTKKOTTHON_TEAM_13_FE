@@ -16,6 +16,14 @@ export default function Scrap() {
     const [likedRecipe, setLikedRecipe] = useState([]);
     const [selectedWishlistButton, setSelectedWishlistButton] = useState(null);
     const [selectedOption, setSelectedOption] = useState('ingredients');
+    const [signinData, setSigninData] = useState(null);
+
+    useEffect(() => {
+        const storedSigninData = sessionStorage.getItem('signinData');
+        if (storedSigninData) {
+            setSigninData(JSON.parse(storedSigninData));
+        }
+    }, []);
     const navigate = useNavigate();
 
     const handleBackClick = () => {
@@ -23,6 +31,7 @@ export default function Scrap() {
     }
 
     const handleWishlistButtonClick = (action) => {
+        console.log(signinData);
         setData([]);
         if (selectedWishlistButton !== action) {
             setSelectedWishlistButton(action); // 선택된 옵션이 현재 선택된 옵션과 다를 때만 상태 변경
@@ -40,7 +49,7 @@ export default function Scrap() {
     useEffect(() => {
         const fetchUserInfo = async () => {
             try {
-                const response = await axios.get('http://20.39.188.154:8080/user/info?session_id=test_session_id');
+                const response = await axios.get(`http://20.39.188.154:8080/user/info?session_id=${signinData}`);
                 setNickname(response.data.nickname);
                 setSatisfaction(response.data.user_rating * 100); // user_rating은 0.0에서 1.0 범위에 있으므로 100을 곱해서 퍼센트로 변환합니다.
             } catch (error) {
@@ -50,11 +59,9 @@ export default function Scrap() {
 
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://20.39.188.154:8080/user/posts', {
-                    params: {
-                        session_id: 'test_session_id'
-                    }
-                });
+                const response = await axios.get(`http://20.39.188.154:8080/user/posts?session_id=${signinData}`);
+
+                console.log(response.params);
                 console.log(response.data);
                 setProducts(response.data);
             } catch (error) {
@@ -68,7 +75,7 @@ export default function Scrap() {
 
     const fetchLikedPosts = async () => {
         try {
-            const response = await axios.get('http://20.39.188.154:8080/user/likes?session_id=test_session_id&type=post');
+            const response = await axios.get(`http://20.39.188.154:8080/user/likes?session_id=${signinData}&type=post`);
             setPickProducts(response.data);
         } catch (error) {
             console.error('Error fetching liked posts:', error);
@@ -85,7 +92,7 @@ export default function Scrap() {
     // };
 
     const fetchLikedRecipe = async () => {
-        const apiUrl = 'http://20.39.188.154:8080/user/likes?session_id=test_session_id&type=recipe'
+        const apiUrl = `http://20.39.188.154:8080/user/likes?session_id=${signinData}&type=recipe`
 
         axios.get(apiUrl)
             .then((response) => {
@@ -105,7 +112,7 @@ export default function Scrap() {
 
 
     const fetchPostRecipe = async () => {
-        const apiUrl = 'http://20.39.188.154:8080/user/recipes?session_id=test_session_id';
+        const apiUrl = `http://20.39.188.154:8080/user/recipes?session_id=test_${signinData}`;
 
         axios.get(apiUrl)
             .then((response) => {

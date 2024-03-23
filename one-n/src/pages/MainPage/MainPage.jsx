@@ -13,7 +13,7 @@ import SaleProduct from '../../components/SaleProduct/SaleProduct';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import { MyContext } from '../../components/MyContextProvider/MyContextProvider';
-import  Signup  from '../../components/Sign/Signup';
+import Signup from '../../components/Sign/Signup';
 
 
 
@@ -26,11 +26,11 @@ function MainPage() {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [bcode, setBcode] = useState();
   const [userLocation, setUserLocation] = useState();
-  const {myBcode, setMyBcode} = useContext(MyContext);
+  const { myBcode, setMyBcode } = useContext(MyContext);
 
   // 회원가입 모달창
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
-  
+
   const [signinData, setSigninData] = useState(null);
 
   useEffect(() => {
@@ -148,60 +148,51 @@ function MainPage() {
 
   return (
     <div className='mainpage-container'>
-    {/* Signup 모달 */}
-        {isSignupModalOpen && <Signup />}
-        
-      <div className='header-icon'>
-        <img src={logo} alt='logo' className='logo-img' />
+      {/* Signup 모달 */}
+      {isSignupModalOpen && <Signup />}
 
-        <div className='right-header' >
-          <Link to='/search'>
-            <img src={search} alt='search' />
-          </Link>
-          <Link to='/scrap'>
-            <img src={mypage} alt='mypage' />
-          </Link>
-        </div>
+
       <div className='header-container'><Header />
-      </div>
 
-      <div className='main-body'>
-        <div className='title'>
-          <div className='recipe-text'>
-            <div className='recipe-name'> 레시피 둘러보기 </div>
-            <Link to='/explore' className='a'>
-              <div className='more'> 더보기 <img src={next} alt='next' /> </div>
-            </Link>
+
+        <div className='main-body'>
+          <div className='title'>
+            <div className='recipe-text'>
+              <div className='recipe-name'> 레시피 둘러보기 </div>
+              <Link to='/explore' className='a'>
+                <div className='more'> 더보기 <img src={next} alt='next' /> </div>
+              </Link>
+            </div>
+
+            <ThrumnailRecipe data={data} />
           </div>
 
-          <ThrumnailRecipe data={data} />
+          <div className='gredient'>
+            <div className='selling-product-text'>
+              <div className='grd-name'>공구 중인 식품 </div>
+
+              <Link to='/more-product' className='more-product-link-style' >
+                <div className='more'> 더보기 <img src={next} alt='next' /> </div>
+              </Link>
+            </div>
+
+            <div className='sale-gredient-container'>
+              {products.length > 0 && (
+                products.map((product, index) => (
+                  <SaleProduct key={index} product={product} />
+                ))
+              )}
+            </div>
+          </div>
+
+          <img src={plus} className='plus' onClick={toggleDropup} />
+          {dropdownVisible && (
+            <div className='dropup'>
+              <Link to='/recipeReg' className='link-style'><img src={chef} alt='chef' /> 레시피 </Link>
+              <Link to='/product-post' className='link-style' style={{ marginTop: '8px' }}><img src={cart} alt='cart' /> 공동구매 </Link>
+            </div>
+          )}
         </div>
-
-        <div className='gredient'>
-          <div className='recipe-text'>
-            <div className='grd-name'> 공구 중인 식품 </div>
-
-            <Link to='/more-product' className='more-product-link-style' >
-              <div className='more'> 더보기 <img src={next} alt='next' /> </div>
-            </Link>
-          </div>
-
-          <div className='sale-gredient-container'>
-            {products.length > 0 && (
-              products.map((product, index) => (
-                <SaleProduct key={index} product={product} />
-              ))
-            )}
-          </div>
-        </div>
-
-        <img src={plus} className='plus' onClick={toggleDropup} />
-        {dropdownVisible && (
-          <div className='dropup'>
-            <Link to='/recipeReg' className='link-style'><img src={chef} alt='chef' /> 레시피 </Link>
-            <Link to='/product-post' className='link-style' style={{ marginTop: '8px' }}><img src={cart} alt='cart' /> 공동구매 </Link>
-          </div>
-        )}
       </div>
     </div>
   );
