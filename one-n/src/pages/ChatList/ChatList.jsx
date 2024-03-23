@@ -9,6 +9,16 @@ function ChatList() {
 
   const [chat, setChat] = useState([]);
   const [unreadCounts, setUnreadCounts] = useState({});
+  
+  const [signinData, setSigninData] = useState(null);
+
+  useEffect(() => {
+    const storedSigninData = sessionStorage.getItem('signinData');
+    if (storedSigninData) {
+      setSigninData(JSON.parse(storedSigninData));
+    }
+  }, []);
+
 
   const handleChatClick = (chatId) => {
     navigate(`/chatroom/${chatId}`);

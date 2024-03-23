@@ -17,6 +17,16 @@ function RecipeDetail() {
     const [recipe, setRecipe] = useState(null);
     const [picked, setPicked] = useState(false);
 
+    const [signinData, setSigninData] = useState(null);
+
+  useEffect(() => {
+    const storedSigninData = sessionStorage.getItem('signinData');
+    if (storedSigninData) {
+      setSigninData(JSON.parse(storedSigninData));
+    }
+  }, []);
+
+
     const togglePicked = () => {
         setPicked(!picked);
     }

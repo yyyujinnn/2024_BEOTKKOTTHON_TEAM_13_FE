@@ -32,6 +32,15 @@ function ChatRoom() {
   const [newMessage, setNewMessage] = useState(""); 
   const [ws, setWs] = useState(null); 
 
+  const [signinData, setSigninData] = useState(null);
+
+  useEffect(() => {
+    const storedSigninData = sessionStorage.getItem('signinData');
+    if (storedSigninData) {
+      setSigninData(JSON.parse(storedSigninData));
+    }
+  }, []);
+
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
     setRounded(!rounded); 
