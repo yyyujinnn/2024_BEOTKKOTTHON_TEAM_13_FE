@@ -3,13 +3,13 @@ div {
 }
 
 .product-detail-container {
-    background-color: #f5f5f5;
+    background-color: #FFF;
     /* 회색 바탕화면 색상 */
     height: 100vh;
     padding: 16px;
     max-height: calc(100vh - 60px);
     /* 페이지 전체 높이에서 '구매하기' 버튼의 높이를 뺀 값으로 최대 높이 설정 */
-
+    overflow-y: auto;
     margin-bottom: 80px;
     /* 스크롤이 필요한 경우 스크롤 활성화 */
 
@@ -33,23 +33,13 @@ div {
 
 }
 
-.product-header {
-
-    max-width: 100%;
-    height: 10px;
-    margin: 0px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-
-}
 
 .product-name {
     margin-left: 10px;
     color: var(--black-10, #191919);
 
     /* h16_sb */
-    font-family: Pretendard;
+    font-family: Pretendard ExtraBold;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
@@ -68,7 +58,7 @@ div {
 
 .product-price {
     color: #191919;
-    font-family: Pretendard;
+    font-family: Pretendard ExtraBold;
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
@@ -152,7 +142,7 @@ div {
     justify-content: space-between;
     color: #666;
     text-align: center;
-    font-family: ABeeZee;
+    font-family: Pretendard Light;
     font-size: 14px;
     font-weight: 400;
     line-height: normal;
@@ -181,9 +171,8 @@ div {
     border-radius: 8px;
     border: 1px solid #DADADA;
     color: #B0B0B0;
-    font-family: ABeeZee;
+    font-family: Pretendard Light;
     font-size: 13px;
-    font-style: italic;
     font-weight: 400;
     line-height: normal;
 }
@@ -192,7 +181,7 @@ div {
 .product-content {
     margin-top: 36px;
     color: #333;
-    font-family: ABeeZee;
+    font-family: Pretendard Light;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -215,27 +204,13 @@ div {
 }
 
 
-.product-sell-button-container {
-    display: flex;
-    /* 자식 요소를 수평으로 정렬하기 위해 flex를 사용합니다. */
-    justify-content: center;
-    /* 수평으로 가운데 정렬합니다. */
-    align-items: center;
-    /* 수직으로 가운데 정렬합니다. */
-    position: fixed;
-    /* 페이지 하단에 고정 */
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    /* 가로 전체를 차지하도록 설정 */
-    height: 70px;
-    background-color: white;
-}
 
 .product-sell-button {
+    margin-top: 20px;
+    margin-top: 40px;
     /* 버튼 스타일 */
-    width: 343px;
-    padding: 12px 16px;
+    width: 100%;
+    height: 43px;
     gap: 10px;
     border-radius: 8px;
     border: none;
@@ -251,6 +226,19 @@ div {
 .people-container {
     margin-top: 40px;
 
+
+}
+
+.post-product-price {
+    color: var(--black-10, #191919);
+
+    /* h20 */
+    font-family: Pretendard ExtraBold;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: -0.32px;
 
 }
 
@@ -273,7 +261,7 @@ div {
     color: var(--black-10, #191919);
 
     /* h16 */
-    font-family: Pretendard;
+    font-family: Pretendard Light;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
@@ -297,7 +285,7 @@ div {
     color: var(--black-10, #191919);
 
     /* b14_r */
-    font-family: Pretendard;
+    font-family: Pretendard Light;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -360,7 +348,7 @@ div {
     color: #E09D16;
 
     /* b14_r */
-    font-family: Pretendard;
+    font-family: Pretendard Light;
     font-size: 14px;
     font-style: normal;
     font-weight: 400;

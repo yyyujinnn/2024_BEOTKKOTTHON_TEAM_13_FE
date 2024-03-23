@@ -81,7 +81,7 @@ export default function ProductDetail() {
     };
 
     const handleBackClick = () => {
-        // 이전 페이지로 돌아가는 기능 추가
+        navigate(-1);
     };
 
 
@@ -99,7 +99,7 @@ export default function ProductDetail() {
     return (
         <div className="product-detail-container">
             {Object.keys(productData).length > 0 && (
-                <div>
+                <div className='product-detail-contents'>
                     <div className="product-header">
                         <button className='back-button' onClick={handleBackClick}>
                             <Back />
@@ -124,7 +124,7 @@ export default function ProductDetail() {
                                     <div className='alert-dute-date'>마감 {daysRemaining}일 전</div>
                                 )}
 
-                                <div className='product-price'>{productData.price} 원 </div>
+                                <div className='post-product-price'>{productData.price} 원 </div>
                             </div>
 
                             <div className='create-date-container'>

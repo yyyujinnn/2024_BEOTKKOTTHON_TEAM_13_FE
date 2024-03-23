@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import SaleProduct from '../../components/SaleProduct/SaleProduct';
 import './Map.css'
 import LocationImage from '../../assets/Marker.svg'
 import SetLocation from '../../assets/setlocation.png'
 import axios from 'axios';
 import { NavBar } from '../../components/NavBar/NavBar';
+import { MyContext } from '../../components/MyContextProvider/MyContextProvider';
 
 
 const Map = () => {
@@ -14,6 +15,7 @@ const Map = () => {
     const [myLocation, setMyLocation] = useState(false);
     const [page, setPage] = useState(1);
     const [bottomPanel, setBottomPanel] = useState(null);
+    
 
     const moveToUserLocation = () => {
         if (myLocation) {
@@ -26,8 +28,9 @@ const Map = () => {
     };
 
     const getFetchData = () => {
+        const storedBcode = sessionStorage.getItem('myBcode');
         console.log("요청을 보냈습니다");
-        const url = `http://20.39.188.154:8080/post/list?type=all&bcode=&keyword=&page=${page}`;
+        const url = `http://20.39.188.154:8080/post/list?type=all&bcode=${storedBcode}&keyword=&page=${page}`;
         console.log(url);
         fetch(url)
             .then((res) => res.json())

@@ -56,12 +56,9 @@ export default function ReProductDetail() {
     };
 
     const handleBackClick = () => {
-        // 이전 페이지로 돌아가는 기능 추가
+        navigate(-1);
     };
 
-    const handlePickClick = () => {
-        // 이전 페이지로 돌아가는 기능 추가
-    };
 
     const handleMapButton = () => {
         // check-location 페이지로 이동하고 productData의 위치 정보를 함께 전달
@@ -165,7 +162,7 @@ export default function ReProductDetail() {
                     <div className='people-container'>
                         <div className='product-people-container'>
                             <div className='product-people'>
-                                모집 인원 {productData.group_size} 명
+                                모집 인원 {productData.group_size}명
                             </div>
                             <div className='product-people'>
                                 남은 인원 {productData.group_size - productData.cur_group_size}명

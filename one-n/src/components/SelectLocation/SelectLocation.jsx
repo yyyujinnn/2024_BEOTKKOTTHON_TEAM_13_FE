@@ -12,7 +12,8 @@ export default function SelectLocation() {
   const [map, setMap] = useState();
   const [marker, setMarker] = useState();
   const [modalVisible, setModalVisible] = useState(false);
-  const { postAddress, setPostAddress } = useContext(MyContext);
+  const { postAddress, setPostAddress, selectLocation, setSelectLocation } = useContext(MyContext);
+
   const navigate = useNavigate();
 
   const goBack = () => {
@@ -24,27 +25,6 @@ export default function SelectLocation() {
     navigate('/product-post');
   }
 
-  const fetchHCode = (query) => {
-    axios.get(`https://dapi.kakao.com/v2/local/search/address.json?query=${query}`, {
-      headers: {
-        Authorization: "KakaoAK"
-      },
-    })
-    .then(response => {
-      if (response.data.meta.total_count > 0) {
-        const hCode = response.data.documents[0].address.h_code; // 행정동 코드
-        const BCode = response.data.documents[0].address.b_code; 
-        console.log('행정동 코드:', hCode);
-        console.log('법정동 코드:', BCode);
-        // 여기서 필요한 작업 수행
-      } else {
-        console.error('No results found for the address query:', query);
-      }
-    })
-    .catch(error => {
-      console.error('Error fetching hCode:', error);
-    });
-  };
   // 1) 카카오맵 불러오기
   useEffect(() => {
     if (!window.kakao) {
@@ -71,10 +51,10 @@ export default function SelectLocation() {
         document.head.removeChild(script);
       };
     }
-  }, []);
+  }, [map]);
 
   // 2) 최초 렌더링 시에는 제외하고 map이 변경되면 실행
-  useDidMountEffect(() => {
+  useEffect(() => {
     if (map) {
       // 사용자의 현재 위치를 가져옴
       if (navigator.geolocation) {
@@ -148,7 +128,7 @@ export default function SelectLocation() {
 
               const query = encodeURIComponent(addr);
 
-              fetchHCode(query);
+              
 
               setPostAddress(addr);
               setModalVisible(true);

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import './MainPage.css';
 import logo from '../../assets/logo/logo.png';
@@ -12,20 +12,18 @@ import { ThrumnailRecipe } from '../../components/Recipe/ThrumnailRecipe';
 import SaleProduct from '../../components/SaleProduct/SaleProduct';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
+import { MyContext } from '../../components/MyContextProvider/MyContextProvider';
 
 function MainPage() {
 
   const navigate = useNavigate();
-
   const [data, setData] = useState([]);
-
   const [page, setPage] = useState(1);
   const [products, setProducts] = useState([]);
-
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [bcode, setBcode] = useState();
-
   const [userLocation, setUserLocation] = useState();
+  const {myBcode, setMyBcode} = useContext(MyContext);
 
   const toggleDropup = () => {
     setDropdownVisible(!dropdownVisible);
@@ -92,11 +90,14 @@ function MainPage() {
             .then(response => {
               console.log('Region codes:', response.data);
               const bCode = response.data.documents.find(doc => doc.region_type === 'B').code;
-              console.log('B 타입의 코드:', bCode);
-              setBcode(bCode);
+              const shortBCode = bCode.substring(0, 5); // 앞에서 5자리만 추출
+              console.log('앞 5자리 B 타입의 코드:', shortBCode);
+              setBcode(shortBCode);
+              setMyBcode(shortBCode);
+              sessionStorage.setItem('myBcode', shortBCode);
 
               // 여기서 fetch 함수를 호출하여 요청 보내도록 수정
-              fetchProducts(bCode);
+              fetchProducts(shortBCode);
             })
             .catch(error => {
               console.error('Error fetching region codes:', error);

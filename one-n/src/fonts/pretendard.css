@@ -11,3 +11,25 @@
         url("./Pretendard/Pretendard-Thin.otf") format('woff');
     
 }
+
+
+@font-face {
+    font-family: 'Pretendard Bold';
+    font-display: swap;
+    src: local('Pretendard Bold'), url('./Pretendard/Pretendard-Bold.otf') format('woff');
+  }
+
+
+  @font-face {
+    font-family: 'Pretendard ExtraBold';
+    font-weight: 900;
+    font-display: swap;
+    src: local('Pretendard ExtraBold'), url('./Pretendard/Pretendard-ExtraBold.otf') format('woff');
+  }
+
+  
+  @font-face {
+    font-family: 'Pretendard Light';
+    font-display: swap;
+    src: local('Pretendard Light'), url('./Pretendard/Pretendard-Light.otf') format('woff');
+  }
