@@ -11,8 +11,8 @@ import cart from '../../assets/icons/cart.png';
 import { ThrumnailRecipe } from '../../components/Recipe/ThrumnailRecipe';
 import SaleProduct from '../../components/SaleProduct/SaleProduct';
 import { Link, useNavigate } from 'react-router-dom';
-import { Signup } from '../../components/Sign/Signup';
-import { Header } from '../../components/Header/Header';
+import  Signup  from '../../components/Sign/Signup';
+import  Header  from '../../components/Header/Header';
 
 function MainPage() {
 
@@ -101,7 +101,7 @@ function MainPage() {
     {/* Signup 모달 */}
         {isSignupModalOpen && <Signup />}
         
-      <div className='header-icon'>
+      {/* <div className='header-icon'>
         <img src={logo} alt='logo' className='logo-img' />
 
         <div className='right-header' >
@@ -111,7 +111,7 @@ function MainPage() {
           <Link to='/scrap'>
             <img src={mypage} alt='mypage' />
           </Link>
-        </div>
+        </div> */}
       <div className='header-container'><Header />
       </div>
 
@@ -153,7 +153,7 @@ function MainPage() {
           </div>
         )}
       </div>
-    </div>
+      </div>
   );
 }
 
