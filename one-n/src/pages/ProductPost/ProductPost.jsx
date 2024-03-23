@@ -1,6 +1,7 @@
 //공동구매 게시글 작성 페이지
 import { ReactComponent as Back } from '../../assets/back.svg'
 import { ReactComponent as Next } from '../../assets/Next.svg'
+import ReactModal from 'react-modal';
 import InputForm from '../../components/InputForm/InputForm';
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext, useState, useEffect } from 'react';
@@ -10,6 +11,8 @@ import RecipeIngredientsPost from '../../components/ProductPostForm/RecipeIngred
 import './ProductPost.css'
 import Camera from '../../assets/camera.png'
 import PostSucessModal from '../../components/PostSucessModal/PostSucessModal';
+import quit from '../../assets/icons/quit.png';
+import save from '../../assets/icons/save.png';
 
 
 export default function ProductPost() {
@@ -20,6 +23,19 @@ export default function ProductPost() {
     const { selectLocation, setSelectLocation } = useContext(MyContext);
     const [showModal, setShowModal] = useState(false);
     // const [userLocation, setUserLocation] = useState(null); // 사용자 위치 정보 상태 추가
+
+
+    const [closeModalOpen, setCloseModalOpen] = useState(false); // 닫기
+    const [exitModalOpen, setExitModalOpen] = useState(false); // 퇴장
+
+    const onClickclose = () => {
+        setCloseModalOpen(false);
+    }
+    const onClickExit = () => {
+        setExitModalOpen(false);
+    }
+
+
 
     const handleButtonClick = (option) => {
         if (selectedOption !== option) {
@@ -106,9 +122,29 @@ export default function ProductPost() {
     return (
         <div className='product-post-container'>
             <div className="product-post-header">
-                <button className='post-back-button' onClick={handleBackClick}>
+                <button className='post-back-button' onClick={()=>setCloseModalOpen(true)}>
                     <Back />
                 </button>
+                <ReactModal
+                isOpen={closeModalOpen}
+                style={CloseModalStyles}
+                contentLabel="Close Modal"
+              >
+                <div className="closeModal">
+                    <img src={quit} alt='quit' />
+                    <h3> 작성을 취소하시겠어요?</h3>
+                    <h4>
+                        작성하던 글은 모두 사라지며
+                        <br/>
+                        임시저장되지 않습니다.
+                    </h4>
+                    <div style={{ display:"flex", gap:"16px" }}>
+                        <button onClick={()=> navigate(-1)} style={{...CloseModalStyles.button, background:"#FFF", border:"1px solid #D9D9D9"}}> 취소하기 </button>
+                        <button onClick={onClickclose} style={CloseModalStyles.button}> 계속하기 </button>
+                    </div>
+                  </div>
+                </ReactModal>
+
                 <div className='product-post-text'>
                     <p className='centered-text'>공동구매 게시글 작성</p>
                 </div>
@@ -163,16 +199,92 @@ export default function ProductPost() {
 
             <div>
                 <div className='product-post-button-container'>
-                    <button className='product-post-button' onClick={handlePostButtonClick}>올리기</button>
+                    <button className='product-post-button' onClick={() => setExitModalOpen(true)}>올리기</button>
+                    <ReactModal
+                        isOpen={exitModalOpen}
+                        style={ExitModalStyles}
+                        contentLabel="Exit Modal"
+                    >
+                        <div className="exitModal">
+                            <img src={save} alt='save' />
+                            <h3> 성공적으로 등록되었어요!</h3>
+                            <button onClick={onClickExit} style={ExitModalStyles.button}> 확인 </button>
+                        </div>
+                    </ReactModal>
                 </div>
             </div>
 
             {
                 showModal && (
-                    <PostSucessModal/>
+                    <PostSucessModal />
                 )
             }
         </div>
-
     );
-} 
+}
+
+const CloseModalStyles = {
+    overlay: {
+        backgroundColor: " rgba(0, 0, 0, 0.3)"
+    },
+    content: {
+        width: "311px",
+        height: "300px",
+        padding: "32px 16px 0 16px",
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        borderRadius: "16px",
+        backgroundColor: "white",
+        display: 'flex',
+        justifyContent: "center",
+        textAlign: "center",
+        overflow: "auto",
+    },
+    button: {
+        width: "131px",
+        padding: "12px 20px",
+        fontSize: "16px",
+        fontWeight: "500",
+        backgroundColor: "#FFDC25",
+        color: "#191919",
+        borderRadius: "8px",
+        border: "none",
+        cursor: "pointer",
+        transition: "background-color 0.3s",
+    },
+};
+
+const ExitModalStyles = {
+    overlay: {
+        backgroundColor: " rgba(0, 0, 0, 0.3)"
+    },
+    content: {
+        width: "311px",
+        height: "240px",
+        padding: "32px 16px 0 16px",
+        position: "absolute",
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        borderRadius: "16px",
+        backgroundColor: "white",
+        display: 'flex',
+        justifyContent: "center",
+        textAlign: "center",
+        overflow: "auto",
+    },
+    button: {
+        width: "132px",
+        padding: "12px 20px",
+        fontSize: "16px",
+        fontWeight: "500",
+        backgroundColor: "#FFDC25",
+        color: "#191919",
+        borderRadius: "8px",
+        border: "none",
+        cursor: "pointer",
+        transition: "background-color 0.3s",
+    },
+};
