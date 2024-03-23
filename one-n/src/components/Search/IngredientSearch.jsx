@@ -15,6 +15,8 @@ export default function IngredientSearch({ product }) {
         ? product.filter(item => item.type === 'ingd')
         : product.filter(item => item.type === 'r_ingd');
 
+    
+
     return (
         <div className="search-select-container">
             <div className='search-select'>

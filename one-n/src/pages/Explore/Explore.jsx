@@ -12,6 +12,15 @@ const Explore = () => {
   const [data, setData] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState('');
 
+  const [signinData, setSigninData] = useState(null);
+
+  useEffect(() => {
+    const storedSigninData = sessionStorage.getItem('signinData');
+    if (storedSigninData) {
+      setSigninData(JSON.parse(storedSigninData));
+    }
+  }, []);
+
   const handlePhotoClick = (id) => {
     navigate(`/recipe/${id}`);
   };
@@ -21,6 +30,9 @@ const Explore = () => {
   };
 
   useEffect(() => {
+
+    // API 엔드포인트 URL 설정
+   
     const apiUrl = `http://20.39.188.154:8080/recipe/list?keyword=${searchKeyword}&page=1`;
 
     axios.get(apiUrl)

@@ -1,3 +1,4 @@
+
 .header-icon {
   /* width: 375px; */
   height: 40px;
@@ -7,6 +8,7 @@
   margin-top: 15px;
   padding-bottom: 15px; /*dh*/
   border-bottom: 0.5px solid lightgray; /* 상단에 실선 추가 */
+
 }
 
 .logo-img {
@@ -69,6 +71,8 @@
   font-weight: 500;
   color: #666;
   cursor: pointer;
+  border: none;
+  
 }
 
 .a {
@@ -131,6 +135,7 @@
 }
 
 /* 핫한 식품 */
+
 .gredient {
   margin-top: 50px;
   width: 100%;
@@ -197,19 +202,22 @@
   margin-right: 0; /* 마지막 해시태그의 오른쪽 마진 제거 */
 }
 
-.mainpage-container {
-  overflow-y: hidden;
-  height: 100vh;
-}
+
+
+.link-style {
+    text-decoration: none;
+  }
+
 
 .sale-gredient-container {
-  margin-bottom: 40px;
+  margin-bottom: 100px;
 }
 
 .plus {
-  position: absolute;
-  bottom: 90px;
-  right: 24px;
+  position: fixed;
+  bottom: 80px; /* 원하는 위치로 조정 */
+  right: 20px; /* 원하는 위치로 조정 */
+  z-index: 9999; /* 다른 요소 위에 표시되도록 z-index 설정 */
   padding: 12px;
   border-radius: 100px;
   background: #ffd31a;
@@ -231,4 +239,23 @@
   border-radius: 100px;
   background-color: #fff;
   text-decoration: none;
+}
+
+.mainpage-container{
+  margin-top: 60px;
+  overflow-y: auto;
+}
+
+.more-product-link-style{
+  text-decoration: none;
+}
+
+.header-container {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000; /* 다른 요소들보다 위에 표시되도록 설정 */
+  /* 필요에 따라 다른 스타일을 추가할 수 있습니다. */
 }

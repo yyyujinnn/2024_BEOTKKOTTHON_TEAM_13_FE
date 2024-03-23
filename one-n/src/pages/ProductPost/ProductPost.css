@@ -229,3 +229,49 @@ div {
     border-bottom: 1px solid #D9D9D9;
 
 }
+
+.product-sale-due-date {
+    padding: 16px;
+}
+
+.year-month-day {
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.year-month-day input {
+    margin-top: 8px;
+    width: 25%;
+    height: 27px;
+    border-radius: 8px;
+    background-color: transparent;
+    border: 1px solid var(--grey-85, #D9D9D9);
+}
+
+.product-sale-due-date-text {
+    margin-top: 24px;
+    color: var(--black-10, #191919);
+
+    /* b14 */
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: -0.14px;
+
+}
+
+.due-date-placeholder {
+    color: var(--black-10, #191919);
+    
+    /* b14_r */
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.14px;
+
+}
