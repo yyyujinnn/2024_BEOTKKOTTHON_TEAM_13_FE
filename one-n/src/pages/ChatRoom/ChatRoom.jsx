@@ -7,7 +7,6 @@ import './ChatRoom.css'
 import previous from '../../assets/icons/previous.svg'
 import down from '../../assets/icons/down.png'
 import exit from '../../assets/icons/exit.png'
-import img from '../../assets/icons/img.png'
 import send from '../../assets/icons/send.png'
 import door from '../../assets/icons/door.png';
 import save from '../../assets/icons/save.png';
@@ -18,6 +17,7 @@ function ChatRoom() {
   const navigate = useNavigate();
   const { chatId } = useParams();
 
+  const [titleData, setTitleData] = useState([]);
   const [data, setData] = useState([]);
   const [Exit, setExit] = useState(null);
 
@@ -27,6 +27,19 @@ function ChatRoom() {
   const [exitModalOpen, setExitModalOpen] = useState(false);
   const [reviewModalOpen, setReviewModalOpen] = useState(false);  
   const [closeModalOpen, setCloseModalOpen] = useState(false);
+
+  // 채팅 웹소켓
+  const [newMessage, setNewMessage] = useState(""); 
+  const [ws, setWs] = useState(null); 
+
+  const [signinData, setSigninData] = useState(null);
+
+  useEffect(() => {
+    const storedSigninData = sessionStorage.getItem('signinData');
+    if (storedSigninData) {
+      setSigninData(JSON.parse(storedSigninData));
+    }
+  }, []);
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
@@ -58,8 +71,27 @@ function ChatRoom() {
 
   // 채팅방 전체 메시지
   useEffect(() => {
+    
+    const TitleapiUrl = `http://20.39.188.154:8080/chats/list?session_id=test_session_id`;
     const apiUrl = `http://20.39.188.154:8080/chat/init-messages?id=${chatId}&session_id=test_session_id`;
    
+    axios.get(TitleapiUrl)
+      .then((response) => {
+        const chatRooms = response.data;
+        // chatId 일치하는 채팅방 매칭, 해당 채팅방의 title 가져오기
+        const targetChatRoom = chatRooms.find(room => room.chat_id === chatId);
+        if (targetChatRoom) {
+          const lastMessage = targetChatRoom.last_message;
+          console.log(lastMessage);
+          setTitleData(lastMessage);
+        } else {
+        console.error(`Chat room with chatId ${chatId} not found.`);
+      }
+      })
+      .catch((error) => {
+        console.error('API 요청 에러:', error);
+      });
+
     axios.get(apiUrl)
       .then((response) => {
         const updatedData = response.data.map(item => ({
@@ -73,6 +105,45 @@ function ChatRoom() {
       });
     }, [chatId]);
 
+      // 웹 소켓 연결 설정
+      useEffect(() => {
+        const ws = new WebSocket("ws://20.39.188.154:8080/ws");
+        setWs(ws);
+        
+        // 컴포넌트가 unmount 될 때 웹 소켓 연결 해제
+        return () => {
+          ws.close();
+        };
+      }, []); 
+      
+      // 메시지 수신 이벤트 핸들러
+      useEffect(() => {
+        if (!ws) return;
+    
+        ws.onmessage = (event) => {
+          const message = JSON.parse(event.data);
+          // 받은 메시지를 기존 메시지 데이터에 추가
+          setData(prevData => [...prevData, message]);
+        };
+      }, [ws]);
+      
+      const sendMessage = () => {
+        if (ws && newMessage.trim() !== '') {
+          const message = {
+            type: "MESSAGE_TEXT",
+            sessionId: "세션 ID",
+            chatId: chatId,
+            nickname: "해당 메시지 작성자 닉네임",
+            profile_image: "해당 메시지 작성자 프로필 이미지 url",
+            message: newMessage.trim()
+          };
+          ws.send(JSON.stringify(message));
+          setNewMessage('');
+        }
+      };
+
+      
+
   return (
     <div>
         <div className='room-header'>
@@ -81,7 +152,7 @@ function ChatRoom() {
 
             <div className='product'>
               <div className='product-img' />
-              <span> 닭갈비 공동구매 </span>
+              <span> {titleData} </span>
             </div>
 
             <div className='rt-header'>
@@ -132,7 +203,7 @@ function ChatRoom() {
                   
                   <button style={ReviewModalStyles.button}
                   onClick={() => {
-                    setCloseModalOpen(true);  
+                    setCloseModalOpen(true);
                   }}> 등록하기 </button>
                   <ReactModal
                   isOpen={closeModalOpen}
@@ -146,6 +217,7 @@ function ChatRoom() {
                       onClick={() => {
                         setCloseModalOpen(false);
                         setReviewModalOpen(false);
+                        toggleDropdown(false);
                       }}> 확인 </button>
                     </div>
                   </ReactModal>
@@ -157,10 +229,10 @@ function ChatRoom() {
         </div>
 
         <div className='room-body'>
-
-
-          {/* 채팅메세지 */}
-          {data.map((item, index) => (
+          
+        {/* 채팅메세지 */}
+        <div>
+        {data.map((item, index) => (
           <div className='other' key={index}>
           {item.type === 'NOTICE' ? (
             <div style={{ display:'flex', gap:'20px', alignItems:'center', margin: '8px 0', fontSize: '12px', color: '#8593A8', textAlign: 'center' }}>
@@ -189,15 +261,20 @@ function ChatRoom() {
           )}
         </div>
         ))}
+      </div>  
 
-         
-        </div>
-        
-        <div className='input-msg'>
-          <img src={img} alt='img'/>
-          <input placeholder='메세지 보내기' />
-          <img src={send} alt='send' className='send'/>
-        </div>
+     <div className='input-msg'>
+        <input 
+          type="text"
+          value={newMessage}
+          onChange={(e) => setNewMessage(e.target.value)}
+          placeholder='메세지 보내기' />
+     
+        <img src={send} onClick={sendMessage} className='send'/>
+     
+     </div>
+
+      </div>  
         
     </div>
   )

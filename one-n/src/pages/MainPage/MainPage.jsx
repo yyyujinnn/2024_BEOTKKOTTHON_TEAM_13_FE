@@ -13,6 +13,9 @@ import SaleProduct from '../../components/SaleProduct/SaleProduct';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import { MyContext } from '../../components/MyContextProvider/MyContextProvider';
+import  Signup  from '../../components/Sign/Signup';
+
+
 
 function MainPage() {
 
@@ -25,9 +28,25 @@ function MainPage() {
   const [userLocation, setUserLocation] = useState();
   const {myBcode, setMyBcode} = useContext(MyContext);
 
+  // 회원가입 모달창
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+  
+  const [signinData, setSigninData] = useState(null);
+
+  useEffect(() => {
+    const storedSigninData = sessionStorage.getItem('signinData');
+    if (!storedSigninData) {
+      // 세션 스토리지에 저장된 값이 없는 경우에만 모달창
+      setIsSignupModalOpen(true);
+    } else {
+      setSigninData(JSON.parse(storedSigninData));
+    }
+  }, []);
+
   const toggleDropup = () => {
     setDropdownVisible(!dropdownVisible);
   };
+
 
 
 
@@ -129,6 +148,20 @@ function MainPage() {
 
   return (
     <div className='mainpage-container'>
+    {/* Signup 모달 */}
+        {isSignupModalOpen && <Signup />}
+        
+      <div className='header-icon'>
+        <img src={logo} alt='logo' className='logo-img' />
+
+        <div className='right-header' >
+          <Link to='/search'>
+            <img src={search} alt='search' />
+          </Link>
+          <Link to='/scrap'>
+            <img src={mypage} alt='mypage' />
+          </Link>
+        </div>
       <div className='header-container'><Header />
       </div>
 

@@ -12,6 +12,15 @@ const Explore = () => {
   const [data, setData] = useState([]);
   const [searchKeyword, setSearchKeyword] = useState('');
 
+  const [signinData, setSigninData] = useState(null);
+
+  useEffect(() => {
+    const storedSigninData = sessionStorage.getItem('signinData');
+    if (storedSigninData) {
+      setSigninData(JSON.parse(storedSigninData));
+    }
+  }, []);
+
   const handlePhotoClick = (id) => {
     navigate(`/recipe/${id}`);
   };
