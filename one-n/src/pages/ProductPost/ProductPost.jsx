@@ -9,12 +9,14 @@ import IngredientPost from '../../components/ProductPostForm/IngredientPost';
 import RecipeIngredientsPost from '../../components/ProductPostForm/RecipeIngredientsPost';
 import './ProductPost.css'
 import Camera from '../../assets/camera.png'
+import { useNavigate } from 'react-router-dom';
 
 
 export default function ProductPost() {
     const [selectedOption, setSelectedOption] = useState('ingredients');
     const [imageUploaded, setImageUploaded] = useState(false); // 이미지가 업로드되었는지 여부
     const [imageURL, setImageURL] = useState(''); // 이미지 URL 상태 추가
+    const navigate = useNavigate();
     // const [userLocation, setUserLocation] = useState(null); // 사용자 위치 정보 상태 추가
 
     const handleButtonClick = (option) => {
@@ -28,17 +30,20 @@ export default function ProductPost() {
         setImageURL('');
     };
 
+    const handleBackClick = () => {
+        navigate(-1); // Go back one step
+    };
 
     const handleImageUpload = (e) => {
         const file = e.target.files[0]; // 선택한 파일 가져오기
         const reader = new FileReader(); // 파일을 읽기 위한 FileReader 객체 생성
-    
+
         reader.onloadend = () => {
             // 파일 읽기가 완료되었을 때
             setImageURL(reader.result); // 이미지 URL을 상태에 설정하여 이미지 표시
             setImageUploaded(true); // 이미지 업로드 상태를 true로 변경
         };
-    
+
         if (file) {
             reader.readAsDataURL(file); // 파일을 읽어서 base64 형태로 변환
         }
@@ -50,13 +55,24 @@ export default function ProductPost() {
         postURL, setPostURL,
         postPrice, setPostPrice,
         postPeople, setPostPeople,
-        postContent, setPostContent } = useContext(MyContext);
+        postContent, setPostContent,
+        postYear, setPostYear,
+        postMonth, setPostMonth,
+        postDay, setPostDay } = useContext(MyContext);
 
-    const handleContentInputChange = (e) => {
-        setPostContent(e.target.value);
+    const handleYearInputChange = (e) => {
+        setPostYear(e.target.value);
     }
 
-   
+    const handleMonthInputChange = (e) => {
+        setPostMonth(e.target.value);
+    }
+
+    const handleDayInputChange = (e) => {
+        setPostDay(e.target.value);
+    }
+
+
     const handlePostButtonClick = () => {
         console.log(postTitle);
         console.log(postURL);
@@ -88,7 +104,7 @@ export default function ProductPost() {
     return (
         <div className='product-post-container'>
             <div className="product-post-header">
-                <button className='back-button'>
+                <button className='back-button' onClick={handleBackClick}>
                     <Back />
                 </button>
                 <div className='product-post-text'>
@@ -133,6 +149,17 @@ export default function ProductPost() {
             <div className='product-post-select-place-container'>
                 <input className='product-post-select-place' placeholder='거래 희망 장소를 선택하세요.' defaultValue={postAddress}></input>
             </div>
+            <div className='product-sale-due-date'>
+                <div className='product-sale-due-date-text' >거래 마감일</div>
+                <div className='year-month-day'>
+                    <input className='due-date-placeholder' placeholder=' 년도'
+                        onChange={handleYearInputChange}
+                        value={postYear}></input>
+                    <input className='due-date-placeholder' placeholder=' 월' onChange={handleMonthInputChange} value={postMonth}></input>
+                    <input className='due-date-placeholder' placeholder=' 일' onChange={handleMonthInputChange} value={postDay}></input>
+                </div>
+            </div>
+
 
             <div>
                 <div className='product-post-button-container'>

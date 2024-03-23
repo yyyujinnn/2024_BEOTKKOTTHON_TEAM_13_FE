@@ -9,6 +9,9 @@ export const MyContextProvider = ({ children }) => {
     const [postContent, setPostContent] = useState(''); // 기본값으로 빈 문자열을 설정합니다.
     const [postPrice, setPostPrice] = useState(''); // 기본값으로 빈 문자열을 설정합니다.
     const [postPeople, setPostPeople] = useState(''); // 기본값으로 빈 문자열을 설정합니다.
+    const [postYear, setPostYear] = useState('');
+    const [postMonth, setPostMonth] = useState('');
+    const [postDay, setPostDay] = useState('');
 
     return (
         <MyContext.Provider value={{
@@ -17,7 +20,10 @@ export const MyContextProvider = ({ children }) => {
             postURL, setPostURL, 
             postPrice, setPostPrice, 
             postPeople, setPostPeople,
-            postContent, setPostContent
+            postContent, setPostContent,
+            postYear, setPostYear,
+            postMonth, setPostMonth,
+            postDay, setPostDay
         }}>
             {children}
         </MyContext.Provider>

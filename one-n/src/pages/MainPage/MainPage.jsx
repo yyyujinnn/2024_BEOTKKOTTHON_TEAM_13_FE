@@ -17,6 +17,10 @@ function MainPage() {
   
   const navigate = useNavigate();
   const [data, setData] = useState([]);
+
+  const [page, setPage] = useState(1);
+  const [products, setProducts] = useState([]);
+
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   // 회원가입 모달창
@@ -38,378 +42,7 @@ function MainPage() {
     setDropdownVisible(!dropdownVisible);
   };
 
-  const [products, setProducts] = useState([
-    {
-      "image": "/user-image/post/1.png",
-      "price": "4880",
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "5",
-      "type": "ingd",
-      "title": "감자 공동구매 합니다.",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    },
-    {
-      "image": "/user-image/post/1.png",
-      "price": "1210",
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "23",
-      "type": "ingd",
-      "title": "대파 공동구매 합니다.",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    },
-    {
-      "image": "/user-image/post/1.png",
-      "price": "1760",
-      "ingredients": [
-        "카레가루",
-        "당근",
-        "양파",
-        "후추",
-        "계란",
-        "마늘",
-        "오이",
-        "호루라기"
-      ],
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "45",
-      "type": "r_ingd",
-      "title": "샐로드 재료 공동구매 합니다.",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    },
-    {
-      "image": "/user-image/post/1.png",
-      "price": "4930",
-      "ingredients": [
-        "카레가루",
-        "당근",
-        "양파",
-        "후추",
-        "계란",
-        "마늘",
-        "오이",
-        "호루라기"
-      ],
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "13",
-      "type": "r_ingd",
-      "title": "김밥 재료 공동구매!",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    },
-    {
-      "image": "/user-image/post/1.png",
-      "price": "3360",
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "29",
-      "type": "ingd",
-      "title": "마늘 공동구매 합니다.",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    },
-    {
-      "image": "/user-image/post/1.png",
-      "price": "4210",
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "34",
-      "type": "ingd",
-      "title": "마늘 공동구매 합니다.",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    },
-    {
-      "image": "/user-image/post/1.png",
-      "price": "340",
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "46",
-      "type": "ingd",
-      "title": "양파 한 묶음 공동구매 합니다~",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    },
-    {
-      "image": "/user-image/post/1.png",
-      "price": "9780",
-      "ingredients": [
-        "카레가루",
-        "당근",
-        "양파",
-        "후추",
-        "계란",
-        "마늘",
-        "오이",
-        "호루라기"
-      ],
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "8",
-      "type": "r_ingd",
-      "title": "김밥 재료 공동구매!",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    },
-    {
-      "image": "/user-image/post/1.png",
-      "price": "7850",
-      "ingredients": [
-        "카레가루",
-        "당근",
-        "양파",
-        "후추",
-        "계란",
-        "마늘",
-        "오이",
-        "호루라기"
-      ],
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "9",
-      "type": "r_ingd",
-      "title": "오이소박이 요리 재료 공동구매 진행합니다!",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    },
-    {
-      "image": "/user-image/post/1.png",
-      "price": "2630",
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "49",
-      "type": "ingd",
-      "title": "마늘 공동구매 합니다.",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    },
-    {
-      "image": "/user-image/post/1.png",
-      "price": "3920",
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "10",
-      "type": "ingd",
-      "title": "감자 공동구매 합니다.",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    },
-    {
-      "image": "/user-image/post/1.png",
-      "price": "2520",
-      "ingredients": [
-        "카레가루",
-        "당근",
-        "양파",
-        "후추",
-        "계란",
-        "마늘",
-        "오이",
-        "호루라기"
-      ],
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "35",
-      "type": "r_ingd",
-      "title": "샐로드 재료 공동구매 합니다.",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    },
-    {
-      "image": "/user-image/post/1.png",
-      "price": "8400",
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "43",
-      "type": "ingd",
-      "title": "대파 공동구매 합니다.",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    },
-    {
-      "image": "/user-image/post/1.png",
-      "price": "9440",
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "22",
-      "type": "ingd",
-      "title": "고구마 공동구매 합니다!",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    },
-    {
-      "image": "/user-image/post/1.png",
-      "price": "610",
-      "ingredients": [
-        "카레가루",
-        "당근",
-        "양파",
-        "후추",
-        "계란",
-        "마늘",
-        "오이",
-        "호루라기"
-      ],
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "16",
-      "type": "r_ingd",
-      "title": "카레 재료 공둥구매 진행합니다!",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    },
-    {
-      "image": "/user-image/post/1.png",
-      "price": "8760",
-      "ingredients": [
-        "카레가루",
-        "당근",
-        "양파",
-        "후추",
-        "계란",
-        "마늘",
-        "오이",
-        "호루라기"
-      ],
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "42",
-      "type": "r_ingd",
-      "title": "제육볶음 재료 공동구매 합니다.",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    },
-    {
-      "image": "/user-image/post/1.png",
-      "price": "700",
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "10",
-      "type": "ingd",
-      "title": "감자 공동구매 합니다.",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    },
-    {
-      "image": "/user-image/post/1.png",
-      "price": "1980",
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "17",
-      "type": "ingd",
-      "title": "고구마 공동구매 합니다!",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    },
-    {
-      "image": "/user-image/post/1.png",
-      "price": "920",
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "4",
-      "type": "ingd",
-      "title": "마늘 공동구매 합니다.",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    },
-    {
-      "image": "/user-image/post/1.png",
-      "price": "50",
-      "location": {
-        "latiude": "126.932922",
-        "longitude": "36.772158"
-      },
-      "id": "18",
-      "type": "ingd",
-      "title": "대파 공동구매 합니다.",
-      "user": {
-        "nickname": "윤준영",
-        "rating": "89"
-      }
-    }
-  ]);
+
 
 
   useEffect(() => {
@@ -429,26 +62,38 @@ function MainPage() {
       });
   }, []);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get('http://20.39.188.154:8080/post/list', {
-  //         params: {
-  //           type: 'all',
-  //           bcode: '',
-  //           keyword: '',
-  //           page: 1
-  //         }
-  //       });
-  //       setProducts(response.data);
-  //       console.log(response.data);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
+  const getFetchData = () => {
+    console.log("요청을 보냈습니다");
+    const url = `http://20.39.188.154:8080/post/list?type=all&bcode=&keyword=&page=${page}`;
+    console.log(url);
+    fetch(url)
+      .then((res) => res.json())
+      .then((product) => setProducts((prev) => [...prev, ...product]));
+  };
 
-  //   fetchData();
-  // }, []);
+  useEffect(() => getFetchData(), [page]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const onScroll = () => {
+    console.log("실행됨");
+    const scrollTop = document.documentElement.scrollTop;
+    const clientHeight = document.documentElement.clientHeight;
+    const scrollHeight = document.documentElement.scrollHeight;
+    console.log(scrollTop);
+    console.log(clientHeight);
+    console.log(scrollHeight);
+
+    if (scrollTop + clientHeight >= scrollHeight) {
+      console.log("스크롤 끝");
+      setPage((prev) => prev + 1);
+    }
+  };
+
+
 
   return (
     <div className='mainpage-container'>
@@ -483,8 +128,9 @@ function MainPage() {
         <div className='gredient'>
           <div className='recipe-text'>
             <div className='grd-name'> 공구 중인 식품 </div>
-            <Link to='/explore' className='a'>
-              <div className='more' > 더보기 <img src={next} alt='next' /> </div>
+
+            <Link to='/more-product' className='link-style' >
+              <div className='more'> 더보기 <img src={next} alt='next' /> </div>
             </Link>
           </div>
 

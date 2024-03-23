@@ -12,6 +12,8 @@ const Map = () => {
     const [products, setProducts] = useState([]);
     const [marker, setMarker] = useState(null);
     const [myLocation, setMyLocation] = useState(false);
+    const [page, setPage] = useState(1);
+    const [bottomPanel, setBottomPanel] = useState(null);
 
     const moveToUserLocation = () => {
         if (myLocation) {
@@ -23,28 +25,42 @@ const Map = () => {
 
     };
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                // Axios를 사용하여 데이터 요청
-                const response = await axios.get('http://20.39.188.154:8080/post/list', {
-                    params: {
-                        type: 'all',
-                        bcode: '',
-                        keyword: '',
-                        page: 1
-                    }
-                });
-                // 받아온 데이터를 LocationData로 설정
-                setProducts(response.data);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
+    const getFetchData = () => {
+        console.log("요청을 보냈습니다");
+        const url = `http://20.39.188.154:8080/post/list?type=all&bcode=&keyword=&page=${page}`;
+        console.log(url);
+        fetch(url)
+            .then((res) => res.json())
+            .then((product) => setProducts((prev) => [...prev, ...product]));
+    };
 
-        // fetchData 함수 호출
-        fetchData();
+    useEffect(() => getFetchData(), [page]);
+
+
+    useEffect(() => {
+        const bottomPanelElement = document.querySelector(".bottom-panel");
+        setBottomPanel(bottomPanelElement);
     }, []);
+    
+    useEffect(() => {
+        if (!bottomPanel) return;
+    
+        bottomPanel.addEventListener("scroll", onScrollBottomPanel);
+        return () => bottomPanel.removeEventListener("scroll", onScrollBottomPanel);
+    }, [bottomPanel, page]);
+
+
+    const onScrollBottomPanel = () => {
+        const bottomPanel = document.querySelector(".bottom-panel");
+        const scrollTop = bottomPanel.scrollTop;
+        const clientHeight = bottomPanel.clientHeight;
+        const scrollHeight = bottomPanel.scrollHeight;
+
+        if (scrollTop + clientHeight >= scrollHeight) {
+            // bottom panel이 스크롤된 상태에서 스크롤이 끝까지 도달하면 새로운 페이지 로드
+            setPage(prevPage => prevPage + 1);
+        }
+    };
 
 
     useEffect(() => {
@@ -67,7 +83,7 @@ const Map = () => {
                 // 마커 추가
                 products.forEach(markerData => {
                     console.log(markerData);
-                    console.log(markerData.location.latiude, markerData.location.longitude)
+                    console.log(markerData.location.latitude, markerData.location.longitude);
                     const position = new window.kakao.maps.LatLng(markerData.location.latiude, markerData.location.longitude);
 
                     // 원의 옵션 설정

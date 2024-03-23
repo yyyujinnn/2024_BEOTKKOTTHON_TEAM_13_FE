@@ -1,33 +1,31 @@
 .sale-product {
+
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 16px;
     position: relative;
-
 }
 
 .product-details {
-    display: flex;
+  display: flex;
 }
 
 .product-image {
-    width: 100px;
-    height: 100px;
-    margin-right: 20px;
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
 }
 
 .product-details h2 {
-    margin: 0;
-
+  margin: 0;
 }
 
-.products {
-    margin-top: 16px;
-}
+
+.products {}
 
 .product-item {
-    margin-top: 8px;
+    margin-top: 16px;
     display: inline-block;
     padding: 6px 12px;
     justify-content: center;
@@ -43,77 +41,146 @@
     line-height: 22px;
     letter-spacing: -0.14px;
     margin-right: 8px;
+
 }
 
 .sale-product-title {
-    color: var(--black-10, #191919);
-    font-family: Pretendard;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    letter-spacing: -0.15px;
-    width: 170px;
-
+  color: var(--black-10, #191919);
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.15px;
+  width: 170px;
 }
 
 .sale-product-price {
-    color: var(--black-10, #191919);
-    font-family: Pretendard;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: -0.2px;
-    margin-top: 8px;
+  color: var(--black-10, #191919);
+  font-family: Pretendard;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: -0.2px;
+  margin-top: 8px;
 }
 
 .sale-product-satisfaction-container {
-    margin-top: 16px;
-    display: flex;
-    justify-content: space-between;
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .sale-product-satisfaction-bar {
-    margin-top: 5px;
-    width: 96px;
-    /* 바의 너비 설정 */
-    height: 8px;
-    /* 바의 높이 설정 */
-    background-color: #D9D9D9;
-    /* 바의 배경색 설정 */
-    border-radius: 5px;
-    /* 바의 모서리를 둥글게 만듭니다. */
-    overflow: hidden;
-    /* 만족도를 나타내는 바의 내용이 바깥으로 넘치지 않도록 합니다. */
+  margin-top: 5px;
+  width: 96px;
+  /* 바의 너비 설정 */
+  height: 8px;
+  /* 바의 높이 설정 */
+  background-color: #d9d9d9;
+  /* 바의 배경색 설정 */
+  border-radius: 5px;
+  /* 바의 모서리를 둥글게 만듭니다. */
+  overflow: hidden;
+  /* 만족도를 나타내는 바의 내용이 바깥으로 넘치지 않도록 합니다. */
 }
 
 .sale-product-satisfaction-fill {
-    height: 100%;
-    background-color: #F0D135;
+  height: 100%;
+  background-color: #f0d135;
 }
 
 .sale-product-satisfaction {
-    text-align: right;
-    color: #262626;
-    font-family: Pretendard;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    letter-spacing: -0.14px;
-    margin-right: 16px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    position: absolute;
-    right: 0;
-
+  text-align: right;
+  color: #262626;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.14px;
+  margin-right: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  position: absolute;
+  right: 0;
 }
 
 .sale-product-user-name {
+  color: var(--black-20, #333);
+  font-family: Pretendard;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.14px;
+}
+
+.sale-product-satisfaction-num {
+  color: var(--black-20, #333);
+  text-align: center;
+  font-family: ABeeZee;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.12px;
+}
+
+
+.sale-product-text-pick {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+
+}
+
+.sale-product-pick-button{
+    background-color: transparent;
+    border: none;
+}
+
+
+
+.date-people {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.due-date {
+    display: flex;
+    padding: 4px 8px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    align-self: stretch;
+    border-radius: 4px;
+    background: var(--brand_color, #FFDC25);
+    color: #CD8C0B;
+
+    /* b12_r */
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+
+}
+
+.cur-people {
+    margin-left: 8px;
+    display: flex;
+    padding: 4px 8px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 4px;
+    background: var(--grey-90, #E6E6E6);
     color: var(--black-20, #333);
+    text-align: center;
     font-family: Pretendard;
     font-size: 14px;
     font-style: normal;
@@ -123,24 +190,13 @@
 
 }
 
-.sale-product-satisfaction-num {
-    color: var(--black-20, #333);
-    text-align: center;
-    font-family: ABeeZee;
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    letter-spacing: -0.12px;
-}
-
 .sale-product-pick-button {
-    padding: 0px;
-    border: none;
-    background-color: transparent;
-    position: absolute;
-    right: 0;
-    margin-top: 2px;
-    margin-right: 16px;
-
+  padding: 0px;
+  border: none;
+  background-color: transparent;
+  position: absolute;
+  right: 0;
+  margin-top: 2px;
+  margin-right: 16px;
 }
+
