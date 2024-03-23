@@ -22,9 +22,11 @@
 }
 
 .grid-container {
+  height: 700px;
   margin: 16px 16px 0 16px;
   display: flex;
   gap: 8px;
+  max-height: 700px;
   overflow-y: auto;
 }
 

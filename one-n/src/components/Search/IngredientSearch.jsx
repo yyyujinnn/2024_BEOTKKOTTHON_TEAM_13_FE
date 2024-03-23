@@ -15,8 +15,6 @@ export default function IngredientSearch({ product }) {
         ? product.filter(item => item.type === 'ingd')
         : product.filter(item => item.type === 'r_ingd');
 
-    
-
     return (
         <div className="search-select-container">
             <div className='search-select'>
@@ -36,9 +34,13 @@ export default function IngredientSearch({ product }) {
                 </div>
             </div>
             {/* 조건에 따라 다르게 렌더링 */}
-            {filteredProducts.map((item, index) => (
-                <SaleProduct key={index} product={item} />
-            ))}
+            {filteredProducts.length > 0 ? (
+                filteredProducts.map((item, index) => (
+                    <SaleProduct key={index} product={item} />
+                ))
+            ) : (
+                <p className="none-search">검색 결과가 없습니다.</p>
+            )}
         </div>
     );
 }
