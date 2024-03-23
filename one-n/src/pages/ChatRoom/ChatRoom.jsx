@@ -33,13 +33,20 @@ function ChatRoom() {
   const [ws, setWs] = useState(null);
 
   const [signinData, setSigninData] = useState(null);
+  const [nickname, setNickname ] = useState(null);
 
   useEffect(() => {
-    const storedSigninData = sessionStorage.getItem("signinData");
+    const storedSigninData = sessionStorage.getItem('signinData');
     if (storedSigninData) {
       setSigninData(JSON.parse(storedSigninData));
-    }
-  }, []);
+
+      const storedNickname = sessionStorage.getItem('nickname');
+      if (storedNickname) {
+        setNickname(storedNickname);
+      }
+      console.log(signinData);
+    }  
+  }, [signinData]);
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
@@ -68,83 +75,63 @@ function ChatRoom() {
 
   const onClickReview = () => {
     setReviewModalOpen(false);
-  };
+  }
 
   // 채팅방 전체 메시지
   useEffect(() => {
-    const TitleapiUrl = `http://20.39.188.154:8080/chats/list?session_id=test_session_id`;
-    const apiUrl = `http://20.39.188.154:8080/chat/init-messages?id=${chatId}&session_id=test_session_id`;
-
-    axios
-      .get(TitleapiUrl)
+    
+    const apiUrl = `http://20.39.188.154:8080/chat/init-messages?id=${chatId}&session_id=${signinData}`;
+   
+    axios.get(apiUrl)
       .then((response) => {
-        const chatRooms = response.data;
-        // chatId 일치하는 채팅방 매칭, 해당 채팅방의 title 가져오기
-        const targetChatRoom = chatRooms.find(
-          (room) => room.chat_id === chatId
-        );
-        if (targetChatRoom) {
-          const lastMessage = targetChatRoom.last_message;
-          console.log(lastMessage);
-          setTitleData(lastMessage);
-        } else {
-          console.error(`Chat room with chatId ${chatId} not found.`);
-        }
-      })
-      .catch((error) => {
-        console.error("API 요청 에러:", error);
-      });
-
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        const updatedData = response.data.map((item) => ({
+         const updatedData = response.data.messages.map(item => ({
           ...item,
-          profile_image: `http://20.39.188.154${item.profile_image}`,
+          profile_image: `http://20.39.188.154${item.profile_image}` // 이미지의 절대 경로 추가
         }));
         setData(updatedData);
+        setTitleData(response.data.post_title);
       })
       .catch((error) => {
         console.error("API 요청 에러:", error);
       });
-  }, [chatId]);
+    }, [chatId, signinData]);
 
-  // 웹 소켓 연결 설정
-  useEffect(() => {
-    const ws = new WebSocket("ws://20.39.188.154:8080/ws");
-    setWs(ws);
-
-    // 컴포넌트가 unmount 될 때 웹 소켓 연결 해제
-    return () => {
-      ws.close();
-    };
-  }, []);
-
-  // 메시지 수신 이벤트 핸들러
-  useEffect(() => {
-    if (!ws) return;
-
-    ws.onmessage = (event) => {
-      const message = JSON.parse(event.data);
-      // 받은 메시지를 기존 메시지 데이터에 추가
-      setData((prevData) => [...prevData, message]);
-    };
-  }, [ws]);
-
-  const sendMessage = () => {
-    if (ws && newMessage.trim() !== "") {
-      const message = {
-        type: "MESSAGE_TEXT",
-        sessionId: "세션 ID",
-        chatId: chatId,
-        nickname: "해당 메시지 작성자 닉네임",
-        profile_image: "해당 메시지 작성자 프로필 이미지 url",
-        message: newMessage.trim(),
+      // 웹 소켓 연결 설정
+      useEffect(() => {
+        const ws = new WebSocket("ws://20.39.188.154:8080/ws");
+        setWs(ws);
+        
+        // 컴포넌트가 unmount 될 때 웹 소켓 연결 해제
+        return () => {
+          ws.close();
+        };
+      }, []); 
+      
+      // 메시지 수신 이벤트 핸들러
+      useEffect(() => {
+        if (!ws) return;
+    
+        ws.onmessage = (event) => {
+          const message = JSON.parse(event.data);
+          // 받은 메시지를 기존 메시지 데이터에 추가
+          setData(prevData => [...prevData, message]);
+        };
+      }, [ws]);
+      
+      const sendMessage = () => {
+        if (ws && newMessage.trim() !== '') {
+          const message = {
+            type: "MESSAGE_TEXT",
+            sessionId: "세션 ID",
+            chatId: chatId,
+            nickname: "해당 메시지 작성자 닉네임",
+            profile_image: "해당 메시지 작성자 프로필 이미지 url",
+            message: newMessage.trim()
+          };
+          ws.send(JSON.stringify(message));
+          setNewMessage('');
+        }
       };
-      ws.send(JSON.stringify(message));
-      setNewMessage("");
-    }
-  };
 
   return (
     <div>
@@ -237,16 +224,11 @@ function ChatRoom() {
                     <div style={{ margin: "16px 16px 0 16px" }}> 만족도</div>
                     <ReviewSelect /> {/* 만족도 슬라이더 */}
                   </div>
-
-                  <button
-                    style={ReviewModalStyles.button}
-                    onClick={() => {
-                      setCloseModalOpen(true);
-                    }}
-                  >
-                    {" "}
-                    등록하기{" "}
-                  </button>
+                  
+                  <button style={ReviewModalStyles.button}
+                  onClick={() => {
+                    setCloseModalOpen(true);
+                  }}> 등록하기 </button>
                   <ReactModal
                     isOpen={closeModalOpen}
                     style={CloseModalStyles}
@@ -275,79 +257,40 @@ function ChatRoom() {
         </div>
       </div>
 
-      <div className="room-body">
+        <div className='room-body'>
+          
         {/* 채팅메세지 */}
-        <div className="chat-room-box">
-          {data.map((item, index) => (
-            <div className="other" key={index}>
-              {item.type === "NOTICE" ? (
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "20px",
-                    alignItems: "center",
-                    margin: "8px 0",
-                    fontSize: "12px",
-                    color: "#8593A8",
-                    textAlign: "center",
-                  }}
-                >
-                  <div
-                    style={{
-                      flex: "1",
-                      borderBottom: "1px solid #8593A8",
-                      opacity: "0.5",
-                    }}
-                  ></div>
-                  {item.message}
-                  <div
-                    style={{
-                      flex: "1",
-                      borderBottom: "1px solid #8593A8",
-                      opacity: "0.5",
-                    }}
-                  ></div>
+        <div>
+        {data.map((item, index) => (
+          <div className='other' key={index}>
+          {item.type === 'NOTICE' ? (
+            <div style={{ display:'flex', gap:'20px', alignItems:'center', margin: '8px 0', fontSize: '12px', color: '#8593A8', textAlign: 'center' }}>
+              <div style={{ flex: '1', borderBottom: '1px solid #8593A8', opacity:'0.5' }}></div>
+              {item.message}
+              <div style={{ flex: '1', borderBottom: '1px solid #8593A8', opacity:'0.5' }}></div>
+            </div>
+          ) : (
+            <>
+              {index === 0 || data[index - 1].nickname !== item.nickname ? (
+                <div style={{ display: 'flex', justifyContent: 'flex-start', margin: '8px 0' }}>
+                  <img src={item.profile_image} style={{ width: '35px', height: '35px' }} />
+                  <div style={{ marginLeft: '5px' }}>
+                    <div style={{ fontSize: '14px', marginBottom: '5px' }}> {item.nickname} </div>
+                    <div className='message'> {item.message} </div>
+                  </div>
                 </div>
               ) : (
-                <>
-                  {index === 0 || data[index - 1].nickname !== item.nickname ? (
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "flex-start",
-                        margin: "8px 0",
-                      }}
-                    >
-                      <img
-                        src={item.profile_image}
-                        style={{ width: "35px", height: "35px" }}
-                      />
-                      <div style={{ marginLeft: "5px" }}>
-                        <div style={{ fontSize: "14px", marginBottom: "5px" }}>
-                          {" "}
-                          {item.nickname}{" "}
-                        </div>
-                        <div className="message"> {item.message} </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "flex-start",
-                        margin: "8px 0",
-                      }}
-                    >
-                      <div style={{ marginLeft: "40px" }}>
-                        <div className="message"> {item.message} </div>
-                      </div>
-                    </div>
-                  )}
-                </>
+                <div style={{ display: 'flex', justifyContent: 'flex-start', margin: '8px 0' }}>
+                  <div style={{ marginLeft: '40px' }}>
+                    <div className='message'> {item.message} </div>
+                  </div>
+                </div>
               )}
-            </div>
-          ))}
+            </>
+          )}
         </div>
+        ))}
+      </div>  
 
         <div className="input-msg">
           <input

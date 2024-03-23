@@ -1,8 +1,8 @@
 // 레시피 등록페이지
-import React, { useState, useEffect } from "react";
-import ReactModal from "react-modal";
-import { useNavigate } from "react-router-dom";
-import "./RecipeReg.css";
+import React, { useState, useEffect } from 'react';
+import ReactModal from 'react-modal';
+import { useNavigate } from 'react-router-dom';
+import './RecipeReg.css'
 
 import previous from "../../assets/icons/previous.svg";
 import quit from "../../assets/icons/quit.png";

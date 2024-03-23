@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import './MainPage.css';
-import logo from '../../assets/logo/logo.png';
-import search from '../../assets/icons/search.svg';
-import mypage from '../../assets/icons/mypage.svg';
 import next from '../../assets/icons/next.svg';
 import plus from '../../assets/icons/plus.png';
 import chef from '../../assets/icons/chef.png';
@@ -40,6 +37,7 @@ function MainPage() {
       setIsSignupModalOpen(true);
     } else {
       setSigninData(JSON.parse(storedSigninData));
+      console.log('로그인 정보:', JSON.parse(storedSigninData));
     }
   }, []);
 
@@ -194,7 +192,7 @@ function MainPage() {
           )}
         </div>
       </div>
-    </div>
+      </div>
   );
 }
 

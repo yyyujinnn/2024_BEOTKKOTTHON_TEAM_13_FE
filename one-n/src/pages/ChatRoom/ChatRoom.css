@@ -17,9 +17,20 @@
   display: flex;
 }
 
-.rt-header img {
-  margin-left: 16px;
-  cursor: pointer;
+.product{
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+    gap: 16px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.product-img{
+    width: 40px;
+    height: 40px;
+    margin-left: 16px;
+    border-radius: 4px;
+    background-color: #D9D9D9;
 }
 
 .product {
@@ -49,11 +60,24 @@
 }
 
 .dropdown {
-  width: 76px;
-  padding: 12px 8px 12px 4px;
-  margin: -4px 0 0 auto;
-  border-radius: 8px 0 8px 8px;
-  background: #e6e6e6;
+    width: 76px;
+    padding: 12px 8px 12px 4px;
+    margin: -4px 0 0 auto;
+    border-radius: 8px 0 8px 8px;
+    background: #E6E6E6;
+  }
+
+
+.dropdown button{    
+    display: flex;
+    margin-left: auto;
+    padding: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    border-radius: 8px;
+    color: #191919;
+    background-color: #FFDC25;
 }
 
 .dropdown button {
@@ -84,6 +108,31 @@
   font-size: 14px;
   font-weight: 400;
   color: #191919;
+}
+.my {
+    display: flex;
+    padding: 10px 14px;
+    border-radius: 8px 0 8px 8px;
+    background-color: #FFDC25; 
+    font-size: 14px;
+    font-weight: 400;
+    color: #191919;   
+  }
+
+.input-msg{
+    position: absolute;
+    bottom: 42px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 311px;
+    height: 56px;
+    padding: 0px 16px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.12);
+}
+.input-msg img{    
+    cursor: pointer;
 }
 
 .input-msg {
