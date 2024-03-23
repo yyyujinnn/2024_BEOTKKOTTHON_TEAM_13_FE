@@ -1,3 +1,6 @@
+
+import MoreProductPage from './pages/MoreProductPage/MoreProductPage';
+import CheckLocationPage from './pages/CheckLocationPage/CheckLocationPage';
 import React from "react";
 import { NavBar } from "./components/NavBar/NavBar"
 import Map from "./pages/Map/Map";
@@ -18,13 +21,13 @@ import RecipeReg from "./pages/RecipeReg/RecipeReg";
 import SearchPage from "./pages/SearchPage/SearchPage";
 
 
+
 function App() {
   return (
     
     <BrowserRouter>
       <MyContextProvider>
         <div className="App">
-
           <Routes>
             <Route path="/product-detail/:productId" element={<ProductDetail />} />
             <Route path="/reproduct-detail/:productId" element={<ReProductDetail />} />
@@ -35,13 +38,15 @@ function App() {
             <Route path="/scrap" element={<Scrap />} />
             <Route path="/" element={<MainPage />} />
             <Route path="/chat" element={<ChatList/>} />
+            <Route path='/explore' element={<Explore/>} />
+            <Route path='/search' element={<SearchPage/>}/>
+            <Route path='/more-product' element={<MoreProductPage/>}/>
+            <Route path='/check-location' element={<CheckLocationPage/>}/>
             <Route path="/chatroom/:chatId" element={<ChatRoom/>} />
             <Route path="/explore" element={<Explore/>} />
             <Route path="/recipe/:recipeId" element={<RecipeDetail/>} />
             <Route path="/recipeRegister" element={<RecipeReg/>} />
-            <Route path="/search" element={<SearchPage/>}/>
           </Routes>
-
         </div>
       </MyContextProvider>
       {!window.location.pathname.startsWith("/chatroom/") &&

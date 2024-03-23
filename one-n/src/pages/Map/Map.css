@@ -34,9 +34,10 @@ h1 {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 40%;
   background-color: #ffffff;
-  overflow-y: scroll;
+  overflow-y: auto;
+  /* 세로 스크롤이 필요할 때만 스크롤이 나타나도록 설정 */
+  height: 40%;
   overflow-x: hidden;
   padding-top: 16px;
   padding-bottom: 16px;
@@ -51,7 +52,7 @@ h1 {
 .set-location-image {
   width: 34px;
   height: 36px;
-  
+
 }
 
 .set-location-button {
@@ -71,6 +72,6 @@ h1 {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.16);
 }
 
-.map-products{
+.map-products {
   margin-bottom: 50px;
 }

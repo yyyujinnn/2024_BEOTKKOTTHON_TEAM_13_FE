@@ -21,6 +21,9 @@ const Explore = () => {
   };
 
   useEffect(() => {
+
+    // API 엔드포인트 URL 설정
+   
     const apiUrl = `http://20.39.188.154:8080/recipe/list?keyword=${searchKeyword}&page=1`;
 
     axios.get(apiUrl)

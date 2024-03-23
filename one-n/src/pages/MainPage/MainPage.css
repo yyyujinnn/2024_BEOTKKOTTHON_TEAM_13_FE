@@ -1,3 +1,4 @@
+
 .header-icon {
   /* width: 375px; */
   height: 40px;
@@ -7,6 +8,7 @@
   margin-top: 15px;
   padding-bottom: 15px; /*dh*/
   border-bottom: 0.5px solid lightgray; /* 상단에 실선 추가 */
+
 }
 
 .logo-img {
@@ -21,10 +23,14 @@
 }
 
 .main-body {
+
+    width: 100%;
+    max-width: 604px;
   height: 645px;
   width: 100%;
   max-height: 645px;
   overflow-y: auto;
+
 }
 
 /* 추천레시피 */
@@ -122,10 +128,12 @@
 }
 
 /* 핫한 식품 */
-.gredient {
-  margin-top: 50px;
-  padding: 0 16px;
-}
+
+.gredient{
+    margin-top: 50px;
+    padding: 0 16px ;
+   
+
 
 .saleGrd {
   display: flex;
@@ -188,6 +196,12 @@
   margin-right: 0; /* 마지막 해시태그의 오른쪽 마진 제거 */
 }
 
+
+
+.link-style {
+    text-decoration: none;
+  }
+
 .mainpage-container {
   overflow-y: hidden;
   height: 100vh;
@@ -223,3 +237,4 @@
   background-color: #fff;
   text-decoration: none;
 }
+
