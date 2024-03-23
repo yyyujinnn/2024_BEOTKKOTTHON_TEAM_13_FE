@@ -15,21 +15,37 @@ function RecipeDetail() {
     const { recipeId } = useParams();
     
     const [recipe, setRecipe] = useState(null);
+    const [formDate, setFormDate] = useState('');
     const [picked, setPicked] = useState(false);
+    const [like, setLike] = useState(0);
 
     const [signinData, setSigninData] = useState(null);
+    
+    useEffect(() => {
+      const storedSigninData = sessionStorage.getItem('signinData');
+      if (storedSigninData) {
+        setSigninData(JSON.parse(storedSigninData));
+      }
+    }, []);
 
-  useEffect(() => {
-    const storedSigninData = sessionStorage.getItem('signinData');
-    if (storedSigninData) {
-      setSigninData(JSON.parse(storedSigninData));
-    }
-  }, []);
-
-
+    // 레시피 좋아요
     const togglePicked = () => {
-        setPicked(!picked);
-    }
+      const PickapiUrl = 'http://20.39.188.154:8080/user/likes';
+      const userData = {
+        session_id: `${signinData}`,
+        type: "recipe",
+        id: `${recipeId}`
+    };
+  
+      axios.post(PickapiUrl, userData)
+        .then((response) => {
+          setLike((prevCount) => (picked ? prevCount - 1 : prevCount + 1));
+          setPicked(!picked);
+        })
+        .catch((error) => {
+          console.error('API 요청 에러:', error);
+        });
+      };
 
     useEffect(() => {
       const storedBcode = sessionStorage.getItem('myBcode');
@@ -41,11 +57,22 @@ function RecipeDetail() {
                 thumbnail_image: `http://20.39.188.154${response.data.thumbnail_image}`
             };
             setRecipe(updatedData);
+            
+            // 날짜 계산
+            const date = new Date(recipe.created_at);
+            const yy = date.getFullYear().toString().slice(-2);
+            const mm = (date.getMonth() + 1).toString().padStart(2, '0');
+            const dd = date.getDate().toString().padStart(2, '0');
+            
+            const formdate = `${yy}.${mm}.${dd}`;
+            setFormDate(formdate);
+            setLike(response.data.likes_count);
             })
             .catch(error => {
                 console.error('API 요청 에러:', error);
             });
     }, [recipeId]);
+  
 
     if (!recipe) {
         return <div>Loading...</div>;
@@ -64,14 +91,15 @@ function RecipeDetail() {
             <div className='user'>
                 <img src={user} />
                 <div>{recipe.user.nickname}</div>
+                <div style={{color: '#989898', fontSize: '12px', fontWeight:'400' }}>{formDate}</div>
             </div>
             
 
             <div className='recipe-title'>
-                <div > {recipe.title} </div>
+                <div> {recipe.title} </div>
                 <div className='indicate'>
                   <img src={picked ? FiledPick : pick} onClick={togglePicked} style={{width: 20}} className="pick" />
-                   {recipe.likes_count}
+                   {like}
                 </div>
             </div>
             
@@ -81,7 +109,7 @@ function RecipeDetail() {
                 <>
                   <div key={ingredient.id}>
                     {ingredient.name} <img src={arrow} />
-                </div> {ingredient.id}
+                </div> {ingredient.amount}
                 </>
                 ))}
             </div>

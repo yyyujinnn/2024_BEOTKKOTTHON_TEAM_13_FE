@@ -50,13 +50,7 @@ function App() {
           </Routes>
         </div>
       </MyContextProvider>
-      {!window.location.pathname.startsWith("/chatroom/") &&
-      !window.location.pathname.startsWith("/map") &&
-      !window.location.pathname.startsWith("/product-detail/") &&
-      !window.location.pathname.startsWith("/product-post/") &&
-      !window.location.pathname.startsWith("/recipe/") &&
-      !window.location.pathname.startsWith("/recipeRegister/") 
-      && <NavBar />}
+      <NavBar />
     </BrowserRouter >
 
   );
