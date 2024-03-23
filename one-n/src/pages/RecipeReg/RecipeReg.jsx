@@ -1,6 +1,7 @@
 // 레시피 등록페이지
 import React, { useState } from 'react';
 import ReactModal from 'react-modal';
+import { useNavigate } from 'react-router-dom';
 import './RecipeReg.css'
 
 import previous from '../../assets/icons/previous.svg';
@@ -13,6 +14,7 @@ import { PlusGrd } from '../../components/Recipe/PlusGrd';
 
 function RecipeReg() {
 
+  const navigate = useNavigate();
     // 사진 업로드
     const [image, setImage] = useState(null);
 
@@ -68,7 +70,7 @@ function RecipeReg() {
                         임시저장되지 않습니다.
                     </h4>
                     <div style={{ display:"flex", gap:"16px" }}>
-                        <button onClick={onClickclose} style={{...CloseModalStyles.button, background:"#FFF", border:"1px solid #D9D9D9"}}> 취소하기 </button>
+                        <button onClick={()=> navigate(-1)} style={{...CloseModalStyles.button, background:"#FFF", border:"1px solid #D9D9D9"}}> 취소하기 </button>
                         <button onClick={onClickclose} style={CloseModalStyles.button}> 계속하기 </button>
                     </div>
                   </div>

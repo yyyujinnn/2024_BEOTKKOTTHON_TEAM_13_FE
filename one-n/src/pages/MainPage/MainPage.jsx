@@ -5,16 +5,24 @@ import logo from '../../assets/logo/logo.png';
 import search from '../../assets/icons/search.svg';
 import mypage from '../../assets/icons/mypage.svg';
 import next from '../../assets/icons/next.svg';
-import like from '../../assets/icons/like.svg';
-import location from '../../assets/icons/location.svg';
-import level from '../../assets/icons/level.svg';
+import plus from '../../assets/icons/plus.png';
+import chef from '../../assets/icons/chef.png';
+import cart from '../../assets/icons/cart.png';
 import { ThrumnailRecipe } from '../../components/Recipe/ThrumnailRecipe';
 import SaleProduct from '../../components/SaleProduct/SaleProduct';
-import { NavBar } from '../../components/NavBar/NavBar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function MainPage() {
+  
+  const navigate = useNavigate();
+
   const [data, setData] = useState([]);
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+
+  const toggleDropup = () => {
+    setDropdownVisible(!dropdownVisible);
+  };
+
   const [products, setProducts] = useState([
     {
       "image": "/user-image/post/1.png",
@@ -445,7 +453,9 @@ function MainPage() {
         <div className='title'>
           <div className='recipe-text'>
             <div className='recipe-name'> 레시피 둘러보기 </div>
-            <div className='more'> 더보기 <img src={next} alt='next' /> </div>
+            <Link to='/explore' className='a'>
+              <div className='more'> 더보기 <img src={next} alt='next' /> </div>
+            </Link>
           </div>
 
           <ThrumnailRecipe data={data} />
@@ -454,7 +464,9 @@ function MainPage() {
         <div className='gredient'>
           <div className='recipe-text'>
             <div className='grd-name'> 공구 중인 식품 </div>
-            <div className='more'> 더보기 <img src={next} alt='next' /> </div>
+            <Link to='/explore' className='a'>
+              <div className='more' > 더보기 <img src={next} alt='next' /> </div>
+            </Link>
           </div>
 
           <div className='sale-gredient-container'>
@@ -465,8 +477,15 @@ function MainPage() {
             )}
           </div>
         </div>
+      
+        <img src={plus} className='plus' onClick={toggleDropup} />
+        {dropdownVisible && (
+            <div className='dropup'>
+              <Link to='/recipeReg' className='link-style'><img src={chef} alt='chef'/> 레시피 </Link>
+              <Link to='/product-post' className='link-style' style={{marginTop:'8px'}}><img src={cart} alt='cart'/> 공동구매 </Link>
+            </div>
+        )}
       </div>
-      <NavBar />
     </div>
   );
 }

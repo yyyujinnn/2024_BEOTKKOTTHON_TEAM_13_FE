@@ -1,51 +1,83 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 import ReactModal from 'react-modal';
 import './ChatRoom.css'
 
 import previous from '../../assets/icons/previous.svg'
-import next from '../../assets/icons/next.svg'
 import down from '../../assets/icons/down.png'
 import exit from '../../assets/icons/exit.png'
-import menu from '../../assets/icons/menu.png'
 import img from '../../assets/icons/img.png'
 import send from '../../assets/icons/send.png'
 import door from '../../assets/icons/door.png';
 import save from '../../assets/icons/save.png';
 
-import { SellList } from '../../components/Chat/SellList';
 import { ReviewSelect } from '../../components/Review/ReviewSelect';
 
 function ChatRoom() {
+  const navigate = useNavigate();
+  const { chatId } = useParams();
+
+  const [data, setData] = useState([]);
+  const [Exit, setExit] = useState(null);
 
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [rounded, setRounded] = useState(false);
+  
   const [exitModalOpen, setExitModalOpen] = useState(false);
   const [reviewModalOpen, setReviewModalOpen] = useState(false);  
   const [closeModalOpen, setCloseModalOpen] = useState(false);
-  const [level, setLevel] = useState(0);
-
 
   const toggleDropdown = () => {
     setDropdownVisible(!dropdownVisible);
+    setRounded(!rounded); 
   };
 
+  // 채팅방 퇴장
   const onClickExit = () => {
-    setExitModalOpen(false);
+    const apiUrl = 'http://20.39.188.154:8080/chat/exit-user';
+     
+    axios.post(apiUrl)
+      .then((response) => {
+        setExit(response.data);
+      })
+      .catch((error) => {
+        console.error('API 요청 에러:', error);
+      });
+    
+    navigate(-1);
   }
 
   const onClickclose = () => {
-    setCloseModalOpen(false);
-  }
+    setExitModalOpen(false);
+  };
 
   const onClickReview = () => {
     setReviewModalOpen(false);
   }
 
+  // 채팅방 전체 메시지
+  useEffect(() => {
+    const apiUrl = `http://20.39.188.154:8080/chat/init-messages?id=${chatId}&session_id=test_session_id`;
+   
+    axios.get(apiUrl)
+      .then((response) => {
+        const updatedData = response.data.map(item => ({
+        ...item,
+        profile_image: `http://20.39.188.154${item.profile_image}`
+      }));
+      setData(updatedData);
+      })
+      .catch((error) => {
+        console.error('API 요청 에러:', error);
+      });
+    }, [chatId]);
 
   return (
     <div>
         <div className='room-header'>
           <div className='top-header'>
-            <img src={previous} style={{ cursor: 'pointer' }}/>
+            <img src={previous} onClick={() => navigate(-1)}/>
 
             <div className='product'>
               <div className='product-img' />
@@ -74,9 +106,16 @@ function ChatRoom() {
                   </div>
                   </div>
                 </ReactModal>
+            </div>
+          </div>
 
+          <div>    
+          <img src={down} onClick={toggleDropdown} className={`drop ${rounded ? 'rounded' : ''}`} /> 
+          {dropdownVisible && (
+            <div id='dropdown' className='dropdown'>
+              
               {/* 채팅방 종료 → 리뷰 작성 */}
-              <img src={menu} onClick={() => setReviewModalOpen(true)} alt='menu'/>
+              <button onClick={() => setReviewModalOpen(true)}> 거래완료 </button>
               <ReactModal
                 isOpen={reviewModalOpen}
                 style={ReviewModalStyles}
@@ -87,7 +126,7 @@ function ChatRoom() {
 
                   <div className='review-body'>
                     <input placeholder='거래에 대한 후기를 작성해주세요.'/>
-                    <div style={{margin: '16px 16px  0 16px'}}> 만족도</div>
+                    <div style={{margin: '16px 16px 0 16px'}}> 만족도</div>
                     <ReviewSelect/> {/* 만족도 슬라이더 */}
                   </div>
                   
@@ -113,20 +152,45 @@ function ChatRoom() {
                   </div>
               </ReactModal>
             </div>
-          </div>
-
-          <div className='product-list' onClick={toggleDropdown}> 목록 더보기 
-          {dropdownVisible ? <img src={down}/> : <img src={next}/> }</div>
-          {dropdownVisible && (
-          <div id='dropdown' className='dropdown'>
-            <SellList />
-          </div>
           )}
+          </div>
         </div>
 
         <div className='room-body'>
 
 
+          {/* 채팅메세지 */}
+          {data.map((item, index) => (
+          <div className='other' key={index}>
+          {item.type === 'NOTICE' ? (
+            <div style={{ display:'flex', gap:'20px', alignItems:'center', margin: '8px 0', fontSize: '12px', color: '#8593A8', textAlign: 'center' }}>
+              <div style={{ flex: '1', borderBottom: '1px solid #8593A8', opacity:'0.5' }}></div>
+              {item.message}
+              <div style={{ flex: '1', borderBottom: '1px solid #8593A8', opacity:'0.5' }}></div>
+            </div>
+          ) : (
+            <>
+              {index === 0 || data[index - 1].nickname !== item.nickname ? (
+                <div style={{ display: 'flex', justifyContent: 'flex-start', margin: '8px 0' }}>
+                  <img src={item.profile_image} style={{ width: '35px', height: '35px' }} />
+                  <div style={{ marginLeft: '5px' }}>
+                    <div style={{ fontSize: '14px', marginBottom: '5px' }}> {item.nickname} </div>
+                    <div className='message'> {item.message} </div>
+                  </div>
+                </div>
+              ) : (
+                <div style={{ display: 'flex', justifyContent: 'flex-start', margin: '8px 0' }}>
+                  <div style={{ marginLeft: '40px' }}>
+                    <div className='message'> {item.message} </div>
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+        ))}
+
+         
         </div>
         
         <div className='input-msg'>
@@ -178,7 +242,7 @@ const ReviewModalStyles = {
   },
   content: {
     width: "311px",
-    height: "360px",
+    height: "370px",
     padding: "16px 0",
     position: "absolute",
     top: "50%",
